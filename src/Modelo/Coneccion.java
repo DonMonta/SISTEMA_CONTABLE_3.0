@@ -9,5 +9,5 @@ package Modelo;
  * @author monta
  */
 public class Coneccion {
-    puto el que lo lea  
+    String pulñ;
 }
