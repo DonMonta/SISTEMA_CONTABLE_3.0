@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author monta
  */
 public class Coneccion {
-   final String bdd="nora"; 
+   final String bdd="sistema_contable"; 
    final String user="root";
     String pwd="";
     String url="jdbc:mysql://localhost:3306/" + bdd;
