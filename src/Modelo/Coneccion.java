@@ -10,4 +10,5 @@ package Modelo;
  */
 public class Coneccion {
     String pulñ;
+    String Puto el que lo lea;
 }
