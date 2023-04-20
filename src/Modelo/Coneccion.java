@@ -14,4 +14,5 @@ public class Coneccion {
     String b;
     String kk;
     String aa;
+    String juanteamo;
 }
