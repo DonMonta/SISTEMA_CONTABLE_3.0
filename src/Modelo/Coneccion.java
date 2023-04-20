@@ -12,5 +12,5 @@ public class Coneccion {
     String pulñ;
     String a;
     String b;
-    
+    String kk;
 }
