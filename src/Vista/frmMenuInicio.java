@@ -76,9 +76,33 @@ public class frmMenuInicio extends javax.swing.JFrame {
         
 
         //  create submenu Reportes 
-        MenuItem subRcuentascobrar = new MenuItem(new Color(0,109,230),iconCuenCobra, "Cuentas por Cobrar", null);
-        MenuItem subRcuentaspagar = new MenuItem(new Color(0,109,230),iconCuenPaga, "Cuentas por Pagar", null);
-        MenuItem subRfactura = new MenuItem(new Color(0,109,230),iconFactura, "Factura", null);
+        MenuItem subRcuentascobrar = new MenuItem(new Color(0,109,230),iconCuenCobra, "Cuentas por Cobrar", new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent ae) {
+                panelBody.add(new frmcuentasporcobrar());
+                panelBody.repaint();
+                panelBody.revalidate();
+                
+              
+               
+            }
+        });
+        MenuItem subRcuentaspagar = new MenuItem(new Color(0,109,230),iconCuenPaga, "Cuentas por Pagar", new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent ae) {
+                panelBody.add(new frmcuentasporpagar());
+                panelBody.repaint();
+                panelBody.revalidate();
+            }
+        });
+        MenuItem subRfactura = new MenuItem(new Color(0,109,230),iconFactura, "Factura", new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent ae) {
+                panelBody.add(new frmfacturas());
+                panelBody.repaint();
+                panelBody.revalidate();
+            }
+        });
        
         // Create Menus
         MenuItem MenuManteni = new MenuItem(new Color(0,75,159),iconManteni, "Mantenimiento", null, subMclient, 
