@@ -3,27 +3,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Modelo;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-/**
- *
- * @author juand
- */
 
 /**
  *
  * @author juand
  */
-public class ClsUsuario {
-    public class Usuario {
+public class Usuario {
+
+    //Atributos
+    private int idUsuario;
     private String usuario;
-    private String password;
+    private String clave;
+   
 
-    public Usuario(String usuario, String password) {
-        this.usuario = usuario;
-        this.password = password;
+    //Contructor vacío
+    public Usuario() {
+        this.idUsuario = 0;
+        this.usuario = "";
+        this.clave = "";
     }
+
+    //set and get
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+   
 
     public String getUsuario() {
         return usuario;
@@ -34,11 +43,11 @@ public class ClsUsuario {
     }
 
     public String getPassword() {
-        return password;
+        return clave;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.clave = password;
     }
-    }
+
 }

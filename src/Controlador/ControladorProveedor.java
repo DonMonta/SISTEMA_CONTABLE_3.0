@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ControladorProveedor {
     private final String tabla = "proveedores";
-    private Connection conexion = Coneccion.getConexion();
+    private Connection conexion = Coneccion.conectar();
 
     public void agregarProveedor(ClsProveedor proveedor) {
         String sql = "INSERT INTO " + tabla + " (nombre, direccion, identificacion_fiscal, forma_pago_preferida) VALUES (?, ?, ?, ?)";

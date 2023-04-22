@@ -8,22 +8,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ *
+ * @author ediso
+ */
 public class Coneccion {
-    
-    private static Connection conexion;
-    private static final String URL = "jdbc:mysql://localhost:3306/nombre_basedatos";
-    private static final String USUARIO = "root";
-    private static final String CONTRASENA = "";
-    
-    public static Connection getConexion() {
+
+    //conexion local
+    public static Connection conectar() {
         try {
-            if (conexion == null) {
-                conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA);
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error al obtener la conexión: " + ex.getMessage());
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/sistema_contable", "root", "1234");
+            return cn;
+        } catch (SQLException e) {
+            System.out.println("Error en la conexion local " + e);
         }
-        return conexion;
+        return null;
     }
-    
 }
