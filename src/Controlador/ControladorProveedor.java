@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorProveedor {
+    /*
     private final String tabla = "proveedores";
     private Connection conexion = Coneccion.conectar();
 
@@ -60,4 +61,5 @@ public class ControladorProveedor {
             System.out.println("Error al eliminar proveedor: " + e.getMessage());
         }
     }
+*/
 }

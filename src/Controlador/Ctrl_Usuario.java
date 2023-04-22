@@ -17,6 +17,7 @@ import java.sql.Statement;
  * @author juand
  */
 public class Ctrl_Usuario {
+    /*
      public boolean guardar(Usuario objeto) {
         boolean respuesta = false;
         Connection cn = Coneccion.conectar();
@@ -50,4 +51,5 @@ public class Ctrl_Usuario {
         }
         return respuesta;
     }
+*/
 }

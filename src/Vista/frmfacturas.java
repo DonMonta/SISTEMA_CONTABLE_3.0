@@ -41,7 +41,7 @@ public class frmfacturas extends javax.swing.JPanel {
         jLabel3.setText("FACTURAS");
         jLabel3.setToolTipText("");
         jLabel3.setOpaque(true);
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 97));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -3, 860, 100));
     }// </editor-fold>//GEN-END:initComponents
 
 

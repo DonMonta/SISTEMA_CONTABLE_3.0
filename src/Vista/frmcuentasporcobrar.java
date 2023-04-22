@@ -30,6 +30,25 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtimporte = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtbuscar = new javax.swing.JTextField();
+        imagen = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        cmbfacturas = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbtransacc = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        btnagregar = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        btnagregar1 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -50,7 +69,7 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Cuentas por cobraR");
+        jLabel1.setText("Cuentas por cobrar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -61,7 +80,7 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap(301, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,13 +92,255 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
         );
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 120));
+
+        txtimporte.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtimporte.setForeground(new java.awt.Color(204, 204, 204));
+        txtimporte.setText("0000000");
+        txtimporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtimporteMousePressed(evt);
+            }
+        });
+        txtimporte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtimporteKeyTyped(evt);
+            }
+        });
+        add(txtimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 160, 40));
+
+        jLabel8.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel8.setText("Fecha de Vencimineto");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 170, 30));
+
+        txtbuscar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtbuscar.setForeground(new java.awt.Color(204, 204, 204));
+        txtbuscar.setText("Buscar fechas de Pago");
+        txtbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtbuscarMousePressed(evt);
+            }
+        });
+        add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 330, 30));
+
+        imagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        imagen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imagenMouseClicked(evt);
+            }
+        });
+        add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 40, 30));
+
+        jLabel9.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel9.setText("Importe");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 130, 30));
+
+        jDateChooser1.setBackground(new java.awt.Color(255, 255, 255));
+        jDateChooser1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 160, 40));
+
+        jLabel10.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel10.setText("Fecha de Pago");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 170, 30));
+
+        jDateChooser2.setBackground(new java.awt.Color(255, 255, 255));
+        jDateChooser2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 160, 40));
+
+        jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
+        jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1180, 10));
+
+        jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 10, 430));
+
+        add(cmbfacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 160, 40));
+
+        jLabel11.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel11.setText("Nª de Faturas");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
+
+        tbtransacc.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tbtransacc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Fecha", "Tipo de Transaccion", "Descripcion"
+            }
+        ));
+        tbtransacc.setGridColor(new java.awt.Color(255, 255, 255));
+        tbtransacc.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        jScrollPane1.setViewportView(tbtransacc);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, 490, 260));
+
+        jLabel6.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel6.setText("Datos Guardados");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, -1, 40));
+
+        btnagregar.setBackground(new java.awt.Color(0, 112, 224));
+        btnagregar.setForeground(new java.awt.Color(0, 112, 224));
+        btnagregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnagregarMouseClicked(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("AGREGAR");
+        jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout btnagregarLayout = new javax.swing.GroupLayout(btnagregar);
+        btnagregar.setLayout(btnagregarLayout);
+        btnagregarLayout.setHorizontalGroup(
+            btnagregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnagregarLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        btnagregarLayout.setVerticalGroup(
+            btnagregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        add(btnagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 110, 40));
+
+        btnagregar1.setBackground(new java.awt.Color(0, 112, 224));
+        btnagregar1.setForeground(new java.awt.Color(0, 112, 224));
+        btnagregar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnagregar1MouseClicked(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Generar Reporte");
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout btnagregar1Layout = new javax.swing.GroupLayout(btnagregar1);
+        btnagregar1.setLayout(btnagregar1Layout);
+        btnagregar1Layout.setHorizontalGroup(
+            btnagregar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnagregar1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
+        );
+        btnagregar1Layout.setVerticalGroup(
+            btnagregar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        add(btnagregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 490, 170, 40));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtimporteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtimporteMousePressed
+        /*if(this.txtnumero.getText().equals("0000000")){
+            this.txtnumero.setText("");
+            this.txtnumero.setForeground(Color.black);
+        }
+        if(String.valueOf(this.txtsaldo.getText()).isEmpty()){
+            this.txtsaldo.setText("0");
+            this.txtsaldo.setForeground(Color.gray);
+        }
+        if(String.valueOf(this.txtnombre.getText()).isEmpty()){
+            this.txtnombre.setText("Name and LastName");
+            this.txtnombre.setForeground(Color.gray);
+        }
+        if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
+            this.txtbuscar.setText("Buscar elementos");
+            this.txtbuscar.setForeground(Color.gray);
+        }
+        */
+    }//GEN-LAST:event_txtimporteMousePressed
+
+    private void txtimporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtimporteKeyTyped
+        char c = evt.getKeyChar();
+        if(c<'0'|| c>'9')   evt.consume();
+
+    }//GEN-LAST:event_txtimporteKeyTyped
+
+    private void txtbuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtbuscarMousePressed
+        /*
+        if(this.txtbuscar.getText().equals("Buscar elementos")){
+            this.txtbuscar.setText("");
+            this.txtbuscar.setForeground(Color.black);
+        }
+        if(String.valueOf(this.txtnumero.getText()).isEmpty()){
+            this.txtnumero.setText("0000000");
+            this.txtnumero.setForeground(Color.gray);
+        }
+        if(String.valueOf(this.txtsaldo.getText()).isEmpty()){
+            this.txtsaldo.setText("0");
+            this.txtsaldo.setForeground(Color.gray);
+        }
+        if(String.valueOf(this.txtnombre.getText()).isEmpty()){
+            this.txtnombre.setText("Name and LastName");
+            this.txtnombre.setForeground(Color.gray);
+        }
+*/
+    }//GEN-LAST:event_txtbuscarMousePressed
+
+    private void imagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagenMouseClicked
+       // buscar(this.txtbuscar.getText());
+    }//GEN-LAST:event_imagenMouseClicked
+
+    private void btnagregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnagregarMouseClicked
+        /*Cls_CuentaBanco cb = new Cls_CuentaBanco(Integer.parseInt(this.txtnumero.getText()),this.txtnombre.getText(),
+            (String)this.cmbcuenta.getSelectedItem(),Double.parseDouble(this.txtsaldo.getText()),(String)this.cmbbanco.getSelectedItem(),(String)this.cmbestado.getSelectedItem());
+        if(!"0000000".equals(this.txtnumero.getText()) && !"Name and LastName".equals(this.txtnombre.getText())
+            && !"0,000".equals(this.txtsaldo.getText()) && !"".equals(this.cmbbanco.getSelectedItem()) && !"".equals(this.cmbcuenta.getSelectedItem())
+            &&!"".equals(this.cmbestado.getSelectedItem())){
+            cuenta.add(cb);
+            ActualizarLista();
+            JOptionPane.showMessageDialog(rootPane, "Datos Agregados Correctamente", "Informacion", HEIGHT);
+            Limpiar();
+
+        }else{
+
+            JOptionPane.showMessageDialog(rootPane, "No se Pueden Agregar Campos Vacios", "Informacion", HEIGHT);
+        }
+*/
+    }//GEN-LAST:event_btnagregarMouseClicked
+
+    private void btnagregar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnagregar1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnagregar1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btnagregar;
+    private javax.swing.JPanel btnagregar1;
+    private javax.swing.JComboBox<String> cmbfacturas;
+    private javax.swing.JLabel imagen;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    public javax.swing.JTable tbtransacc;
+    private javax.swing.JTextField txtbuscar;
+    private javax.swing.JTextField txtimporte;
     // End of variables declaration//GEN-END:variables
 }
