@@ -29,6 +29,9 @@ public class frmMenuInicio extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         execute();
     }
+    private JPanel clienteForm,gastosForm,inventaForm,proveeForm,cuentabanForm,userForm,
+            cuencobraForm,cuenpagaForm,facturaForm;
+    
      
      private void execute() {
         ImageIcon iconManteni = new ImageIcon(getClass().getResource("/imagenes/icons8_home_24px_1.png"));
@@ -48,10 +51,68 @@ public class frmMenuInicio extends javax.swing.JFrame {
         MenuItem subMclient = new MenuItem(new Color(0,109,230),iconClient, "Cliente" , new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent ae) {
-                panelBody.add(new frmCliente());
-                panelBody.repaint();
-                panelBody.revalidate();
+                if (clienteForm != null) {
+                    panelBody.remove(clienteForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                if (gastosForm != null) {
+                    panelBody.remove(gastosForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                  if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (proveeForm != null) {
+                    panelBody.remove(proveeForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (cuentabanForm != null) {
+                    panelBody.remove(cuentabanForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (userForm != null) {
+                    panelBody.remove(userForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                  if (cuencobraForm != null) {
+                    panelBody.remove(cuencobraForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (cuenpagaForm != null) {
+                    panelBody.remove(cuenpagaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (facturaForm != null) {
+                    panelBody.remove(facturaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
                 
+
+                // Agregar nuevo formulario
+                    clienteForm = new frmCliente(); // Crea una nueva instancia del formulario
+                    panelBody.add(clienteForm); // Agrega el nuevo formulario al panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
               
                
             }
@@ -59,9 +120,68 @@ public class frmMenuInicio extends javax.swing.JFrame {
         MenuItem subMGastos = new MenuItem(new Color(0,109,230),iconGastos, "Gastos", new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent ae) {
-                panelBody.add(new frmGastos());
-                panelBody.repaint();
-                panelBody.revalidate();
+               if (gastosForm != null) {
+                    panelBody.remove(gastosForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                if (clienteForm != null) {
+                    panelBody.remove(clienteForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                  if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (proveeForm != null) {
+                    panelBody.remove(proveeForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (cuentabanForm != null) {
+                    panelBody.remove(cuentabanForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (userForm != null) {
+                    panelBody.remove(userForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                  if (cuencobraForm != null) {
+                    panelBody.remove(cuencobraForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (cuenpagaForm != null) {
+                    panelBody.remove(cuenpagaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (facturaForm != null) {
+                    panelBody.remove(facturaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                
+
+                // Agregar nuevo formulario
+                    gastosForm = new frmGastos(); // Crea una nueva instancia del formulario
+                    panelBody.add(gastosForm); // Agrega el nuevo formulario al panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
                 
               
                
@@ -79,9 +199,72 @@ public class frmMenuInicio extends javax.swing.JFrame {
         MenuItem subRcuentascobrar = new MenuItem(new Color(0,109,230),iconCuenCobra, "Cuentas por Cobrar", new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent ae) {
-                panelBody.add(new frmcuentasporcobrar());
-                panelBody.repaint();
-                panelBody.revalidate();
+                if (cuencobraForm != null) {
+                    panelBody.remove(cuencobraForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                if (gastosForm != null) {
+                    panelBody.remove(gastosForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+              if (clienteForm != null) {
+                    panelBody.remove(clienteForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                  if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (proveeForm != null) {
+                    panelBody.remove(proveeForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (cuentabanForm != null) {
+                    panelBody.remove(cuentabanForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (userForm != null) {
+                    panelBody.remove(userForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                  if (gastosForm != null) {
+                    panelBody.remove(gastosForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (cuenpagaForm != null) {
+                    panelBody.remove(cuenpagaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (facturaForm != null) {
+                    panelBody.remove(facturaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+
+                // Agregar nuevo formulario
+                    cuencobraForm = new frmcuentasporcobrar(); // Crea una nueva instancia del formulario
+                    panelBody.add(cuencobraForm); // Agrega el nuevo formulario al panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
                 
               
                
@@ -90,17 +273,132 @@ public class frmMenuInicio extends javax.swing.JFrame {
         MenuItem subRcuentaspagar = new MenuItem(new Color(0,109,230),iconCuenPaga, "Cuentas por Pagar", new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent ae) {
-                panelBody.add(new frmcuentasporpagar());
-                panelBody.repaint();
-                panelBody.revalidate();
+                if (cuenpagaForm != null) {
+                    panelBody.remove(cuenpagaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (clienteForm != null) {
+                    panelBody.remove(clienteForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                  if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (proveeForm != null) {
+                    panelBody.remove(proveeForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (cuentabanForm != null) {
+                    panelBody.remove(cuentabanForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (userForm != null) {
+                    panelBody.remove(userForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                  if (gastosForm != null) {
+                    panelBody.remove(gastosForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (cuencobraForm != null) {
+                    panelBody.remove(cuencobraForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (facturaForm != null) {
+                    panelBody.remove(facturaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                // Agregar nuevo formulario
+                    cuenpagaForm = new frmcuentasporpagar(); // Crea una nueva instancia del formulario
+                    panelBody.add(cuenpagaForm); // Agrega el nuevo formulario al panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
             }
         });
         MenuItem subRfactura = new MenuItem(new Color(0,109,230),iconFactura, "Factura", new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent ae) {
-                panelBody.add(new frmfacturas());
-                panelBody.repaint();
-                panelBody.revalidate();
+               if (clienteForm != null) {
+                    panelBody.remove(clienteForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                  if (inventaForm != null) {
+                    panelBody.remove(inventaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (proveeForm != null) {
+                    panelBody.remove(proveeForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (cuentabanForm != null) {
+                    panelBody.remove(cuentabanForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (userForm != null) {
+                    panelBody.remove(userForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                  if (gastosForm != null) {
+                    panelBody.remove(gastosForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (cuencobraForm != null) {
+                    panelBody.remove(cuencobraForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (cuenpagaForm != null) {
+                    panelBody.remove(cuenpagaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+                 if (facturaForm != null) {
+                    panelBody.remove(facturaForm); // Remueve el formulario anterior del panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
+                }
+
+                // Agregar nuevo formulario
+                    facturaForm = new frmfacturas(); // Crea una nueva instancia del formulario
+                    panelBody.add(facturaForm); // Agrega el nuevo formulario al panel
+                    panelBody.repaint();
+                    panelBody.revalidate();
             }
         });
        
