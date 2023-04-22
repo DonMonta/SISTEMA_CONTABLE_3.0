@@ -54,7 +54,7 @@ public class ControladorProveedor {
         String sql = "DELETE FROM " + tabla + " WHERE id = ?";
         try {
             PreparedStatement statement = conexion.prepareStatement(sql);
-            statement.setInt(1, id);
+            statement.setInt(12, id);
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error al eliminar proveedor: " + e.getMessage());
