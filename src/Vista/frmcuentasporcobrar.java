@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Modelo.ClsCuentasPorCobrar;
+
 /**
  *
  * @author joel
@@ -45,10 +47,9 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbtransacc = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        btnagregar = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        btnagregar1 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        txtid = new javax.swing.JTextField();
+        btngenerar = new javax.swing.JButton();
+        btnagregar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,6 +124,7 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
         add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 330, 30));
 
         imagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
         imagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         imagen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -161,87 +163,46 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
         jLabel11.setText("Nª de Faturas");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
 
-        tbtransacc.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jScrollPane1.setBorder(null);
+
+        tbtransacc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         tbtransacc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Fecha", "Tipo de Transaccion", "Descripcion"
+                "ID", "Importe", "Fecha Vencimiento", "Fecha de Pago", "Nº Factura"
             }
         ));
         tbtransacc.setGridColor(new java.awt.Color(255, 255, 255));
         tbtransacc.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        tbtransacc.setRowHeight(25);
+        tbtransacc.setSelectionBackground(new java.awt.Color(0, 112, 224));
         jScrollPane1.setViewportView(tbtransacc);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, 490, 260));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, 490, 260));
 
         jLabel6.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel6.setText("Datos Guardados");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, -1, 40));
+        add(txtid, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        btngenerar.setBackground(new java.awt.Color(0, 112, 224));
+        btngenerar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btngenerar.setForeground(new java.awt.Color(255, 255, 255));
+        btngenerar.setText("GENERAR REPORTE");
+        btngenerar.setBorder(null);
+        add(btngenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, 170, 40));
 
         btnagregar.setBackground(new java.awt.Color(0, 112, 224));
-        btnagregar.setForeground(new java.awt.Color(0, 112, 224));
-        btnagregar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnagregarMouseClicked(evt);
-            }
-        });
-
-        jLabel12.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("AGREGAR");
-        jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout btnagregarLayout = new javax.swing.GroupLayout(btnagregar);
-        btnagregar.setLayout(btnagregarLayout);
-        btnagregarLayout.setHorizontalGroup(
-            btnagregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnagregarLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-        btnagregarLayout.setVerticalGroup(
-            btnagregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        add(btnagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 110, 40));
-
-        btnagregar1.setBackground(new java.awt.Color(0, 112, 224));
-        btnagregar1.setForeground(new java.awt.Color(0, 112, 224));
-        btnagregar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnagregar1MouseClicked(evt);
-            }
-        });
-
-        jLabel13.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Generar Reporte");
-        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout btnagregar1Layout = new javax.swing.GroupLayout(btnagregar1);
-        btnagregar1.setLayout(btnagregar1Layout);
-        btnagregar1Layout.setHorizontalGroup(
-            btnagregar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnagregar1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
-        );
-        btnagregar1Layout.setVerticalGroup(
-            btnagregar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        add(btnagregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 490, 170, 40));
+        btnagregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnagregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnagregar.setText("AGREGAR");
+        btnagregar.setBorder(null);
+        add(btnagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 430, 90, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtimporteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtimporteMousePressed
@@ -295,41 +256,17 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
        // buscar(this.txtbuscar.getText());
     }//GEN-LAST:event_imagenMouseClicked
 
-    private void btnagregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnagregarMouseClicked
-        /*Cls_CuentaBanco cb = new Cls_CuentaBanco(Integer.parseInt(this.txtnumero.getText()),this.txtnombre.getText(),
-            (String)this.cmbcuenta.getSelectedItem(),Double.parseDouble(this.txtsaldo.getText()),(String)this.cmbbanco.getSelectedItem(),(String)this.cmbestado.getSelectedItem());
-        if(!"0000000".equals(this.txtnumero.getText()) && !"Name and LastName".equals(this.txtnombre.getText())
-            && !"0,000".equals(this.txtsaldo.getText()) && !"".equals(this.cmbbanco.getSelectedItem()) && !"".equals(this.cmbcuenta.getSelectedItem())
-            &&!"".equals(this.cmbestado.getSelectedItem())){
-            cuenta.add(cb);
-            ActualizarLista();
-            JOptionPane.showMessageDialog(rootPane, "Datos Agregados Correctamente", "Informacion", HEIGHT);
-            Limpiar();
-
-        }else{
-
-            JOptionPane.showMessageDialog(rootPane, "No se Pueden Agregar Campos Vacios", "Informacion", HEIGHT);
-        }
-*/
-    }//GEN-LAST:event_btnagregarMouseClicked
-
-    private void btnagregar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnagregar1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnagregar1MouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnagregar;
-    private javax.swing.JPanel btnagregar1;
-    private javax.swing.JComboBox<String> cmbfacturas;
-    private javax.swing.JLabel imagen;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    public javax.swing.JButton btnagregar;
+    public javax.swing.JButton btngenerar;
+    public javax.swing.JComboBox<ClsCuentasPorCobrar> cmbfacturas;
+    public javax.swing.JLabel imagen;
+    public com.toedter.calendar.JDateChooser jDateChooser1;
+    public com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
@@ -340,7 +277,8 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     public javax.swing.JTable tbtransacc;
-    private javax.swing.JTextField txtbuscar;
-    private javax.swing.JTextField txtimporte;
+    public javax.swing.JTextField txtbuscar;
+    public javax.swing.JTextField txtid;
+    public javax.swing.JTextField txtimporte;
     // End of variables declaration//GEN-END:variables
 }
