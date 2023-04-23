@@ -1,19 +1,19 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package Vista;
 
 /**
  *
- * @author joel
+ * @author monta
  */
-public class frmfacturas extends javax.swing.JPanel {
+public class FrmCUENTASPAGAR extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form frmfacturas
+     * Creates new form FrmCUENTASPAGAR
      */
-    public frmfacturas() {
+    public FrmCUENTASPAGAR() {
         initComponents();
     }
 
@@ -29,19 +29,22 @@ public class frmfacturas extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setBorder(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_estimate_50px.png"))); // NOI18N
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 6, -1, 110));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_bank_building_50px_2.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 79, 120));
 
         jLabel3.setBackground(new java.awt.Color(0, 75, 159));
         jLabel3.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("    Facturas");
+        jLabel3.setText("        Cuentas por pagar");
         jLabel3.setToolTipText("");
         jLabel3.setOpaque(true);
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 120));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 120));
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
