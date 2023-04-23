@@ -4,6 +4,9 @@
  */
 package Vista;
 
+import Controlador.Ctrl_ReportCuentaCobrar;
+import Modelo.ClsConsultaCuentasPorCobrar;
+import Modelo.ClsCuentasPorCobrar;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -261,10 +264,16 @@ public class frmMenuInicio extends javax.swing.JFrame {
                 }
 
                 // Agregar nuevo formulario
+                    ClsCuentasPorCobrar obj = new ClsCuentasPorCobrar();
+                    ClsConsultaCuentasPorCobrar sqlobj = new ClsConsultaCuentasPorCobrar();
+                    frmcuentasporcobrar ventana = new frmcuentasporcobrar();
+                    Ctrl_ReportCuentaCobrar ctrl = new Ctrl_ReportCuentaCobrar(obj,sqlobj,ventana);
+                    ctrl.Iniciar();
                     cuencobraForm = new frmcuentasporcobrar(); // Crea una nueva instancia del formulario
                     panelBody.add(cuencobraForm); // Agrega el nuevo formulario al panel
                     panelBody.repaint();
                     panelBody.revalidate();
+                    
                 
               
                

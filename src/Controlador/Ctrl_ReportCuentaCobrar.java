@@ -4,11 +4,12 @@
  */
 package Controlador;
 import Modelo.ClsConsultaCuentasPorCobrar;
+import Modelo.ClsConsultaFactura;
 import Modelo.ClsCuentasPorCobrar;
+import Modelo.ClsFactura;
 import Vista.frmcuentasporcobrar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JPanel;
 /**
  *
  * @author monta
@@ -34,8 +36,10 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
         this.sqlest = sqlest;
         this.frm = frm;
         this.frm.btngenerar.addActionListener((ActionListener) this);
+        this.frm.cmbfacturas.addActionListener((ActionListener)this);
         this.frm.btngenerar.addActionListener((ActionListener) this);
-        this.frm.imagen.addMouseListener((MouseListener) this); 
+        this.frm.btnactualizar.addActionListener((ActionListener) this);
+         this.frm.btnbuscar.addActionListener((ActionListener) this);
        
         this.frm.tbtransacc.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -61,7 +65,7 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
                 } catch (ParseException ex) {
                     Logger.getLogger(Ctrl_ReportCuentaCobrar.class.getName()).log(Level.SEVERE, null, ex);
                 }
-              frm.cmbfacturas.setSelectedItem(modelo.getValueAt(fila, 4).toString());
+              frm.jComboBox1.setSelectedItem(modelo.getValueAt(fila, 4).toString());
               
               
              
@@ -74,45 +78,57 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
         });
        
     }
+    public void Iniciar(){
+          
+        try {
+            Mostrar();
+            //campos ocultos
+           frm.txtid.setVisible(false);
+          
+            ClsConsultaFactura prod = new ClsConsultaFactura();
+            List objList = prod.Mostrar();
+             Iterator iterador = objList.iterator();  
+            while (iterador.hasNext()) {
+                ClsFactura pro = (ClsFactura) iterador.next();
+                frm.cmbfacturas.addItem(pro);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Ctrl_ReportCuentaCobrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
      @Override
-     
-    public void actionPerformed(ActionEvent e)
-    {
-        /*
-       if(e.getSource()==frm.btnactualizar){
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource()==frm.btnactualizar){
             Mostrar();
             Limpiar();
-         frm.btneditar.setEnabled(false);
-         frm.btneliminar.setEnabled(false);
-         frm.txtbuscar.setEnabled(true);
-         frm.btnguardar.setEnabled(true);
-         frm.btnbuscar.setEnabled(true);
-          frm.txtbuscar.setText(null);
+            frm.txtbuscar.setEnabled(true);
+            frm.txtbuscar.setText("Buscar fechas de Pago");
         }
-       if(e.getSource()==frm.cmbtransacc)
-       {   
+        if(e.getSource()==frm.cmbfacturas)
+        {   
            Mostrar();
          
-       }
-        if(e.getSource()==frm.btnguardar)
-       {  
+        }
+         if(e.getSource()==frm.btnagregar)
+        {  
            if(Validar()){
-               frm.txtbuscar.setEnabled(true);
-                ClsTipo_Transaccion mat = (ClsTipo_Transaccion)frm.cmbtransacc.getSelectedItem();
-                 String fecha;
-           java.util.Date date = new java.util.Date();
-           SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-           fecha=f.format(frm.jfecha.getDate());
+                frm.txtbuscar.setEnabled(true);
+                ClsFactura fac = (ClsFactura)frm.cmbfacturas.getSelectedItem();
+                est.setImporte(Double.parseDouble(frm.txtimporte.getText()));
+                String fecha,fecha2;
+                java.util.Date date = new java.util.Date();
+                SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+                fecha=f.format(frm.jDateChooser1.getDate());
+                fecha2=f.format(frm.jDateChooser2.getDate());
          
-           
             try {       
                 
-                est.setFecha(new SimpleDateFormat("yyyy-MM-dd").parse(fecha));
+                est.setFecha_venci(new SimpleDateFormat("yyyy-MM-dd").parse(fecha));
+                est.setFecha_pag(new SimpleDateFormat("yyyy-MM-dd").parse(fecha2));
             } catch (ParseException ex) {
-                Logger.getLogger(CtrlTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ctrl_ReportCuentaCobrar.class.getName()).log(Level.SEVERE, null, ex);
             }
-                est.setTipo_transaccion(mat.getId());
-                 est.setDescripcion(frm.txtdescricion.getText());     
+                est.setFactura(fac.getId()); 
            
           
            if(sqlest.Guardar(est))
@@ -127,124 +143,22 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
           
            
        }
-         if(e.getSource()==frm.btneditar)
-       {
-           if(Validar()){
-             ClsTipo_Transaccion mat = (ClsTipo_Transaccion)frm.cmbtransacc.getSelectedItem();
-           est.setId(Integer.parseInt(frm.txtid.getText()));
-                 String fecha;
-           java.util.Date date = new java.util.Date();
-           SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-           fecha=f.format(frm.jfecha.getDate());
-         
-           
-            try {       
-                
-                est.setFecha(new SimpleDateFormat("yyyy-MM-dd").parse(fecha));
-            } catch (ParseException ex) {
-                Logger.getLogger(CtrlTransaccion.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                est.setTipo_transaccion(mat.getId());
-                 est.setDescripcion(frm.txtdescricion.getText()); 
-           
-           if(sqlest.Modificar(est))
-           {JOptionPane.showMessageDialog(null, "Se actualizo la informacion"); Limpiar();Mostrar();frm.btnguardar.setEnabled(true);
-            frm.btnbuscar.setEnabled(true);frm.txtbuscar.setEnabled(true);frm.btneditar.setEnabled(false);frm.btneliminar.setEnabled(false);}
-           else
-           {JOptionPane.showMessageDialog(null, "No se actualizo la informacion");Limpiar();frm.btnguardar.setEnabled(true);
-            frm.btnbuscar.setEnabled(true);frm.txtbuscar.setEnabled(true);frm.btneditar.setEnabled(false);frm.btneliminar.setEnabled(false);}
-           }
-           
-       }
-       if(e.getSource()==frm.btneliminar)
-       {   
-           if(frm.tbtransacc.getSelectedRow()==-1)
-           { JOptionPane.showMessageDialog(frm, "Debe seleccionar la fila que desea eliminar");}
-           else{    
-               est.setId(Integer.parseInt(frm.txtid.getText()));  
-               if(sqlest.Eliminar(est))
-               { JOptionPane.showMessageDialog(frm, "Eliminado");
-                  Mostrar();
-                  Limpiar();frm.btnguardar.setEnabled(true);
-            frm.btnbuscar.setEnabled(true);frm.txtbuscar.setEnabled(true);frm.btneditar.setEnabled(false);frm.btneliminar.setEnabled(false);
-               }
-           }
-       }
-       if(e.getSource()==frm.btnbuscar){
-                if(ValidarBusca()){ 
-                try {
-                   
-        est.setFecha(new SimpleDateFormat("yyyy-MM-dd").parse(frm.txtbuscar.getText()));
-//            
-               } catch (ParseException ex) {
-                   Logger.getLogger(CtrlTransaccion.class.getName()).log(Level.SEVERE, null, ex);
-               }
-//            
-               
-            if(sqlest.BusquedaComple(est)){
-                
-                ClsTipo_Transaccion tipo_Transaccion;
-                 String[] columnas ={"ID","Fecha","Tipo de Transaccion","Descripcion"};
-           Object[] datos = new Object[4];
-           DefaultTableModel tabla = new DefaultTableModel(null,columnas){
-             @Override
-             public boolean isCellEditable(int i, int j)
-             { if(i==4){return true;} else {return false;}}
-           };
-          List objList; ClsTransaccion cls;
-          ClsTipo_Transaccion obj =(ClsTipo_Transaccion) frm.cmbtransacc.getSelectedItem();
-           try {
-              
-                objList= sqlest.BuscarPList(frm.txtbuscar.getText());
-                if(!objList.isEmpty())
-                {
-                 for (int i = 0; i < objList.size(); i++) {
-                  
-                    cls = (ClsTransaccion) objList.get(i);
-                    datos[0] = cls.getId();
-                    datos[1]= cls.getFecha();
-                   
-                    datos[3]= cls.getDescripcion();
-                    tipo_Transaccion = sqlest.BuscarTienda(cls);
-                    datos[2]= "N:Compra:"+tipo_Transaccion.getCompra()+" N:Venta:"+tipo_Transaccion.getVenta()+" N:Dev:"+tipo_Transaccion.getDevolucion();
-                    tabla.addRow(datos);
-                  }  
-                 frm.tbtransacc.setModel(tabla);
-                  Limpiar();
-                 frm.txtbuscar.setText(null);
-                
-                 
-                 DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
-                 Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
-                 for(int i=4; i<7;i++)
-                 {  frm.tbtransacc.getColumnModel().getColumn(i).setCellRenderer(Alinear);}
-               }
-                else
-               {JOptionPane.showMessageDialog(null, "No encontro información"); Limpiar();frm.txtbuscar.setText(null);}
-               
-           } catch (Exception ex) {
-               Logger.getLogger(CtrlTransaccion.class.getName()).log(Level.SEVERE, null, ex);
-           }  
-            } 
-          
-           }
-       }
     }
- 
-  public void Mostrar()
+    
+    public void Mostrar()
     {  
         List notas; 
-       ClsTransaccion cls;
-       ClsTipo_Transaccion tipo_Transaccion;
-                 String[] columnas ={"ID","Fecha","Tipo de Transaccion","Descripcion"};
-           Object[] datos = new Object[4];
+       ClsCuentasPorCobrar cls;
+       ClsFactura factura;
+                 String[] columnas ={"ID","Importe","Fecha Vencimiento","Fecha de Pago","Nº Factura"};
+           Object[] datos = new Object[5];
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override
              public boolean isCellEditable(int i, int j)
-             { if(i==4){return true;} else {return false;}}
+             { if(i==5){return true;} else {return false;}}
            };
          
-         ClsTipo_Transaccion obj =(ClsTipo_Transaccion) frm.cmbtransacc.getSelectedItem();
+         ClsFactura obj =(ClsFactura) frm.cmbtransacc.getSelectedItem();
            try {
               
                 notas= sqlest.Mostrar();
@@ -252,13 +166,14 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
                 {
                  for (int i = 0; i < notas.size(); i++) {
                   
-                    cls = (ClsTransaccion) notas.get(i);
+                    cls = (ClsCuentasPorCobrar) notas.get(i);
                    datos[0] = cls.getId();
-                    datos[1]= cls.getFecha();
+                    datos[1]= cls.getImporte();
                    
-                    datos[3]= cls.getDescripcion();
-                    tipo_Transaccion = sqlest.BuscarTienda(cls);
-                    datos[2]= "N:Compra:"+tipo_Transaccion.getCompra()+" N:Venta:"+tipo_Transaccion.getVenta()+" N:Dev:"+tipo_Transaccion.getDevolucion();
+                    datos[2]= cls.getFecha_venci();
+                     datos[3]= cls.getFecha_pag();
+                    factura = sqlest.BuscarFactura(cls);
+                    datos[4]= factura.getNumero();
                     tabla.addRow(datos);
                   }  
                  frm.tbtransacc.setModel(tabla);
@@ -273,26 +188,33 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
                {JOptionPane.showMessageDialog(null, "No encontro información"); Limpiar();frm.txtbuscar.setText(null);}
                
            } catch (Exception ex) {
-               Logger.getLogger(CtrlTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+               Logger.getLogger(Ctrl_ReportCuentaCobrar.class.getName()).log(Level.SEVERE, null, ex);
            }  
     }  
    public void Limpiar()
     {
         frm.txtid.setText(null);
-        frm.jfecha.setDate(null);
-        frm.txtdescricion.setText(null);
+        frm.jDateChooser1.setDate(null);
+        frm.jDateChooser2.setDate(null);
+        frm.txtimporte.setText("0000000");
        
         
     }
      private boolean Validar(){
        
-        if("".equals(frm.txtdescricion.getText())){
+        if("".equals(frm.txtimporte.getText())){
             JOptionPane.showMessageDialog(null,"Debe ingresar datos");
             
             return  false;
             
         }
-       if(frm.jfecha.getDate()==null){
+       if(frm.jDateChooser1.getDate()==null){
+            JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+            
+            return  false;
+            
+        }
+        if(frm.jDateChooser2.getDate()==null){
             JOptionPane.showMessageDialog(null,"Debe ingresar datos");
             
             return  false;
@@ -302,7 +224,7 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
          
 
         return true;
-    }/*
+    }
       private boolean ValidarBusca(){
         if("".equals(frm.txtbuscar.getText())){
             JOptionPane.showMessageDialog(null,"Debe ingresar datos");
@@ -325,7 +247,4 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
   private static boolean FormatoFecha(String datos){
           return datos.matches("[0-9-/]*");
       }
-*/
-
- }  
 }

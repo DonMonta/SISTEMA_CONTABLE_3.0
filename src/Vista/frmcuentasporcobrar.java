@@ -5,6 +5,8 @@
 package Vista;
 
 import Modelo.ClsCuentasPorCobrar;
+import Modelo.ClsFactura;
+import java.awt.Color;
 
 /**
  *
@@ -35,7 +37,6 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
         txtimporte = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtbuscar = new javax.swing.JTextField();
-        imagen = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
@@ -50,6 +51,10 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
         txtid = new javax.swing.JTextField();
         btngenerar = new javax.swing.JButton();
         btnagregar = new javax.swing.JButton();
+        btnactualizar = new javax.swing.JButton();
+        btnbuscar = new javax.swing.JButton();
+        cmbtransacc = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,16 +128,6 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
         });
         add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 330, 30));
 
-        imagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
-        imagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        imagen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imagenMouseClicked(evt);
-            }
-        });
-        add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 40, 30));
-
         jLabel9.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel9.setText("Importe");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 130, 30));
@@ -188,7 +183,7 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel6.setText("Datos Guardados");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, -1, 40));
-        add(txtid, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        add(txtid, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
 
         btngenerar.setBackground(new java.awt.Color(0, 112, 224));
         btngenerar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -203,26 +198,30 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
         btnagregar.setText("AGREGAR");
         btnagregar.setBorder(null);
         add(btnagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 430, 90, 40));
+
+        btnactualizar.setBackground(new java.awt.Color(0, 112, 224));
+        btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_update_30px.png"))); // NOI18N
+        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 290, 50, 40));
+
+        btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
+        add(btnbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 50, 30));
+
+        add(cmbtransacc, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, -1, -1));
+
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 150, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtimporteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtimporteMousePressed
-        /*if(this.txtnumero.getText().equals("0000000")){
-            this.txtnumero.setText("");
-            this.txtnumero.setForeground(Color.black);
+        if(this.txtimporte.getText().equals("0000000")){
+            this.txtimporte.setText("");
+            this.txtimporte.setForeground(Color.black);
         }
-        if(String.valueOf(this.txtsaldo.getText()).isEmpty()){
-            this.txtsaldo.setText("0");
-            this.txtsaldo.setForeground(Color.gray);
-        }
-        if(String.valueOf(this.txtnombre.getText()).isEmpty()){
-            this.txtnombre.setText("Name and LastName");
-            this.txtnombre.setForeground(Color.gray);
-        }
+       
         if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
             this.txtbuscar.setText("Buscar elementos");
             this.txtbuscar.setForeground(Color.gray);
         }
-        */
+        
     }//GEN-LAST:event_txtimporteMousePressed
 
     private void txtimporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtimporteKeyTyped
@@ -232,36 +231,26 @@ public class frmcuentasporcobrar extends javax.swing.JPanel {
     }//GEN-LAST:event_txtimporteKeyTyped
 
     private void txtbuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtbuscarMousePressed
-        /*
+        
         if(this.txtbuscar.getText().equals("Buscar elementos")){
             this.txtbuscar.setText("");
             this.txtbuscar.setForeground(Color.black);
         }
-        if(String.valueOf(this.txtnumero.getText()).isEmpty()){
-            this.txtnumero.setText("0000000");
-            this.txtnumero.setForeground(Color.gray);
+        if(String.valueOf(this.txtimporte.getText()).isEmpty()){
+            this.txtimporte.setText("0000000");
+            this.txtimporte.setForeground(Color.gray);
         }
-        if(String.valueOf(this.txtsaldo.getText()).isEmpty()){
-            this.txtsaldo.setText("0");
-            this.txtsaldo.setForeground(Color.gray);
-        }
-        if(String.valueOf(this.txtnombre.getText()).isEmpty()){
-            this.txtnombre.setText("Name and LastName");
-            this.txtnombre.setForeground(Color.gray);
-        }
-*/
     }//GEN-LAST:event_txtbuscarMousePressed
-
-    private void imagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagenMouseClicked
-       // buscar(this.txtbuscar.getText());
-    }//GEN-LAST:event_imagenMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnactualizar;
     public javax.swing.JButton btnagregar;
+    public javax.swing.JButton btnbuscar;
     public javax.swing.JButton btngenerar;
-    public javax.swing.JComboBox<ClsCuentasPorCobrar> cmbfacturas;
-    public javax.swing.JLabel imagen;
+    public javax.swing.JComboBox<ClsFactura> cmbfacturas;
+    public javax.swing.JComboBox<ClsFactura> cmbtransacc;
+    public javax.swing.JComboBox<ClsFactura> jComboBox1;
     public com.toedter.calendar.JDateChooser jDateChooser1;
     public com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
