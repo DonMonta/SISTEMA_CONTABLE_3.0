@@ -28,10 +28,6 @@ public class ClsConsultaFactura extends Coneccion{
                 ClsFactura obj = new ClsFactura();
                 obj.setId(res.getInt("id"));
                 obj.setNumero(res.getString("numero_factura"));
-                obj.setFecha(res.getDate("fecha"));
-                obj.setImporte(res.getDouble("importe_total"));
-                obj.setCliente(res.getInt("id_cliente")); 
-                obj.setProveedor(res.getInt("id_proveedor"));
                 listaCompras.add(obj);
              }
          } catch (SQLException ex) {

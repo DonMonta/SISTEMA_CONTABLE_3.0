@@ -94,7 +94,7 @@ public class ClsConsultaCuentasPorCobrar extends Coneccion{
                 al.setFecha(rs.getDate("fecha"));
                 al.setImporte(rs.getDouble("importe_total"));
                 al.setCliente(rs.getInt("id_cliente"));
-                 al.setProveedor(rs.getInt("id_proveedor "));
+                 al.setProveedor(rs.getInt("id_proveedor"));
                 return al;  
             }
             return null;

@@ -6,13 +6,19 @@ package Vista;
 
 import Controlador.Ctrl_ReportCuentaCobrar;
 import Modelo.ClsConsultaCuentasPorCobrar;
+import Modelo.ClsConsultaFactura;
 import Modelo.ClsCuentasPorCobrar;
+import Modelo.ClsFactura;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -264,13 +270,17 @@ public class frmMenuInicio extends javax.swing.JFrame {
                 }
 
                 // Agregar nuevo formulario
+                     
                     ClsCuentasPorCobrar obj = new ClsCuentasPorCobrar();
                     ClsConsultaCuentasPorCobrar sqlobj = new ClsConsultaCuentasPorCobrar();
                     frmcuentasporcobrar ventana = new frmcuentasporcobrar();
                     Ctrl_ReportCuentaCobrar ctrl = new Ctrl_ReportCuentaCobrar(obj,sqlobj,ventana);
                     ctrl.Iniciar();
-                    cuencobraForm = new frmcuentasporcobrar(); // Crea una nueva instancia del formulario
-                    panelBody.add(cuencobraForm); // Agrega el nuevo formulario al panel
+                     // Crea una nueva instancia del formulario
+                    //cuencobraForm = new Prueba();
+                    ventana.setVisible(true);
+                    panelBody.add(ventana); // Agrega el nuevo formulario al panel
+                    
                     panelBody.repaint();
                     panelBody.revalidate();
                     

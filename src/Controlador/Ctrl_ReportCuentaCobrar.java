@@ -8,8 +8,10 @@ import Modelo.ClsConsultaFactura;
 import Modelo.ClsCuentasPorCobrar;
 import Modelo.ClsFactura;
 import Vista.frmcuentasporcobrar;
+import Vista.frmcuentasporcobrar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +24,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JPanel;
+import javax.swing.DefaultComboBoxModel;
 /**
  *
  * @author monta
@@ -35,7 +38,7 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
         this.est = est;
         this.sqlest = sqlest;
         this.frm = frm;
-        this.frm.btngenerar.addActionListener((ActionListener) this);
+        this.frm.btnagregar.addActionListener((ActionListener) this);
         this.frm.cmbfacturas.addActionListener((ActionListener)this);
         this.frm.btngenerar.addActionListener((ActionListener) this);
         this.frm.btnactualizar.addActionListener((ActionListener) this);
@@ -65,12 +68,12 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
                 } catch (ParseException ex) {
                     Logger.getLogger(Ctrl_ReportCuentaCobrar.class.getName()).log(Level.SEVERE, null, ex);
                 }
-              frm.jComboBox1.setSelectedItem(modelo.getValueAt(fila, 4).toString());
+              frm.cmbfacturas.setSelectedItem(modelo.getValueAt(fila, 4).toString());
               
               
              
               
-               frm.btngenerar.setEnabled(false);
+               //frm.btngenerar.setEnabled(false);
                 
               
               
@@ -78,10 +81,12 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
         });
        
     }
+    
     public void Iniciar(){
-          
+        
+        
         try {
-            Mostrar();
+            
             //campos ocultos
            frm.txtid.setVisible(false);
           
@@ -95,6 +100,7 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
         } catch (Exception ex) {
             Logger.getLogger(Ctrl_ReportCuentaCobrar.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
      @Override
     public void actionPerformed(ActionEvent e){
@@ -158,34 +164,36 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
              { if(i==5){return true;} else {return false;}}
            };
          
-         ClsFactura obj =(ClsFactura) frm.cmbtransacc.getSelectedItem();
+         ClsFactura obj =(ClsFactura) frm.cmbfacturas.getSelectedItem();
            try {
               
                 notas= sqlest.Mostrar();
                 if(!notas.isEmpty())
                 {
-                 for (int i = 0; i < notas.size(); i++) {
-                  
-                    cls = (ClsCuentasPorCobrar) notas.get(i);
-                   datos[0] = cls.getId();
-                    datos[1]= cls.getImporte();
-                   
-                    datos[2]= cls.getFecha_venci();
-                     datos[3]= cls.getFecha_pag();
-                    factura = sqlest.BuscarFactura(cls);
-                    datos[4]= factura.getNumero();
-                    tabla.addRow(datos);
-                  }  
-                 frm.tbtransacc.setModel(tabla);
-                
-                 
-                 DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
-                 Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
-                 for(int i=4; i<7;i++)
-                 {  frm.tbtransacc.getColumnModel().getColumn(i).setCellRenderer(Alinear);}
-               }
+                    for (int i = 0; i < notas.size(); i++) {
+
+                       cls = (ClsCuentasPorCobrar) notas.get(i);
+                      datos[0] = cls.getId();
+                       datos[1]= cls.getImporte();
+
+                       datos[2]= cls.getFecha_venci();
+                        datos[3]= cls.getFecha_pag();
+                       factura = sqlest.BuscarFactura(cls);
+                       datos[4]= factura.getNumero();
+                       tabla.addRow(datos);
+                     }  
+                    frm.tbtransacc.setModel(tabla);
+
+
+                    DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
+                    Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
+                    for(int i=4; i<7;i++)
+                    {  frm.tbtransacc.getColumnModel().getColumn(i).setCellRenderer(Alinear);}
+                }
                 else
-               {JOptionPane.showMessageDialog(null, "No encontro información"); Limpiar();frm.txtbuscar.setText(null);}
+                {
+                   frm.txtbuscar.setEnabled(false);
+                   JOptionPane.showMessageDialog(null, "No encontro información"); Limpiar();frm.txtbuscar.setText(null);}
                
            } catch (Exception ex) {
                Logger.getLogger(Ctrl_ReportCuentaCobrar.class.getName()).log(Level.SEVERE, null, ex);
@@ -197,6 +205,7 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
         frm.jDateChooser1.setDate(null);
         frm.jDateChooser2.setDate(null);
         frm.txtimporte.setText("0000000");
+        
        
         
     }
@@ -247,4 +256,6 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
   private static boolean FormatoFecha(String datos){
           return datos.matches("[0-9-/]*");
       }
+
+   
 }
