@@ -32,16 +32,16 @@ public class frmcuentasporpagar extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_bank_building_50px_2.png"))); // NOI18N
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 79, 84));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 79, 120));
 
         jLabel3.setBackground(new java.awt.Color(0, 75, 159));
-        jLabel3.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("CUENTAS POR PAGAR");
+        jLabel3.setText("        Cuentas por pagar");
         jLabel3.setToolTipText("");
         jLabel3.setOpaque(true);
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 97));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 120));
     }// </editor-fold>//GEN-END:initComponents
 
 
