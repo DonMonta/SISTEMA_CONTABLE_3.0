@@ -4,6 +4,10 @@
  */
 package Vista;
 
+import Controlador.ctrl_Login;
+import Modelo.Clsconsulta_usuario;
+import Modelo.Usuario;
+
 /**
  *
  * @author monta
@@ -15,6 +19,7 @@ public class frmLogin extends javax.swing.JFrame {
      */
     public frmLogin() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -26,31 +31,102 @@ public class frmLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jbtnSalir = new javax.swing.JButton();
+        jbtnIngresar = new javax.swing.JButton();
+        jtxtClave = new javax.swing.JTextField();
+        jtxtUsuario = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("INICIAR SECION");
+        jbtnSalir.setBackground(new java.awt.Color(0, 75, 159));
+        jbtnSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbtnSalir.setText("SALIR");
+        jbtnSalir.setBorder(null);
+        jbtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 90, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(330, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(110, 110, 110))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(278, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(123, 123, 123))
-        );
+        jbtnIngresar.setBackground(new java.awt.Color(0, 75, 159));
+        jbtnIngresar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbtnIngresar.setText("INGRESAR");
+        jbtnIngresar.setBorder(null);
+        jbtnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnIngresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbtnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 189, 49));
+
+        jtxtClave.setBackground(new java.awt.Color(255, 255, 255));
+        jtxtClave.setForeground(new java.awt.Color(0, 0, 0));
+        jtxtClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtClaveActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jtxtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 240, 34));
+
+        jtxtUsuario.setBackground(new java.awt.Color(255, 255, 255));
+        jtxtUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(jtxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 240, 35));
+
+        jButton2.setBackground(new java.awt.Color(0, 75, 159));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_microsoft_admin_24px.png"))); // NOI18N
+        jButton2.setBorder(null);
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 40, 40));
+
+        jButton1.setBackground(new java.awt.Color(0, 75, 159));
+        jButton1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_client_management_24px.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 40, 40));
+
+        jPanel1.setBackground(new java.awt.Color(0, 75, 159));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("LOGIN DE ACCESO / SISTEMA CONTABLE");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 400, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 550, 80));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/149071.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 180, 140));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIngresarActionPerformed
+        Usuario usuario = new Usuario();
+        Clsconsulta_usuario consulta_usuario = new Clsconsulta_usuario();
+        frmLogin frmlogin = new frmLogin();
+        ctrl_Login ctrl = new ctrl_Login(frmlogin,usuario,consulta_usuario);
+        ctrl.Log(jtxtUsuario.getText(),jtxtClave.getText());
+    }//GEN-LAST:event_jbtnIngresarActionPerformed
+
+    private void jtxtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtClaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtClaveActionPerformed
+
+    private void jbtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalirActionPerformed
+      System.exit(0);
+    }//GEN-LAST:event_jbtnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -63,7 +139,7 @@ public class frmLogin extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -89,5 +165,13 @@ public class frmLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    public javax.swing.JButton jbtnIngresar;
+    public javax.swing.JButton jbtnSalir;
+    public javax.swing.JTextField jtxtClave;
+    public javax.swing.JTextField jtxtUsuario;
     // End of variables declaration//GEN-END:variables
 }

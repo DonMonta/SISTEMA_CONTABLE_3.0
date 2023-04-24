@@ -1,12 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Modelo;
-/**
- *
- * @author monta
- */
+
 public class ClsLogin {
+    // ATRIBUTOS
     
+private String usuario;
+private String clave;
+
+// CONSTRUCTOR
+
+public ClsLogin(){
+    this.clave=clave;
+    this.usuario=usuario;
+}
+// METODOS GETTER Y SETTER
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
 }
