@@ -21,6 +21,7 @@ public class Coneccion {
    final String user="root";
     String pwd="";
     String url="jdbc:mysql://localhost:3306/" + bdd;
+    
     Connection conexion;
     
     public Connection getConexion(){

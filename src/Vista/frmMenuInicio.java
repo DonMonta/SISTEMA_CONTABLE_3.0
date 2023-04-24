@@ -5,10 +5,13 @@
 package Vista;
 
 import Controlador.Ctrl_ReportCuentaCobrar;
+import Controlador.Ctrl_Usuario;
 import Modelo.ClsConsultaCuentasPorCobrar;
 import Modelo.ClsConsultaFactura;
+import Modelo.ClsConsultaUsuario;
 import Modelo.ClsCuentasPorCobrar;
 import Modelo.ClsFactura;
+import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -423,7 +426,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.revalidate();
                 }
                  
-                
+                    Usuario obj = new Usuario();
+                    ClsConsultaUsuario sqlobj = new ClsConsultaUsuario();
+                    
+                    Ctrl_Usuario ctrl = new Ctrl_Usuario(obj,sqlobj,usuario);
+                    ctrl.Iniciar();
 
                 // Agregar nuevo formulario
                      // Crea una nueva instancia del formulario
@@ -432,7 +439,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
               
-               
+              
             }
         });
         

@@ -67,17 +67,12 @@ public class frmLogin extends javax.swing.JFrame {
         });
         getContentPane().add(jbtnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 189, 49));
 
-        jtxtClave.setBackground(new java.awt.Color(255, 255, 255));
-        jtxtClave.setForeground(new java.awt.Color(0, 0, 0));
         jtxtClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtClaveActionPerformed(evt);
             }
         });
         getContentPane().add(jtxtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 240, 34));
-
-        jtxtUsuario.setBackground(new java.awt.Color(255, 255, 255));
-        jtxtUsuario.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(jtxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 240, 35));
 
         jButton2.setBackground(new java.awt.Color(0, 75, 159));
@@ -87,7 +82,6 @@ public class frmLogin extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(0, 75, 159));
         jButton1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_client_management_24px.png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
