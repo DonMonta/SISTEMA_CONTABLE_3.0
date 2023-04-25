@@ -138,7 +138,7 @@ public class ControladorProveedor implements ActionListener {
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override
              public boolean isCellEditable(int i, int j)
-             { if(i==6){return true;} else {return false;}}
+             { if(i==5){return true;} else {return false;}}
            };
           
            List objList; ClsProveedor cls;
@@ -182,7 +182,7 @@ public class ControladorProveedor implements ActionListener {
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override
              public boolean isCellEditable(int i, int j)
-             { if(i==3){return true;} else {return false;}}
+             { if(i==5){return true;} else {return false;}}
            };
           
            List objList; ClsProveedor cls;

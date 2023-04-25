@@ -32,15 +32,15 @@ public class FrmUSUARIOS extends javax.swing.JInternalFrame {
         txtUsuario = new javax.swing.JTextField();
         txtContraseña = new javax.swing.JTextField();
         txtID = new javax.swing.JTextField();
-        btnLimpiar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        btnBusca = new javax.swing.JButton();
-        btnIngresar = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbMaterias = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
+        btnLimpiar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
         btnactualizar = new javax.swing.JButton();
+        btnIngresar = new javax.swing.JButton();
+        btnBusca = new javax.swing.JButton();
 
         setBorder(null);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,36 +53,24 @@ public class FrmUSUARIOS extends javax.swing.JInternalFrame {
         jLabel4.setText("CREAR USUARIOS");
         jLabel4.setToolTipText("");
         jLabel4.setOpaque(true);
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 60));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Usuario");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Contraseña");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 90, 20));
-        getContentPane().add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 90, -1));
-        getContentPane().add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 90, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
 
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
+                txtUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, -1));
-
-        btnEliminar.setText("Eliminar");
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
-
-        btnUpdate.setText("Modificar");
-        getContentPane().add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, -1));
-
-        btnBusca.setText("Buscar");
-        getContentPane().add(btnBusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, -1, -1));
-
-        btnIngresar.setText("Ingresar");
-        getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 120, 30));
+        getContentPane().add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 120, 30));
+        getContentPane().add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 40, -1));
 
         tbMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,27 +85,59 @@ public class FrmUSUARIOS extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tbMaterias);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 360, 240));
-        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 210, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 360, 240));
 
-        btnactualizar.setText("Actualizar");
-        getContentPane().add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
+        txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtBuscar.setForeground(new java.awt.Color(204, 204, 204));
+        txtBuscar.setText("Buscar Por nombre de Usuario");
+        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 210, 30));
+
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-broom-with-a-lot-of-dust-40.png"))); // NOI18N
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 40, 40));
+
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-eliminar-40.png"))); // NOI18N
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 30, 40));
+
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-editar-40.png"))); // NOI18N
+        btnUpdate.setBorder(null);
+        getContentPane().add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 40, 40));
+
+        btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-actualizar.gif"))); // NOI18N
+        getContentPane().add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, 40, 40));
+
+        btnIngresar.setBackground(new java.awt.Color(0, 112, 224));
+        btnIngresar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-guardar-94.png"))); // NOI18N
+        btnIngresar.setBorder(null);
+        getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, 40));
+
+        btnBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
+        getContentPane().add(btnBusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 50, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-         txtID.setText(null);
-       txtUsuario.setText(null);
+        txtID.setText(null);
+        txtUsuario.setText(null);
         txtContraseña.setText(null);
-       txtUsuario.setFocusable(true);
+        txtUsuario.setFocusable(true);
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBusca;
     public javax.swing.JButton btnEliminar;
-    public javax.swing.JToggleButton btnIngresar;
+    public javax.swing.JButton btnIngresar;
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnUpdate;
     public javax.swing.JButton btnactualizar;
