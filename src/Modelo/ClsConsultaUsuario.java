@@ -154,22 +154,22 @@ public class ClsConsultaUsuario extends Coneccion {
              ps=con.prepareStatement(sql);
              res = ps.executeQuery();
              while (res.next()) {                 
-                ClsCuentasPorCobrar obj = new ClsCuentasPorCobrar();
-                obj.setId(res.getInt("id"));
-                obj.setImporte(res.getDouble("user"));
-                obj.setFecha_venci(res.getDate("clave"));
+                Usuario obj = new Usuario();
+                obj.setIdUsuario(res.getInt("id"));
+                obj.setUsuario(res.getNString("user"));
+                obj.setPassword(res.getNString("clave"));
                 
                  
                 listaCompras.add(obj);
              }
          } catch (SQLException ex) {
-            Logger.getLogger(ClsConsultaCuentasPorCobrar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
                 try {
                     con.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(ClsConsultaCuentasPorCobrar.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }return listaCompras;
      }

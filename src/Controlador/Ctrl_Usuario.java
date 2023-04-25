@@ -5,8 +5,6 @@
 package Controlador;
 
 import Modelo.ClsConsultaUsuario;
-import Modelo.ClsFactura;
-
 import Modelo.Usuario;
 import Vista.FrmUSUARIOS;
 import java.awt.event.ActionEvent;

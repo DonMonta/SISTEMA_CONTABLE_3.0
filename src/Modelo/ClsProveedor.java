@@ -15,12 +15,13 @@ public class ClsProveedor {
     private String identificacionFiscal;
     private String formaPagoPreferida;
 
-    public ClsProveedor(int id, String nombre, String direccion, String identificacionFiscal, String formaPagoPreferida) {
-        this.id = id;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.identificacionFiscal = identificacionFiscal;
-        this.formaPagoPreferida = formaPagoPreferida;
+    //Contructor vacío
+    public ClsProveedor() {
+        this.id = 0;
+        this.nombre = "";
+        this.direccion = "";
+         this.identificacionFiscal = "";
+         this.formaPagoPreferida="";
     }
 
     public int getId() {

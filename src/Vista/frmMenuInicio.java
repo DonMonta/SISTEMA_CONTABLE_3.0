@@ -4,13 +4,16 @@
  */
 package Vista;
 
+import Controlador.ControladorProveedor;
 import Controlador.Ctrl_ReportCuentaCobrar;
 import Controlador.Ctrl_Usuario;
 import Modelo.ClsConsultaCuentasPorCobrar;
 import Modelo.ClsConsultaFactura;
+import Modelo.ClsConsultaProveedor;
 import Modelo.ClsConsultaUsuario;
 import Modelo.ClsCuentasPorCobrar;
 import Modelo.ClsFactura;
+import Modelo.ClsProveedor;
 import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -303,7 +306,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                 }
                  
                 
-
+                     ClsProveedor obj = new ClsProveedor();
+                    ClsConsultaProveedor sqlobj = new ClsConsultaProveedor();
+                    
+                    ControladorProveedor ctrl = new ControladorProveedor(obj,sqlobj,proveedores);
+                    ctrl.Iniciar();
                 // Agregar nuevo formulario
                      // Crea una nueva instancia del formulario
                     proveedores.setVisible(true);
