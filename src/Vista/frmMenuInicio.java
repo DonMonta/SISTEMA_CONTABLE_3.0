@@ -8,13 +8,16 @@ import Controlador.ControladorProveedor;
 import Controlador.Ctrl_ReportCuentaCobrar;
 import Controlador.Ctrl_ReportCuentaPagar;
 import Controlador.Ctrl_Usuario;
+import Controlador.Ctrl_inventario;
 import Modelo.ClsConsultaCuentasPorCobrar;
 import Modelo.ClsConsultaFactura;
 import Modelo.ClsConsultaProveedor;
 import Modelo.ClsConsultaUsuario;
+import Modelo.ClsConsultainventario;
 import Modelo.ClsConsultasCuentasPorPagar;
 import Modelo.ClsCuentasPorCobrar;
 import Modelo.ClsFactura;
+import Modelo.ClsInventario;
 import Modelo.ClsProveedor;
 import Modelo.Usuario;
 import Modelo.clsCuentasPorPagar;
@@ -246,7 +249,12 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
                 }
-                 
+                   ClsInventario obj = new ClsInventario();
+                    ClsConsultainventario sqlobj = new ClsConsultainventario();
+                    
+                    Ctrl_inventario ctrl = new Ctrl_inventario(obj,sqlobj,inventario);
+                    ctrl.Iniciar();     
+                
                 
 
                 // Agregar nuevo formulario

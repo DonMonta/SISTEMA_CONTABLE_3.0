@@ -20,7 +20,7 @@ public class Coneccion {
    final String bdd="sistema_contable"; 
    final String user="root";
     String pwd="";
-    String url="jdbc:mysql://localhost:3309/" + bdd;
+    String url="jdbc:mysql://localhost:3306/" + bdd;
     
     Connection conexion;
     

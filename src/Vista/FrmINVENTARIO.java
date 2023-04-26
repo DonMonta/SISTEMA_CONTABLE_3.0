@@ -1,14 +1,14 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Vista;
 
 /**
  *
- * @author monta
+ * @author jorge
  */
-public class FrmINVENTARIO extends javax.swing.JInternalFrame {
+public class FrmINVENTARIO extends javax.swing.JPanel {
 
     /**
      * Creates new form FrmINVENTARIO
@@ -26,34 +26,142 @@ public class FrmINVENTARIO extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        txtnombreproducto = new javax.swing.JTextField();
+        lblnombredelproducto = new javax.swing.JLabel();
+        lbldescripcion = new javax.swing.JLabel();
+        txtdescripcion = new javax.swing.JTextField();
+        lblpreciodeventa = new javax.swing.JLabel();
+        txtprecioventa = new javax.swing.JTextField();
+        txtcosto = new javax.swing.JTextField();
+        lblcantidaddisponible = new javax.swing.JLabel();
+        txtcantidaddisponible = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator1 = new javax.swing.JSeparator();
+        txtbuscar = new javax.swing.JTextField();
+        btnbuscar = new javax.swing.JButton();
+        txtid = new javax.swing.JTextField();
+        lblcosto = new javax.swing.JLabel();
+        btnguardar = new javax.swing.JButton();
+        btneliminar = new javax.swing.JButton();
+        btnmodificar = new javax.swing.JButton();
+        btnborrar = new javax.swing.JButton();
+        btnactualizar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbltabla = new javax.swing.JTable();
 
-        setBorder(null);
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(txtnombreproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 115, -1));
 
-        jLabel1.setText("Inventario");
+        lblnombredelproducto.setText("Nombre del producto");
+        add(lblnombredelproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(jLabel1)
-                .addContainerGap(187, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jLabel1)
-                .addContainerGap(187, Short.MAX_VALUE))
-        );
+        lbldescripcion.setText("Descripcion");
+        add(lbldescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        add(txtdescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 115, -1));
 
-        pack();
+        lblpreciodeventa.setText("Precio de venta");
+        add(lblpreciodeventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
+        add(txtprecioventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 115, -1));
+        add(txtcosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 110, -1));
+
+        lblcantidaddisponible.setText("Cantidad disponible");
+        add(lblcantidaddisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, -1, -1));
+        add(txtcantidaddisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 110, -1));
+
+        jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 10, 380));
+
+        jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
+        jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 170, 1180, 80));
+
+        txtbuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtbuscar.setForeground(new java.awt.Color(204, 204, 204));
+        txtbuscar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtbuscar.setText("Buscar Por Nombre");
+        add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 272, -1));
+
+        btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
+        add(btnbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 50, 30));
+        add(txtid, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        lblcosto.setText("Costo");
+        add(lblcosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 70, 20));
+
+        btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-guardar-94.png"))); // NOI18N
+        add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
+
+        btneliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-eliminar-40.png"))); // NOI18N
+        add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 460, -1, -1));
+
+        btnmodificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-editar-40.png"))); // NOI18N
+        add(btnmodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, -1, -1));
+
+        btnborrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-broom-with-a-lot-of-dust-40.png"))); // NOI18N
+        add(btnborrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, -1, -1));
+
+        btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-actualizar.gif"))); // NOI18N
+        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 460, -1, -1));
+
+        jLabel4.setBackground(new java.awt.Color(0, 75, 159));
+        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-en-inventario-50.png"))); // NOI18N
+        jLabel4.setText("GESTIONAR INVENTARIO");
+        jLabel4.setToolTipText("");
+        jLabel4.setOpaque(true);
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1220, 110));
+
+        jScrollPane1.setBorder(null);
+
+        tbltabla.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        tbltabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre del producto", "Descripcion", "Precio Venta", "Costo", "Cantidad disponible"
+            }
+        ));
+        tbltabla.setGridColor(new java.awt.Color(255, 255, 255));
+        tbltabla.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        tbltabla.setRowHeight(25);
+        tbltabla.setSelectionBackground(new java.awt.Color(0, 112, 224));
+        jScrollPane1.setViewportView(tbltabla);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 750, 360));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JButton btnactualizar;
+    public javax.swing.JButton btnborrar;
+    public javax.swing.JButton btnbuscar;
+    public javax.swing.JButton btneliminar;
+    public javax.swing.JButton btnguardar;
+    public javax.swing.JButton btnmodificar;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    public javax.swing.JLabel lblcantidaddisponible;
+    public javax.swing.JLabel lblcosto;
+    public javax.swing.JLabel lbldescripcion;
+    public javax.swing.JLabel lblnombredelproducto;
+    public javax.swing.JLabel lblpreciodeventa;
+    public javax.swing.JTable tbltabla;
+    public javax.swing.JTextField txtbuscar;
+    public javax.swing.JTextField txtcantidaddisponible;
+    public javax.swing.JTextField txtcosto;
+    public javax.swing.JTextField txtdescripcion;
+    public javax.swing.JTextField txtid;
+    public javax.swing.JTextField txtnombreproducto;
+    public javax.swing.JTextField txtprecioventa;
     // End of variables declaration//GEN-END:variables
 }

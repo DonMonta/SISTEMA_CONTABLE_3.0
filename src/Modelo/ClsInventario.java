@@ -13,7 +13,14 @@ public class ClsInventario {
     String nombre_producto, descripcion;
     double precio_venta, costo;
     int cantidad_disponible;
-
+public ClsInventario() {
+        this.id = 0;
+        this. nombre_producto= "";
+        this. descripcion= "";
+        this. precio_venta= 0;
+        this. costo= 0;
+        this. cantidad_disponible= 0;
+    }
     public int getId() {
         return id;
     }
