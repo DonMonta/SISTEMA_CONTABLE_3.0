@@ -6,15 +6,18 @@ package Vista;
 
 import Controlador.ControladorProveedor;
 import Controlador.Ctrl_ReportCuentaCobrar;
+import Controlador.Ctrl_ReportCuentaPagar;
 import Controlador.Ctrl_Usuario;
 import Modelo.ClsConsultaCuentasPorCobrar;
 import Modelo.ClsConsultaFactura;
 import Modelo.ClsConsultaProveedor;
 import Modelo.ClsConsultaUsuario;
+import Modelo.ClsConsultasCuentasPorPagar;
 import Modelo.ClsCuentasPorCobrar;
 import Modelo.ClsFactura;
 import Modelo.ClsProveedor;
 import Modelo.Usuario;
+import Modelo.clsCuentasPorPagar;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,7 +51,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
     }
     
     frmcientascobrar cobrar = new frmcientascobrar();
-    FrmCUENTASPAGAR pagar = new FrmCUENTASPAGAR();
+    frmcuentasporpagar pagar = new frmcuentasporpagar();
     FrmCLIENTES clientes = new FrmCLIENTES();
     FrmFACTURA factura = new FrmFACTURA();
     frmuser usuario = new frmuser();
@@ -56,8 +59,6 @@ public class frmMenuInicio extends javax.swing.JFrame {
     frmproveedore proveedores = new frmproveedore();
     FrmINVENTARIO inventario = new FrmINVENTARIO();
     FrmCUENTASBANCARIAS bancarias = new FrmCUENTASBANCARIAS();
-           
-    
      
      private void execute() {
         ImageIcon iconManteni = new ImageIcon(getClass().getResource("/imagenes/icons8_home_24px_1.png"));
@@ -572,7 +573,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
                 }
-                 
+                 clsCuentasPorPagar obj = new clsCuentasPorPagar();
+                    ClsConsultasCuentasPorPagar sqlobj = new  ClsConsultasCuentasPorPagar();
+                    
+                    Ctrl_ReportCuentaPagar ctrl = new Ctrl_ReportCuentaPagar(obj,sqlobj,pagar);
+                    ctrl.Iniciar();
                 
 
                 // Agregar nuevo formulario

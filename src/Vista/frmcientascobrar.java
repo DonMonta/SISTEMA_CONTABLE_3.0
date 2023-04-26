@@ -91,6 +91,11 @@ public class frmcientascobrar extends javax.swing.JPanel {
         btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
 
         cmbfacturas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbfacturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbfacturasActionPerformed(evt);
+            }
+        });
 
         txtimporte.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtimporte.setForeground(new java.awt.Color(204, 204, 204));
@@ -123,6 +128,11 @@ public class frmcientascobrar extends javax.swing.JPanel {
         btnagregar.setForeground(new java.awt.Color(255, 255, 255));
         btnagregar.setText("AGREGAR");
         btnagregar.setBorder(null);
+        btnagregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnagregarActionPerformed(evt);
+            }
+        });
 
         jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -306,6 +316,14 @@ public class frmcientascobrar extends javax.swing.JPanel {
         char c = evt.getKeyChar();
         if(c<'0'|| c>'9')   evt.consume();
     }//GEN-LAST:event_txtimporteKeyTyped
+
+    private void btnagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnagregarActionPerformed
+
+    private void cmbfacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbfacturasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbfacturasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
