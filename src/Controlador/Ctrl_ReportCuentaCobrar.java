@@ -55,8 +55,8 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
               frm.txtbuscar.setEnabled(false);
               frm.txtid.setText(modelo.getValueAt(fila, 0).toString());
               frm.txtimporte.setText(modelo.getValueAt(fila, 1).toString());
-             String fecha=String.valueOf(modelo.getValueAt(fila, 2));
-             String fecha2=String.valueOf(modelo.getValueAt(fila, 3));
+              String fecha=String.valueOf(modelo.getValueAt(fila, 2));
+              String fecha2=String.valueOf(modelo.getValueAt(fila, 3));
              
               SimpleDateFormat s= new SimpleDateFormat("yyyy-MM-dd");
               java.util.Date fechasa,fehca2;

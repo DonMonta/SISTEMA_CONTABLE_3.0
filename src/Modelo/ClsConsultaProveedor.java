@@ -13,15 +13,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Vista.FrmPROVEEDORES;
+
 /**
  *
  * @author juand
  */
 public class ClsConsultaProveedor extends Coneccion {
-ClsConsultaProveedor est;
-    ClsConsultaUsuario sqlest;
-    FrmPROVEEDORES frm;
+
     public boolean Guardar(ClsProveedor proveedor){
             PreparedStatement ps =null;
             Connection con= (Connection)getConexion();
@@ -125,24 +123,7 @@ ClsConsultaProveedor est;
                 }
         }return listaProveedores;
      }
-       public void Iniciar(){
-        
-        
-        try {
-            
-            //campos ocultos
-           frm.txtID.setVisible(false);
-          
-            ClsConsultaProveedor prod = new ClsConsultaProveedor();
-            List objList = prod.Mostrar();
-             Iterator iterador = objList.iterator();  
-            while (iterador.hasNext()) {
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(ClsConsultaProveedor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+   
        public List Mostrar()throws Exception{
          ResultSet res;
          List listaCompras = new ArrayList();

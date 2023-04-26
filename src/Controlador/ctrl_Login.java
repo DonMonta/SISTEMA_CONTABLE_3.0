@@ -7,6 +7,7 @@ package Controlador;
 import Modelo.Clsconsulta_usuario;
 import Modelo.Usuario;
 import Vista.frmLogin;
+import Vista.frmMenuInicio;
 import Vista.frmMenuP;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,8 +49,11 @@ public class ctrl_Login implements ActionListener{
             if (clsconsulta_usuario.Login(usuario)) {
                 JOptionPane.showMessageDialog(null, "Login Correcto...");
                 frmMenuP menu = new frmMenuP();
+                
                menu.setVisible(true);
-                frm.dispose();
+                frmMenuInicio inicio = new frmMenuInicio();
+                inicio.lbluser.setText(us);
+                frm.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o Clave Incorrectos");
             }

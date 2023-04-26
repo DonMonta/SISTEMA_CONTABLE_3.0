@@ -43,15 +43,17 @@ public class frmMenuInicio extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         execute();
+       frmLogin user = new frmLogin();
+        lbluser.setText(user.jtxtUsuario.getText());
     }
     
     frmcuentasporcobrar cobrar = new frmcuentasporcobrar();
     FrmCUENTASPAGAR pagar = new FrmCUENTASPAGAR();
     FrmCLIENTES clientes = new FrmCLIENTES();
     FrmFACTURA factura = new FrmFACTURA();
-    FrmUSUARIOS usuario = new FrmUSUARIOS();
+    frmuser usuario = new frmuser();
     FrmGASTO gasto = new FrmGASTO();
-    FrmPROVEEDORES proveedores = new FrmPROVEEDORES();
+    frmproveedore proveedores = new frmproveedore();
     FrmINVENTARIO inventario = new FrmINVENTARIO();
     FrmCUENTASBANCARIAS bancarias = new FrmCUENTASBANCARIAS();
            
@@ -435,7 +437,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                  
                     Usuario obj = new Usuario();
                     ClsConsultaUsuario sqlobj = new ClsConsultaUsuario();
-                    
+                   
                     Ctrl_Usuario ctrl = new Ctrl_Usuario(obj,sqlobj,usuario);
                     ctrl.Iniciar();
 
@@ -674,7 +676,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jSeparator16 = new javax.swing.JSeparator();
-        jLabel29 = new javax.swing.JLabel();
+        lbluser = new javax.swing.JLabel();
         panelMenu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         menus = new javax.swing.JPanel();
@@ -694,9 +696,9 @@ public class frmMenuInicio extends javax.swing.JFrame {
 
         jSeparator16.setPreferredSize(new java.awt.Dimension(50, 5));
 
-        jLabel29.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel29.setText("User");
+        lbluser.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        lbluser.setForeground(new java.awt.Color(255, 255, 255));
+        lbluser.setText("User");
 
         javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
         panelHeader.setLayout(panelHeaderLayout);
@@ -711,7 +713,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 439, Short.MAX_VALUE)
-                .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbluser, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelHeaderLayout.setVerticalGroup(
@@ -722,7 +724,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
-                        .addComponent(jLabel29)))
+                        .addComponent(lbluser)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
@@ -805,11 +807,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator16;
+    public javax.swing.JLabel lbluser;
     private javax.swing.JPanel menus;
     private javax.swing.JPanel panelBody;
     private javax.swing.JPanel panelHeader;

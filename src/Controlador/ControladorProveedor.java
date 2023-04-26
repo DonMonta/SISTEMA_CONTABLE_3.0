@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import Modelo.ClsProveedor;
 import Modelo.ClsConsultaProveedor;
 import Vista.FrmPROVEEDORES;
+import Vista.frmproveedore;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,8 +23,8 @@ public class ControladorProveedor implements ActionListener {
     
   ClsProveedor mat;
     ClsConsultaProveedor sqlmat;
-    FrmPROVEEDORES frm;
-    public ControladorProveedor(ClsProveedor mat, ClsConsultaProveedor sqlmat, FrmPROVEEDORES frm) {
+    frmproveedore frm;
+    public ControladorProveedor(ClsProveedor mat, ClsConsultaProveedor sqlmat, frmproveedore frm) {
         this.mat = mat;
         this.sqlmat = sqlmat;
         this.frm = frm;
@@ -66,11 +67,7 @@ public class ControladorProveedor implements ActionListener {
         Mostrar();
     }
 
-    /**
-     *
-     * @param e
-     */
-  
+   @Override
     public void actionPerformed(ActionEvent e)
     {
         if(e.getSource()==frm.btnactualizar){
@@ -85,16 +82,46 @@ public class ControladorProveedor implements ActionListener {
         }
        
        if(e.getSource()==frm.btnIngresar)
+       { 
+                if("".equals(frm.txtNombre.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+
+                }
+                else if("".equals(frm.txtDireccion.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+
+
+
+                }
+                else if("".equals(frm.txtFormadepago.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+
+
+
+                }else if("".equals(frm.txtIdentificacion.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+
+
+                }
+                else{
+                    mat.setNombre(frm.txtNombre.getText());
+                    mat.setDireccion(frm.txtDireccion.getText());
+                    mat.setFormaPagoPreferida(frm.txtFormadepago.getText());
+                    mat.setIdentificacionFiscal(frm.txtIdentificacion.getText());
+                    if(sqlmat.Guardar(mat))
+                    {JOptionPane.showMessageDialog(null, "Proveedor guardado"); Limpiar();
+                     Mostrar();}
+                    else
+                    {JOptionPane.showMessageDialog(null, "No se guardó la informacion del Proveedor");Limpiar();}
+                }
+                
+           
+          
+       } 
+       if(e.getSource()==frm.btnLimpiar)
        {
-           mat.setNombre(frm.txtNombre.getText());
-           mat.setDireccion(frm.txtDireccion.getText());
-           mat.setFormaPagoPreferida(frm.txtFormadepago.getText());
-           mat.setIdentificacionFiscal(frm.txtIdentificacion.getText());
-           if(sqlmat.Guardar(mat))
-           {JOptionPane.showMessageDialog(null, "Proveedor guardado"); Limpiar();}
-           else
-           {JOptionPane.showMessageDialog(null, "No se guardó la informacion del Proveedor");Limpiar();}
-       }   
+           Limpiar();
+       } 
             
              
             
@@ -102,16 +129,42 @@ public class ControladorProveedor implements ActionListener {
     
      if(e.getSource()==frm.btnUpdate)
        {
-           mat.setId(Integer.parseInt(frm.txtID.getText()));
-           mat.setNombre(frm.txtNombre.getText());
-           mat.setDireccion(frm.txtDireccion.getText());
-           mat.setFormaPagoPreferida(frm.txtFormadepago.getText());
-           mat.setIdentificacionFiscal(frm.txtIdentificacion.getText());
+                  if("".equals(frm.txtNombre.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+
+                }
+                else if("".equals(frm.txtDireccion.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+
+
+
+                }
+                else if("".equals(frm.txtFormadepago.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+
+
+
+                }else if("".equals(frm.txtIdentificacion.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+
+
+                }else{
+                    mat.setId(Integer.parseInt(frm.txtID.getText()));
+                    mat.setNombre(frm.txtNombre.getText());
+                    mat.setDireccion(frm.txtDireccion.getText());
+                    mat.setFormaPagoPreferida(frm.txtFormadepago.getText());
+                    mat.setIdentificacionFiscal(frm.txtIdentificacion.getText());
+
+                    if(sqlmat.Modificar(mat))
+                    {JOptionPane.showMessageDialog(null, "Se actualizo la informacion del Proveedor"); Limpiar();
+                     Mostrar();}
+                    else
+                    {JOptionPane.showMessageDialog(null, "No se actualizo la informacion del Proveedor");Limpiar();}
+
+                }
+                  
+                
            
-           if(sqlmat.Modificar(mat))
-           {JOptionPane.showMessageDialog(null, "Se actualizo la informacion del Proveedor"); Limpiar();}
-           else
-           {JOptionPane.showMessageDialog(null, "No se actualizo la informacion del Proveedor");Limpiar();}
        }
     
        if(e.getSource()==frm.btnEliminar)
@@ -120,7 +173,8 @@ public class ControladorProveedor implements ActionListener {
           mat.setId(Integer.parseInt(frm.txtID.getText()));
            if(sqlmat.Eliminar(mat))
            {JOptionPane.showMessageDialog(null, "Se elimino el Proveedor"); Limpiar();Mostrar();frm.btnIngresar.setEnabled(true);
-            frm.btnBusca.setEnabled(true);frm.txtBuscar.setEnabled(true);frm.btnUpdate.setEnabled(false);frm.btnEliminar.setEnabled(false);}
+            frm.btnBusca.setEnabled(true);frm.txtBuscar.setEnabled(true);frm.btnUpdate.setEnabled(false);frm.btnEliminar.setEnabled(false);
+            Mostrar();}
            else
            {JOptionPane.showMessageDialog(null, "No se elimino el Proveedor");Limpiar();frm.btnIngresar.setEnabled(true);
             frm.btnBusca.setEnabled(true);frm.txtBuscar.setEnabled(true);frm.btnUpdate.setEnabled(false);frm.btnEliminar.setEnabled(false);}
@@ -133,7 +187,7 @@ public class ControladorProveedor implements ActionListener {
            if(sqlmat.BuscarProveedor(mat))
            {
 
-            String[] columnas ={"ID","Nombre","Direccion,forma_pago_preferida,FormaDePago"};
+            String[] columnas ={"ID","Nombre","Direccion","Identificacion Fiscal","Forma De Pago"};
            Object[] datos = new Object[5];
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override
@@ -170,14 +224,14 @@ public class ControladorProveedor implements ActionListener {
              }
                  else
                  {
-                     JOptionPane.showMessageDialog(null, "No encontro una Tienda Con ese Nombre"); Limpiar();frm.txtBuscar.setText(null);
+                     JOptionPane.showMessageDialog(null, "No encontro un Proveedor Con ese Nombre"); Limpiar();frm.txtBuscar.setText(null);
                     }
                 }
            
     }   
      private void Mostrar()
     {
-   String[] columnas ={"id","nombre","direccion","forma_pago_preferida","identificacion_fiscal"};
+   String[] columnas ={"ID","Nombre","Direccion","Identificacion Fiscal","Forma De Pago"};
            Object[] datos = new Object[5];
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override
@@ -216,29 +270,5 @@ public class ControladorProveedor implements ActionListener {
         frm.txtIdentificacion.setText(null);
         frm.txtNombre.setFocusable(true);
     }
-   private boolean Validar(){
-        if("".equals(frm.txtNombre.getText())){
-            JOptionPane.showMessageDialog(null,"Debe ingresar datos");
-            
-            return  false;
-            
-        }
-        if("".equals(frm.txtDireccion.getText())){
-            JOptionPane.showMessageDialog(null,"Debe ingresar datos");
-            
-            return  false;
-          
-        }
-        if("".equals(frm.txtFormadepago.getText())){
-            JOptionPane.showMessageDialog(null,"Debe ingresar datos");
-            
-            return  false;
-          
-        }if("".equals(frm.txtIdentificacion.getText())){
-            JOptionPane.showMessageDialog(null,"Debe ingresar datos");
-            
-            return  false;
-        }
-        return false;
-    }
+  
 }

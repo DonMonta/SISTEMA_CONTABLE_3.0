@@ -7,6 +7,7 @@ package Controlador;
 import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
 import Vista.FrmUSUARIOS;
+import Vista.frmuser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,8 +23,8 @@ import javax.swing.table.DefaultTableModel;
 public class Ctrl_Usuario implements ActionListener{
     Usuario mat;
     ClsConsultaUsuario sqlmat;
-    FrmUSUARIOS frm;
-    public Ctrl_Usuario(Usuario mat, ClsConsultaUsuario sqlmat, FrmUSUARIOS frm) {
+    frmuser frm;
+    public Ctrl_Usuario(Usuario mat, ClsConsultaUsuario sqlmat, frmuser frm) {
         this.mat = mat;
         this.sqlmat = sqlmat;
         this.frm = frm;
@@ -46,7 +47,7 @@ public class Ctrl_Usuario implements ActionListener{
                   frm.txtBuscar.setEnabled(false);
                   frm.txtID.setText(modelo.getValueAt(fila, 0).toString());
                   frm.txtUsuario.setText(modelo.getValueAt(fila, 1).toString());
-              frm.txtContraseña.setText(modelo.getValueAt(fila, 2).toString());
+                  frm.txtContraseña.setText(modelo.getValueAt(fila, 2).toString());
               
               frm.btnIngresar.setEnabled(false);
                 frm.btnBusca.setEnabled(false);
@@ -86,13 +87,17 @@ public class Ctrl_Usuario implements ActionListener{
        
        if(e.getSource()==frm.btnIngresar)
        {
-          mat.setUsuario(frm.txtUsuario.getText());
-           mat.setPassword(frm.txtContraseña.getText());
            
-           if(sqlmat.Guardar(mat))
-           {JOptionPane.showMessageDialog(null, "Usuario guardado"); Limpiar();}
-           else
-           {JOptionPane.showMessageDialog(null, "No se guardó la informacion del Usuario");Limpiar();}
+                mat.setUsuario(frm.txtUsuario.getText());
+                mat.setPassword(frm.txtContraseña.getText());
+
+                if(sqlmat.Guardar(mat))
+                {JOptionPane.showMessageDialog(null, "Usuario guardado"); Limpiar();
+                 Mostrar();}
+                else
+                {JOptionPane.showMessageDialog(null, "No se guardó la informacion del Usuario");Limpiar();}
+          
+        
        }   
             
              
@@ -101,14 +106,17 @@ public class Ctrl_Usuario implements ActionListener{
     
      if(e.getSource()==frm.btnUpdate)
        {
-           mat.setIdUsuario(Integer.parseInt(frm.txtID.getText()));
-           mat.setUsuario(frm.txtUsuario.getText());
-           mat.setPassword(frm.txtContraseña.getText());
+         
+                mat.setIdUsuario(Integer.parseInt(frm.txtID.getText()));
+                mat.setUsuario(frm.txtUsuario.getText());
+                mat.setPassword(frm.txtContraseña.getText());
+
+                if(sqlmat.Modificar(mat))
+                {JOptionPane.showMessageDialog(null, "Se actualizo la informacion del Usuario"); Limpiar(); Mostrar();}
+                else
+                {JOptionPane.showMessageDialog(null, "No se actualizo la informacion del Usuario");Limpiar();}
            
-           if(sqlmat.Modificar(mat))
-           {JOptionPane.showMessageDialog(null, "Se actualizo la informacion del Usuario"); Limpiar();}
-           else
-           {JOptionPane.showMessageDialog(null, "No se actualizo la informacion del Usuario");Limpiar();}
+           
        }
     
        if(e.getSource()==frm.btnEliminar)
@@ -117,7 +125,8 @@ public class Ctrl_Usuario implements ActionListener{
           mat.setIdUsuario(Integer.parseInt(frm.txtID.getText()));
            if(sqlmat.Eliminar(mat))
            {JOptionPane.showMessageDialog(null, "Se elimino"); Limpiar();Mostrar();frm.btnIngresar.setEnabled(true);
-            frm.btnBusca.setEnabled(true);frm.txtBuscar.setEnabled(true);frm.btnUpdate.setEnabled(false);frm.btnEliminar.setEnabled(false);}
+            frm.btnBusca.setEnabled(true);frm.txtBuscar.setEnabled(true);frm.btnUpdate.setEnabled(false);frm.btnEliminar.setEnabled(false);
+            Mostrar();}
            else
            {JOptionPane.showMessageDialog(null, "No se elimino");Limpiar();frm.btnIngresar.setEnabled(true);
             frm.btnBusca.setEnabled(true);frm.txtBuscar.setEnabled(true);frm.btnUpdate.setEnabled(false);frm.btnEliminar.setEnabled(false);}
@@ -130,7 +139,7 @@ public class Ctrl_Usuario implements ActionListener{
            if(sqlmat.BuscarUsuario(mat))
            {
 
-            String[] columnas ={"ID","USUARIO","CLAVE"};
+            String[] columnas ={"ID","Usuario","Contraseña"};
            Object[] datos = new Object[3];
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override

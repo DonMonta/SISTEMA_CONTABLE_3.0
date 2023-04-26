@@ -24,9 +24,6 @@ import Vista.FrmUSUARIOS;
  * @author juand
  */
 public class ClsConsultaUsuario extends Coneccion {
-    ClsConsultaUsuario est;
-    ClsConsultaUsuario sqlest;
-    FrmUSUARIOS frm;
     public boolean Guardar(Usuario tienda){
             PreparedStatement ps =null;
             Connection con= (Connection)getConexion();
@@ -126,25 +123,7 @@ public class ClsConsultaUsuario extends Coneccion {
                 }
         }return listaUsuarios;
      }
-       public void Iniciar(){
-        
-        
-        try {
-            
-            //campos ocultos
-           frm.txtID.setVisible(false);
-          
-            ClsConsultaUsuario prod = new ClsConsultaUsuario();
-            List objList = prod.Mostrar();
-             Iterator iterador = objList.iterator();  
-            while (iterador.hasNext()) {
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-       public List Mostrar()throws Exception{
+public List Mostrar()throws Exception{
          ResultSet res;
          List listaCompras = new ArrayList();
          PreparedStatement ps =null;
@@ -173,7 +152,7 @@ public class ClsConsultaUsuario extends Coneccion {
                 }
         }return listaCompras;
      }
-       public List MostrarUsuario()throws Exception{
+public List MostrarUsuario()throws Exception{
          ResultSet res;
          List obList = new ArrayList();
          PreparedStatement ps =null;
@@ -201,7 +180,7 @@ public class ClsConsultaUsuario extends Coneccion {
                 }
         }return obList;
      }
-        public boolean BuscarUsuario(Usuario obj){
+public boolean BuscarUsuario(Usuario obj){
     PreparedStatement ps =null;
     Connection con= (Connection)getConexion();
     ResultSet res=null;
@@ -231,7 +210,7 @@ public class ClsConsultaUsuario extends Coneccion {
                 }
         }
     }
-   public List ListarBussqueda(String nombre)throws Exception{
+public List ListarBussqueda(String nombre)throws Exception{
          ResultSet res;
          List listaMaterias = new ArrayList();
          PreparedStatement ps =null;

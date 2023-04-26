@@ -48,6 +48,7 @@ public class FrmPROVEEDORES extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         btnIngresar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
         setName(""); // NOI18N
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -60,7 +61,7 @@ public class FrmPROVEEDORES extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Direccion", "Identificacion_Fiscal", "FormaDePago"
+                "ID", "Nombre", "Direccion", "Identificacion Fiscal", "FormaDePago"
             }
         ));
         jScrollPane1.setViewportView(tbMaterias);
@@ -148,12 +149,7 @@ public class FrmPROVEEDORES extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-       txtID.setText(null);
-        txtNombre.setText(null);
-        txtDireccion.setText(null);
-        txtFormadepago.setText(null);
-         txtIdentificacion.setText(null);
-        txtNombre.setFocusable(true);
+       
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
