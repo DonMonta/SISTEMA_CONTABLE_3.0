@@ -47,7 +47,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
         lbluser.setText(user.jtxtUsuario.getText());
     }
     
-    frmcuentasporcobrar cobrar = new frmcuentasporcobrar();
+    frmcientascobrar cobrar = new frmcientascobrar();
     FrmCUENTASPAGAR pagar = new FrmCUENTASPAGAR();
     FrmCLIENTES clientes = new FrmCLIENTES();
     FrmFACTURA factura = new FrmFACTURA();

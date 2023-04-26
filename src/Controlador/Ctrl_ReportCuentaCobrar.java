@@ -7,8 +7,8 @@ import Modelo.ClsConsultaCuentasPorCobrar;
 import Modelo.ClsConsultaFactura;
 import Modelo.ClsCuentasPorCobrar;
 import Modelo.ClsFactura;
-import Vista.frmcuentasporcobrar;
-import Vista.frmcuentasporcobrar;
+import Vista.frmcientascobrar;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -32,9 +32,9 @@ import javax.swing.DefaultComboBoxModel;
 public class Ctrl_ReportCuentaCobrar implements ActionListener{
     ClsCuentasPorCobrar est;
     ClsConsultaCuentasPorCobrar sqlest;
-    frmcuentasporcobrar frm;
+    frmcientascobrar frm;
 
-    public Ctrl_ReportCuentaCobrar(ClsCuentasPorCobrar est, ClsConsultaCuentasPorCobrar sqlest, frmcuentasporcobrar frm) {
+    public Ctrl_ReportCuentaCobrar(ClsCuentasPorCobrar est, ClsConsultaCuentasPorCobrar sqlest, frmcientascobrar frm) {
         this.est = est;
         this.sqlest = sqlest;
         this.frm = frm;
@@ -117,35 +117,55 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
         }
          if(e.getSource()==frm.btnagregar)
         {  
-           if(Validar()){
-                frm.txtbuscar.setEnabled(true);
-                ClsFactura fac = (ClsFactura)frm.cmbfacturas.getSelectedItem();
-                est.setImporte(Double.parseDouble(frm.txtimporte.getText()));
-                String fecha,fecha2;
-                java.util.Date date = new java.util.Date();
-                SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-                fecha=f.format(frm.jDateChooser1.getDate());
-                fecha2=f.format(frm.jDateChooser2.getDate());
-         
-            try {       
+              if("".equals(frm.txtimporte.getText())){
+             JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+            
+            
+            
+             }
+              else if(frm.jDateChooser1.getDate()==null){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+
+              
+
+             }
+              else if(frm.jDateChooser2.getDate()==null){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+
+              
+
+             }
+              else{
+                  frm.txtbuscar.setEnabled(true);
+                    ClsFactura fac = (ClsFactura)frm.cmbfacturas.getSelectedItem();
+                    est.setImporte(Double.parseDouble(frm.txtimporte.getText()));
+                    String fecha,fecha2;
+                    java.util.Date date = new java.util.Date();
+                    SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+                    fecha=f.format(frm.jDateChooser1.getDate());
+                    fecha2=f.format(frm.jDateChooser2.getDate());
+
+                try {       
+
+                    est.setFecha_venci(new SimpleDateFormat("yyyy-MM-dd").parse(fecha));
+                    est.setFecha_pag(new SimpleDateFormat("yyyy-MM-dd").parse(fecha2));
+                } catch (ParseException ex) {
+                    Logger.getLogger(Ctrl_ReportCuentaCobrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    est.setFactura(fac.getId()); 
+
+
+               if(sqlest.Guardar(est))
+               {
+                   JOptionPane.showMessageDialog(null, "Guardado");
+                    Mostrar();
+                    Limpiar();
+               }
+               else
+               {JOptionPane.showMessageDialog(null, "No se guardó la informacion");Limpiar();}
+              }
                 
-                est.setFecha_venci(new SimpleDateFormat("yyyy-MM-dd").parse(fecha));
-                est.setFecha_pag(new SimpleDateFormat("yyyy-MM-dd").parse(fecha2));
-            } catch (ParseException ex) {
-                Logger.getLogger(Ctrl_ReportCuentaCobrar.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                est.setFactura(fac.getId()); 
            
-          
-           if(sqlest.Guardar(est))
-           {
-               JOptionPane.showMessageDialog(null, "Guardado");
-                Mostrar();
-                Limpiar();
-           }
-           else
-           {JOptionPane.showMessageDialog(null, "No se guardó la informacion");Limpiar();}
-           }
           
            
        }
@@ -209,31 +229,7 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
        
         
     }
-     private boolean Validar(){
-       
-        if("".equals(frm.txtimporte.getText())){
-            JOptionPane.showMessageDialog(null,"Debe ingresar datos");
-            
-            return  false;
-            
-        }
-       if(frm.jDateChooser1.getDate()==null){
-            JOptionPane.showMessageDialog(null,"Debe ingresar datos");
-            
-            return  false;
-            
-        }
-        if(frm.jDateChooser2.getDate()==null){
-            JOptionPane.showMessageDialog(null,"Debe ingresar datos");
-            
-            return  false;
-            
-        }
-      
-         
-
-        return true;
-    }
+    
       private boolean ValidarBusca(){
         if("".equals(frm.txtbuscar.getText())){
             JOptionPane.showMessageDialog(null,"Debe ingresar datos");
