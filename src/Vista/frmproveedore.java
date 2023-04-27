@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,7 +50,13 @@ public class frmproveedore extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         btnIngresar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        cmbforma = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbMaterias.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         tbMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -61,51 +68,119 @@ public class frmproveedore extends javax.swing.JPanel {
                 "ID", "Nombre", "Direccion", "Identificacion Fiscal", "FormaDePago"
             }
         ));
+        tbMaterias.setGridColor(new java.awt.Color(255, 255, 255));
+        tbMaterias.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        tbMaterias.setRowHeight(25);
+        tbMaterias.setSelectionBackground(new java.awt.Color(0, 112, 224));
         jScrollPane1.setViewportView(tbMaterias);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Nombre:");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, -1, 230));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setText("Datos Guardados");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 210, 150, 30));
+
+        txtNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(204, 204, 204));
+        txtNombre.setText("Ingrese Nombre del Proveedor");
+        txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtNombreMousePressed(evt);
+            }
+        });
+        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 280, 40));
+
+        txtDireccion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtDireccion.setForeground(new java.awt.Color(204, 204, 204));
+        txtDireccion.setText("Ingrese Direccion");
+        txtDireccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtDireccionMousePressed(evt);
+            }
+        });
+        add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 280, 40));
 
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-broom-with-a-lot-of-dust-40.png"))); // NOI18N
+        btnLimpiar.setBorder(null);
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
             }
         });
+        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 530, 40, 40));
+
+        txtIdentificacion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtIdentificacion.setForeground(new java.awt.Color(204, 204, 204));
+        txtIdentificacion.setText("Ingrese Identificacion Fiscal");
+        txtIdentificacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtIdentificacionMousePressed(evt);
+            }
+        });
+        txtIdentificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdentificacionActionPerformed(evt);
+            }
+        });
+        txtIdentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdentificacionKeyTyped(evt);
+            }
+        });
+        add(txtIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 220, 40));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-eliminar-40.png"))); // NOI18N
+        btnEliminar.setBorder(null);
+        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 530, 30, 40));
+        add(txtFormadepago, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 130, 30));
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-editar-40.png"))); // NOI18N
         btnUpdate.setBorder(null);
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 530, -1, -1));
 
         btnBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
+        add(btnBusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 50, 30));
 
         txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtBuscar.setForeground(new java.awt.Color(204, 204, 204));
         txtBuscar.setText("Buscar Proveedores");
+        txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtBuscarMousePressed(evt);
+            }
+        });
+        add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 270, 40));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Direccion:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 259, 77, 23));
 
         btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-actualizar.gif"))); // NOI18N
+        btnactualizar.setBorder(null);
+        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 530, 40, 40));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Forma de pago Preferida:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, 30));
 
         txtID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIDActionPerformed(evt);
             }
         });
+        add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Identificacion Fiscal:");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
 
         jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 170, 10, 500));
 
         jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
         jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 1180, 24));
 
         btnIngresar.setBackground(new java.awt.Color(0, 112, 224));
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -116,6 +191,7 @@ public class frmproveedore extends javax.swing.JPanel {
                 btnIngresarActionPerformed(evt);
             }
         });
+        add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(0, 75, 159));
         jLabel4.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
@@ -125,129 +201,20 @@ public class frmproveedore extends javax.swing.JPanel {
         jLabel4.setText("CREAR PROVEEDORES");
         jLabel4.setToolTipText("");
         jLabel4.setOpaque(true);
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 110));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1180, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1040, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(60, 60, 60)
-                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(10, 10, 10)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(60, 60, 60)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel5))
-                            .addGap(36, 36, 36)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(30, 30, 30)
-                                    .addComponent(btnactualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(200, 200, 200)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(550, 550, 550)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(250, 250, 250)
-                            .addComponent(txtFormadepago, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(50, 50, 50)
-                            .addComponent(btnIngresar))
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(60, 60, 60)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(120, 120, 120)
-                            .addComponent(btnUpdate))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(250, 250, 250)
-                            .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(500, 500, 500)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(60, 60, 60)
-                            .addComponent(jLabel3))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(250, 250, 250)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(10, 10, 10)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(160, 160, 160)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(40, 40, 40)
-                            .addComponent(jLabel5))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(110, 110, 110)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(220, 220, 220)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnactualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(360, 360, 360)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(110, 110, 110)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(160, 160, 160)
-                            .addComponent(txtFormadepago, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(360, 360, 360)
-                            .addComponent(btnIngresar))
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(60, 60, 60)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(360, 360, 360)
-                            .addComponent(btnUpdate))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(220, 220, 220)
-                            .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(110, 110, 110)
-                            .addComponent(jLabel3))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(60, 60, 60)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setText("Nombre");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 70, 30));
+
+        cmbforma.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cmbforma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
+        cmbforma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbformaActionPerformed(evt);
+            }
+        });
+        add(cmbforma, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 130, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -262,6 +229,98 @@ public class frmproveedore extends javax.swing.JPanel {
        
     }//GEN-LAST:event_btnIngresarActionPerformed
 
+    private void cmbformaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbformaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbformaActionPerformed
+
+    private void txtBuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMousePressed
+         if(this.txtBuscar.getText().equals("Buscar Proveedores")){
+            this.txtBuscar.setText("");
+            this.txtBuscar.setForeground(Color.black);
+        }
+        if(String.valueOf(this.txtNombre.getText()).isEmpty()){
+            this.txtNombre.setText("Ingrese Nombre del Proveedor");
+            this.txtNombre.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtDireccion.getText()).isEmpty()){
+            this.txtDireccion.setText("Ingrese Direccion");
+            this.txtDireccion.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtIdentificacion.getText()).isEmpty()){
+            this.txtIdentificacion.setText("Ingrese Identificacion Fiscal");
+            this.txtIdentificacion.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtBuscarMousePressed
+
+    private void txtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdentificacionActionPerformed
+
+    private void txtNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMousePressed
+         if(this.txtNombre.getText().equals("Ingrese Nombre del Proveedor")){
+            this.txtNombre.setText("");
+            this.txtNombre.setForeground(Color.black);
+        }
+
+        if(String.valueOf(this.txtBuscar.getText()).isEmpty()){
+            this.txtBuscar.setText("Buscar Proveedores");
+            this.txtBuscar.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtDireccion.getText()).isEmpty()){
+            this.txtDireccion.setText("Ingrese Direccion");
+            this.txtDireccion.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtIdentificacion.getText()).isEmpty()){
+            this.txtIdentificacion.setText("Ingrese Identificacion Fiscal");
+            this.txtIdentificacion.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtNombreMousePressed
+
+    private void txtDireccionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDireccionMousePressed
+       if(this.txtDireccion.getText().equals("Ingrese Direccion")){
+            this.txtDireccion.setText("");
+            this.txtDireccion.setForeground(Color.black);
+        }
+
+        if(String.valueOf(this.txtBuscar.getText()).isEmpty()){
+            this.txtBuscar.setText("Buscar Proveedores");
+            this.txtBuscar.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtNombre.getText()).isEmpty()){
+            this.txtNombre.setText("Ingrese Nombre del Proveedor");
+            this.txtNombre.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtIdentificacion.getText()).isEmpty()){
+            this.txtIdentificacion.setText("Ingrese Identificacion Fiscal");
+            this.txtIdentificacion.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtDireccionMousePressed
+
+    private void txtIdentificacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdentificacionMousePressed
+      if(this.txtIdentificacion.getText().equals("Ingrese Identificacion Fiscal")){
+            this.txtIdentificacion.setText("");
+            this.txtIdentificacion.setForeground(Color.black);
+        }
+
+        if(String.valueOf(this.txtBuscar.getText()).isEmpty()){
+            this.txtBuscar.setText("Buscar Proveedores");
+            this.txtBuscar.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtNombre.getText()).isEmpty()){
+            this.txtNombre.setText("Ingrese Nombre del Proveedor");
+            this.txtNombre.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtDireccion.getText()).isEmpty()){
+            this.txtDireccion.setText("Ingrese Direccion");
+            this.txtDireccion.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtIdentificacionMousePressed
+
+    private void txtIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyTyped
+        char c = evt.getKeyChar();
+        if(c<'0'|| c>'9')   evt.consume();
+    }//GEN-LAST:event_txtIdentificacionKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBusca;
@@ -270,11 +329,13 @@ public class frmproveedore extends javax.swing.JPanel {
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnUpdate;
     public javax.swing.JButton btnactualizar;
+    public javax.swing.JComboBox<String> cmbforma;
     private javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

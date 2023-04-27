@@ -121,35 +121,7 @@ public class ClsConsultaProveedor extends Coneccion {
         }return listaProveedores;
      }
    
-       public List Mostrar()throws Exception{
-         ResultSet res;
-         List listaCompras = new ArrayList();
-         PreparedStatement ps =null;
-         Connection con= (Connection)getConexion();
-         String sql="select * from proveedores";
-         try {
-             ps=con.prepareStatement(sql);
-             res = ps.executeQuery();
-             while (res.next()) {                 
-                ClsProveedor obj = new ClsProveedor();
-                obj.setId(res.getInt("id"));
-                obj.setNombre(res.getNString("nombre"));
-                obj.setDireccion(res.getNString("direccion"));
-                obj.setFormaPagoPreferida(res.getNString("forma_pago_preferida"));
-                 obj.setIdentificacionFiscal(res.getNString("identificacion_fiscal"));
-                listaCompras.add(obj);
-             }
-         } catch (SQLException ex) {
-            Logger.getLogger(ClsConsultaProveedor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ClsConsultaProveedor.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }return listaCompras;
-     }
+      
        public List MostrarProveedor()throws Exception{
          ResultSet res;
          List obList = new ArrayList();

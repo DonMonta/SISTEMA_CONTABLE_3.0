@@ -10,12 +10,12 @@ import java.awt.Color;
  *
  * @author monta
  */
-public class frmCuentasBancarias extends javax.swing.JPanel {
+public class frmCuenta_Bancaria extends javax.swing.JPanel {
 
     /**
-     * Creates new form frmCuentasBancarias
+     * Creates new form frmCuenta_Bancaria
      */
-    public frmCuentasBancarias() {
+    public frmCuenta_Bancaria() {
         initComponents();
     }
 
@@ -37,7 +37,6 @@ public class frmCuentasBancarias extends javax.swing.JPanel {
         txtnombre = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txtnumero = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
         txtsaldo = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -50,9 +49,9 @@ public class frmCuentasBancarias extends javax.swing.JPanel {
         btnbuscar = new javax.swing.JButton();
         txtbuscar = new javax.swing.JTextField();
         txtid = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 75, 159));
 
@@ -71,33 +70,28 @@ public class frmCuentasBancarias extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(304, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30))
         );
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1192, -1));
-
         jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 10, 430));
 
         jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
         jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 1180, 10));
 
         jLabel12.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel12.setText("Nombre del Banco");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         txtnombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtnombre.setForeground(new java.awt.Color(204, 204, 204));
@@ -112,11 +106,9 @@ public class frmCuentasBancarias extends javax.swing.JPanel {
                 txtnombreKeyTyped(evt);
             }
         });
-        add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 320, 40));
 
         jLabel14.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel14.setText("Numero de Cuenta");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, -1, -1));
 
         txtnumero.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtnumero.setForeground(new java.awt.Color(204, 204, 204));
@@ -136,11 +128,6 @@ public class frmCuentasBancarias extends javax.swing.JPanel {
                 txtnumeroKeyTyped(evt);
             }
         });
-        add(txtnumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 200, 40));
-
-        jLabel15.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
-        jLabel15.setText("Saldo");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         txtsaldo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtsaldo.setForeground(new java.awt.Color(204, 204, 204));
@@ -155,7 +142,6 @@ public class frmCuentasBancarias extends javax.swing.JPanel {
                 txtsaldoKeyTyped(evt);
             }
         });
-        add(txtsaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 100, 40));
 
         btnIngresar.setBackground(new java.awt.Color(0, 112, 224));
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -166,15 +152,12 @@ public class frmCuentasBancarias extends javax.swing.JPanel {
                 btnIngresarActionPerformed(evt);
             }
         });
-        add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, -1));
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-editar-40.png"))); // NOI18N
         btnUpdate.setBorder(null);
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, -1));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-eliminar-40.png"))); // NOI18N
         btnEliminar.setBorder(null);
-        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, -1, -1));
 
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-broom-with-a-lot-of-dust-40.png"))); // NOI18N
         btnLimpiar.setBorder(null);
@@ -183,11 +166,9 @@ public class frmCuentasBancarias extends javax.swing.JPanel {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, -1, -1));
 
         btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-actualizar.gif"))); // NOI18N
         btnactualizar.setBorder(null);
-        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 450, -1, -1));
 
         jScrollPane1.setBorder(null);
 
@@ -209,14 +190,10 @@ public class frmCuentasBancarias extends javax.swing.JPanel {
         tbcuenta.setSelectionBackground(new java.awt.Color(0, 112, 224));
         jScrollPane1.setViewportView(tbcuenta);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, -1, 250));
-
         jLabel13.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel13.setText("Datos Guardados");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, -1, -1));
 
         btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
-        add(btnbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
 
         txtbuscar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtbuscar.setForeground(new java.awt.Color(204, 204, 204));
@@ -226,8 +203,111 @@ public class frmCuentasBancarias extends javax.swing.JPanel {
                 txtbuscarMousePressed(evt);
             }
         });
-        add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 270, 30));
-        add(txtid, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel15.setText("Saldo");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1192, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, 0)
+                            .addComponent(btnbuscar)
+                            .addGap(24, 24, 24)
+                            .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel12)
+                                .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(220, 220, 220)
+                                    .addComponent(jLabel14))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(txtsaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(110, 110, 110)
+                                    .addComponent(txtnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(30, 30, 30)
+                                    .addComponent(btnIngresar)
+                                    .addGap(40, 40, 40)
+                                    .addComponent(btnUpdate)
+                                    .addGap(50, 50, 50)
+                                    .addComponent(btnEliminar)
+                                    .addGap(50, 50, 50)
+                                    .addComponent(btnLimpiar)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(btnactualizar)))
+                            .addGap(70, 70, 70)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(470, 470, 470)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(jLabel15))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(670, 670, 670)
+                            .addComponent(jLabel13))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(12, 12, 12)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnbuscar)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(3, 3, 3)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabel12)
+                            .addGap(11, 11, 11)
+                            .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel14)
+                            .addGap(11, 11, 11)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtsaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(100, 100, 100)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnIngresar)
+                                .addComponent(btnUpdate)
+                                .addComponent(btnEliminar)
+                                .addComponent(btnLimpiar)
+                                .addComponent(btnactualizar)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(60, 60, 60)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(120, 120, 120)
+                            .addComponent(jLabel15))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabel13))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtnombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtnombreMousePressed
@@ -273,6 +353,10 @@ public class frmCuentasBancarias extends javax.swing.JPanel {
             this.txtsaldo.setForeground(new Color(204,204,204));
         }
     }//GEN-LAST:event_txtnumeroMousePressed
+
+    private void txtnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnumeroActionPerformed
 
     private void txtnumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumeroKeyTyped
         char c = evt.getKeyChar();
@@ -331,10 +415,6 @@ public class frmCuentasBancarias extends javax.swing.JPanel {
             this.txtsaldo.setForeground(new Color(204,204,204));
         }
     }//GEN-LAST:event_txtbuscarMousePressed
-
-    private void txtnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumeroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnumeroActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,7 +5,7 @@
 package Controlador;
 import Modelo.Cls_ConsultaCuentaBancarias;
 import Modelo.Cuentas_Bancarias;
-import Vista.frmCuentasBancarias;
+import Vista.frmCuenta_Bancaria;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
@@ -23,8 +23,8 @@ import javax.swing.table.DefaultTableModel;
 public class Ctrl_CuentasBancarias implements ActionListener{
      Cuentas_Bancarias clie;
     Cls_ConsultaCuentaBancarias sqlclie;
-    frmCuentasBancarias frm;
-    public Ctrl_CuentasBancarias(Cuentas_Bancarias clie, Cls_ConsultaCuentaBancarias sqlclie, frmCuentasBancarias frm){
+    frmCuenta_Bancaria frm;
+    public Ctrl_CuentasBancarias(Cuentas_Bancarias clie, Cls_ConsultaCuentaBancarias sqlclie, frmCuenta_Bancaria frm){
         this.clie = clie;
         this.sqlclie = sqlclie;
         this.frm = frm;

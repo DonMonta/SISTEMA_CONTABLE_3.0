@@ -15,14 +15,6 @@ public class ClsProveedor {
     private String identificacionFiscal;
     private String formaPagoPreferida;
 
-    //Contructor vacío
-    public ClsProveedor() {
-        this.id = 0;
-        this.nombre = "";
-        this.direccion = "";
-         this.identificacionFiscal = "";
-         this.formaPagoPreferida="";
-    }
 
     public int getId() {
         return id;
@@ -62,5 +54,9 @@ public class ClsProveedor {
 
     public void setFormaPagoPreferida(String formaPagoPreferida) {
         this.formaPagoPreferida = formaPagoPreferida;
+    }
+     @Override
+    public String toString() {
+        return getNombre();
     }
 }

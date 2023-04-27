@@ -4,7 +4,7 @@
  */
 package Vista;
 
-import Controlador.ControladorProveedor;
+import Controlador.Ctrl_Proveedor;
 import Controlador.Ctrl_Clientes;
 import Controlador.Ctrl_CuentasBancarias;
 import Controlador.Ctrl_ReportCuentaCobrar;
@@ -67,7 +67,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
     FrmGASTO gasto = new FrmGASTO();
     frmproveedore proveedores = new frmproveedore();
     FrmINVENTARIO inventario = new FrmINVENTARIO();
-    frmCuentasBancarias bancarias = new frmCuentasBancarias();
+    frmCuenta_Bancaria bancarias = new frmCuenta_Bancaria();
      
      private void execute() {
         ImageIcon iconManteni = new ImageIcon(getClass().getResource("/imagenes/icons8_home_24px_1.png"));
@@ -329,7 +329,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                      ClsProveedor obj = new ClsProveedor();
                     ClsConsultaProveedor sqlobj = new ClsConsultaProveedor();
                     
-                    ControladorProveedor ctrl = new ControladorProveedor(obj,sqlobj,proveedores);
+                    Ctrl_Proveedor ctrl = new Ctrl_Proveedor(obj,sqlobj,proveedores);
                     ctrl.Iniciar();
               
                     proveedores.setVisible(true);
