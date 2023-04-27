@@ -20,7 +20,12 @@ public class ClsConsultaFactura extends Coneccion{
          List listaCompras = new ArrayList();
          PreparedStatement ps =null;
          Connection con= (Connection)getConexion();
-         String sql="select * from facturas";
+         String sql= "SELECT f.id, f.numero_factura, c.nombre AS nombre_cliente, p.nombre AS nombre_proveedor, f.fecha," +
+        "SUM(fp.cantidad * fp.precio_unitario) AS total_importe" +
+        "FROM factura f" +
+        "JOIN cliente c ON f.id_cliente = c.id " +
+        "JOIN proveedor p ON f.id_proveedor = p.id" +
+        "JOIN factura_producto fp ON f.id = fp.id_factura";
          try {
              ps=con.prepareStatement(sql);
              res = ps.executeQuery();
