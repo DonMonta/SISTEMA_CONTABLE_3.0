@@ -43,19 +43,18 @@ public class ctrl_Login implements ActionListener{
         }
            
     }
-    public void Log(String us, String cla){
+    public boolean Log(String us, String cla){
             usuario.setUsuario(us);
             usuario.setPassword(cla);
             if (clsconsulta_usuario.Login(usuario)) {
-                JOptionPane.showMessageDialog(null, "Login Correcto...");
-                frmMenuP menu = new frmMenuP();
-                
+                JOptionPane.showMessageDialog(null, "Bienvenido Usuario " + us);
+                frmMenuP menu = new frmMenuP(); 
                menu.setVisible(true);
-                frmMenuInicio inicio = new frmMenuInicio();
-                inicio.lbluser.setText(us);
-                frm.setVisible(false);
+               
+                return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o Clave Incorrectos");
+                 return false;
             }
     }
    

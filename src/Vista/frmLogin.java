@@ -120,7 +120,9 @@ public class frmLogin extends javax.swing.JFrame {
         Clsconsulta_usuario consulta_usuario = new Clsconsulta_usuario();
         frmLogin frmlogin = new frmLogin();
         ctrl_Login ctrl = new ctrl_Login(frmlogin,usuario,consulta_usuario);
-        ctrl.Log(jtxtUsuario.getText(),jtxtClave.getText());
+        if(ctrl.Log(jtxtUsuario.getText(),jtxtClave.getText())){
+            dispose();
+        }
     }//GEN-LAST:event_jbtnIngresarActionPerformed
 
     private void jtxtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtClaveActionPerformed

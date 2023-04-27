@@ -5,10 +5,13 @@
 package Vista;
 
 import Controlador.ControladorProveedor;
+import Controlador.Ctrl_Clientes;
 import Controlador.Ctrl_ReportCuentaCobrar;
 import Controlador.Ctrl_ReportCuentaPagar;
 import Controlador.Ctrl_Usuario;
 import Controlador.Ctrl_inventario;
+import Modelo.Cliente;
+import Modelo.ClsConsultaClientes;
 import Modelo.ClsConsultaCuentasPorCobrar;
 import Modelo.ClsConsultaFactura;
 import Modelo.ClsConsultaProveedor;
@@ -55,13 +58,13 @@ public class frmMenuInicio extends javax.swing.JFrame {
     
     frmcientascobrar cobrar = new frmcientascobrar();
     frmcuentasporpagar pagar = new frmcuentasporpagar();
-    FrmCLIENTES clientes = new FrmCLIENTES();
+    frmClients clientes = new frmClients();
     FrmFACTURA factura = new FrmFACTURA();
     frmuser usuario = new frmuser();
     FrmGASTO gasto = new FrmGASTO();
     frmproveedore proveedores = new frmproveedore();
     FrmINVENTARIO inventario = new FrmINVENTARIO();
-    FrmCUENTASBANCARIAS bancarias = new FrmCUENTASBANCARIAS();
+    //frmCuentasBancarias bancarias = new frmCuentasBancarias();
      
      private void execute() {
         ImageIcon iconManteni = new ImageIcon(getClass().getResource("/imagenes/icons8_home_24px_1.png"));
@@ -101,11 +104,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
                 }
-                  if (bancarias != null) {
-                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
-                    panelBody.repaint();
-                    panelBody.revalidate();
-                }
+//                  if (bancarias != null) {
+//                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
+//                    panelBody.repaint();
+//                    panelBody.revalidate();
+//                }
                  if (usuario != null) {
                     panelBody.remove(usuario); // Remueve el formulario anterior del panel
                     panelBody.repaint();
@@ -129,8 +132,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                  
                 
 
-                // Agregar nuevo formulario
-                     // Crea una nueva instancia del formulario
+                 Cliente obj = new Cliente();
+                    ClsConsultaClientes sqlobj = new ClsConsultaClientes();
+                    
+                    Ctrl_Clientes ctrl = new Ctrl_Clientes(obj,sqlobj,clientes);
+                    ctrl.Iniciar();
                     clientes.setVisible(true);
                     panelBody.add(clientes); // Agrega el nuevo formulario al panel
                     panelBody.repaint();
@@ -162,11 +168,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
                 }
-                  if (bancarias != null) {
-                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
-                    panelBody.repaint();
-                    panelBody.revalidate();
-                }
+//                  if (bancarias != null) {
+//                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
+//                    panelBody.repaint();
+//                    panelBody.revalidate();
+//                }
                  if (usuario != null) {
                     panelBody.remove(usuario); // Remueve el formulario anterior del panel
                     panelBody.repaint();
@@ -224,11 +230,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
                 }
-                  if (bancarias != null) {
-                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
-                    panelBody.repaint();
-                    panelBody.revalidate();
-                }
+//                  if (bancarias != null) {
+//                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
+//                    panelBody.repaint();
+//                    panelBody.revalidate();
+//                }
                  if (usuario != null) {
                     panelBody.remove(usuario); // Remueve el formulario anterior del panel
                     panelBody.repaint();
@@ -290,11 +296,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
                 }
-                  if (bancarias != null) {
-                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
-                    panelBody.repaint();
-                    panelBody.revalidate();
-                }
+//                  if (bancarias != null) {
+//                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
+//                    panelBody.repaint();
+//                    panelBody.revalidate();
+//                }
                  if (usuario != null) {
                     panelBody.remove(usuario); // Remueve el formulario anterior del panel
                     panelBody.repaint();
@@ -322,8 +328,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     
                     ControladorProveedor ctrl = new ControladorProveedor(obj,sqlobj,proveedores);
                     ctrl.Iniciar();
-                // Agregar nuevo formulario
-                     // Crea una nueva instancia del formulario
+              
                     proveedores.setVisible(true);
                     panelBody.add(proveedores); // Agrega el nuevo formulario al panel
                     panelBody.repaint();
@@ -355,11 +360,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
                 }
-                  if (bancarias != null) {
-                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
-                    panelBody.repaint();
-                    panelBody.revalidate();
-                }
+//                  if (bancarias != null) {
+//                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
+//                    panelBody.repaint();
+//                    panelBody.revalidate();
+//                }
                  if (usuario != null) {
                     panelBody.remove(usuario); // Remueve el formulario anterior del panel
                     panelBody.repaint();
@@ -385,10 +390,10 @@ public class frmMenuInicio extends javax.swing.JFrame {
 
                 // Agregar nuevo formulario
                      // Crea una nueva instancia del formulario
-                    bancarias.setVisible(true);
-                    panelBody.add(bancarias); // Agrega el nuevo formulario al panel
-                    panelBody.repaint();
-                    panelBody.revalidate();
+//                    bancarias.setVisible(true);
+//                    panelBody.add(bancarias); // Agrega el nuevo formulario al panel
+//                    panelBody.repaint();
+//                    panelBody.revalidate();
               
                
             }
@@ -418,11 +423,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
                 }
-                  if (bancarias != null) {
-                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
-                    panelBody.repaint();
-                    panelBody.revalidate();
-                }
+//                  if (bancarias != null) {
+//                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
+//                    panelBody.repaint();
+//                    panelBody.revalidate();
+//                }
                  if (usuario != null) {
                     panelBody.remove(usuario); // Remueve el formulario anterior del panel
                     panelBody.repaint();
@@ -486,11 +491,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
                 }
-                  if (bancarias != null) {
-                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
-                    panelBody.repaint();
-                    panelBody.revalidate();
-                }
+//                  if (bancarias != null) {
+//                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
+//                    panelBody.repaint();
+//                    panelBody.revalidate();
+//                }
                  if (usuario != null) {
                     panelBody.remove(usuario); // Remueve el formulario anterior del panel
                     panelBody.repaint();
@@ -556,11 +561,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
                 }
-                  if (bancarias != null) {
-                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
-                    panelBody.repaint();
-                    panelBody.revalidate();
-                }
+//                  if (bancarias != null) {
+//                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
+//                    panelBody.repaint();
+//                    panelBody.revalidate();
+//                }
                  if (usuario != null) {
                     panelBody.remove(usuario); // Remueve el formulario anterior del panel
                     panelBody.repaint();
@@ -619,11 +624,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
                 }
-                  if (bancarias != null) {
-                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
-                    panelBody.repaint();
-                    panelBody.revalidate();
-                }
+//                  if (bancarias != null) {
+//                    panelBody.remove(bancarias); // Remueve el formulario anterior del panel
+//                    panelBody.repaint();
+//                    panelBody.revalidate();
+//                }
                  if (usuario != null) {
                     panelBody.remove(usuario); // Remueve el formulario anterior del panel
                     panelBody.repaint();
