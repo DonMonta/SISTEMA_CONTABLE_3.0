@@ -3,13 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controlador;
-import Modelo.Cliente;
-import Modelo.ClsConsultaClientes;
-import Vista.frmClients;
-import java.awt.Color;
+import Modelo.Cls_ConsultaCuentaBancarias;
+import Modelo.Cuentas_Bancarias;
+import Vista.frmCuentasBancarias;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,11 +20,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author monta
  */
-public class Ctrl_Clientes implements ActionListener{
-     Cliente clie;
-    ClsConsultaClientes sqlclie;
-    frmClients frm;
-    public Ctrl_Clientes(Cliente clie, ClsConsultaClientes sqlclie, frmClients frm){
+public class Ctrl_CuentasBancarias implements ActionListener{
+     Cuentas_Bancarias clie;
+    Cls_ConsultaCuentaBancarias sqlclie;
+    frmCuentasBancarias frm;
+    public Ctrl_CuentasBancarias(Cuentas_Bancarias clie, Cls_ConsultaCuentaBancarias sqlclie, frmCuentasBancarias frm){
         this.clie = clie;
         this.sqlclie = sqlclie;
         this.frm = frm;
@@ -35,24 +33,22 @@ public class Ctrl_Clientes implements ActionListener{
         this.frm.btnEliminar.addActionListener(this);
         this.frm.btnbuscar.addActionListener(this);
         this.frm.btnLimpiar.addActionListener(this);
-        this.frm.cmbforma.addActionListener((ActionListener)this);
         this.frm.btnactualizar.addActionListener((ActionListener) this);
         
-        this.frm.tbcliente.addMouseListener(new java.awt.event.MouseAdapter(){
+        this.frm.tbcuenta.addMouseListener(new java.awt.event.MouseAdapter(){
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 
-                DefaultTableModel modelo = (DefaultTableModel) frm.tbcliente.getModel();
+                DefaultTableModel modelo = (DefaultTableModel) frm.tbcuenta.getModel();
                 int fila;
-                fila=frm.tbcliente.getSelectedRow();
+                fila=frm.tbcuenta.getSelectedRow();
                 frm.txtbuscar.setEnabled(false);
                 frm.txtid.setText(modelo.getValueAt(fila, 0).toString());
                  
                 frm.txtnombre.setText(modelo.getValueAt(fila, 1).toString());
-                frm.txtdireccion.setText(modelo.getValueAt(fila, 2).toString());
+                frm.txtnumero.setText(modelo.getValueAt(fila, 2).toString());
                 
-                frm.txtidentificacion.setText(modelo.getValueAt(fila, 3).toString());
-                frm.cmbforma.setSelectedItem(modelo.getValueAt(fila, 4).toString());
+                frm.txtsaldo.setText(modelo.getValueAt(fila, 3).toString());
                
                
               
@@ -93,10 +89,9 @@ public class Ctrl_Clientes implements ActionListener{
             if(Validar()){
                 frm.txtbuscar.setEnabled(true);
                 
-                clie.setNombre(frm.txtnombre.getText());
-                clie.setDireccion(frm.txtdireccion.getText());
-                clie.setIdentificacion_fiscal(frm.txtidentificacion.getText());
-                clie.setForma_pago_preferida((String) frm.cmbforma.getSelectedItem());
+                clie.setNombre_banco(frm.txtnombre.getText());
+                clie.setNumero_cuenta(frm.txtnumero.getText());
+                clie.setSaldo_actual(Double.parseDouble(frm.txtsaldo.getText()));
                 if(sqlclie.Guardar(clie)){
                       
                     JOptionPane.showMessageDialog(null, "Guardado");
@@ -114,10 +109,9 @@ public class Ctrl_Clientes implements ActionListener{
                  
                  
                  clie.setId(Integer.parseInt(frm.txtid.getText()));
-                 clie.setNombre(frm.txtnombre.getText());
-                 clie.setDireccion(frm.txtdireccion.getText());
-                 clie.setIdentificacion_fiscal(frm.txtidentificacion.getText());
-                 clie.setForma_pago_preferida((String) frm.cmbforma.getSelectedItem());
+                 clie.setNombre_banco(frm.txtnombre.getText());
+                clie.setNumero_cuenta(frm.txtnumero.getText());
+                clie.setSaldo_actual(Double.parseDouble(frm.txtsaldo.getText()));
                  
            
                  if(sqlclie.Modificar(clie)){
@@ -138,7 +132,7 @@ public class Ctrl_Clientes implements ActionListener{
              }
          }
          if(e.getSource()==frm.btnEliminar){
-             if(frm.tbcliente.getSelectedRow()==-1){
+             if(frm.tbcuenta.getSelectedRow()==-1){
                  JOptionPane.showMessageDialog(frm, "Debe seleccionar la fila que desea eliminar");
              }
              else{
@@ -153,32 +147,31 @@ public class Ctrl_Clientes implements ActionListener{
              }
          }
          if(e.getSource()==frm.btnbuscar){
-             clie.setNombre(frm.txtbuscar.getText());
-             if(sqlclie.BuscarCliente(clie)){
-                 String[] columnas ={"ID","Nombre","Direccion","Identificación","Forma de Pago"};
-                 Object[] datos = new Object[5];
+             clie.setNombre_banco(frm.txtbuscar.getText());
+             if(sqlclie.BuscarCuentas_Bancarias(clie)){
+                 String[] columnas ={"ID","Banco","Numero de Cuenta","Saldo"};
+                 Object[] datos = new Object[4];
                  DefaultTableModel tabla = new DefaultTableModel(null,columnas){
                      @Override
                      public boolean isCellEditable(int i, int j){
-                         if(i==5){return true;} else {return false;}
+                         if(i==4){return true;} else {return false;}
                      }
                  };
-                 List objList; Cliente cls;
+                 List objList; Cuentas_Bancarias cls;
                  try{
-                     objList= sqlclie.ListarBussqueda(clie.getNombre());
+                     objList= sqlclie.ListarBussqueda(clie.getNombre_banco());
                          if(!objList.isEmpty()){
                              for (int i = 0; i < objList.size(); i++){
-                                 cls = (Cliente) objList.get(i);
+                                 cls = (Cuentas_Bancarias) objList.get(i);
                                  datos[0] = cls.getId();
-                                 datos[1]= cls.getNombre();
-                                 datos[2]= cls.getDireccion();
-                                 datos[3]= cls.getIdentificacion_fiscal();
-                                 datos[4]= cls.getForma_pago_preferida();
+                                 datos[1]= cls.getNombre_banco();
+                                 datos[2]= cls.getNumero_cuenta();
+                                 datos[3]= cls.getSaldo_actual();
                                  
                                  tabla.addRow(datos);
                              }
                              
-                             frm.tbcliente.setModel(tabla);
+                             frm.tbcuenta.setModel(tabla);
                              Limpiar();
                              frm.txtbuscar.setText(null);
                 
@@ -186,7 +179,7 @@ public class Ctrl_Clientes implements ActionListener{
                              DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
                              Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
                              for(int i=4; i<7;i++){
-                                 frm.tbcliente.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+                                 frm.tbcuenta.getColumnModel().getColumn(i).setCellRenderer(Alinear);
                              }
                          }
                          else{
@@ -195,62 +188,61 @@ public class Ctrl_Clientes implements ActionListener{
                         }
                      
                  }catch (Exception ex){
-                     Logger.getLogger(Ctrl_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+                     Logger.getLogger(Ctrl_CuentasBancarias.class.getName()).log(Level.SEVERE, null, ex);
                  }
              }
          }
     }
     public void Mostrar(){
          List notas; 
-       Cliente cls;
+       Cuentas_Bancarias cls;
       
-            String[] columnas ={"ID","Nombre","Direccion","Identificación","Forma de Pago"};
-           Object[] datos = new Object[5];
+            String[] columnas ={"ID","Banco","Numero de Cuenta","Saldo"};
+           Object[] datos = new Object[4];
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override
              public boolean isCellEditable(int i, int j)
-             { if(i==5){return true;} else {return false;}}
+             { if(i==4){return true;} else {return false;}}
            };
          
         
            try {
               
-                notas= sqlclie.MostrarCliente();
+                notas= sqlclie.MostrarCuentas_Bancarias();
                 if(!notas.isEmpty())
                 {
                  for (int i = 0; i < notas.size(); i++) {
                   
-                    cls = (Cliente) notas.get(i);
+                    cls = (Cuentas_Bancarias) notas.get(i);
                      datos[0] = cls.getId();
-                     datos[1]= cls.getNombre();
-                     datos[2]= cls.getDireccion();
-                     datos[3]= cls.getIdentificacion_fiscal();
-                     datos[4]= cls.getForma_pago_preferida();
+                     datos[1]= cls.getNombre_banco();
+                     datos[2]= cls.getNumero_cuenta();
+                     datos[3]= cls.getSaldo_actual();
                    
                     tabla.addRow(datos);
                   }  
-                 frm.tbcliente.setModel(tabla);
+                 frm.tbcuenta.setModel(tabla);
                 
                  
                  DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
                  Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
                  for(int i=4; i<7;i++)
-                 {  frm.tbcliente.getColumnModel().getColumn(i).setCellRenderer(Alinear);}
+                 {  frm.tbcuenta.getColumnModel().getColumn(i).setCellRenderer(Alinear);}
                }
                 else
                {JOptionPane.showMessageDialog(null, "No encontro información"); Limpiar();frm.txtbuscar.setText(null);}
                
            } catch (Exception ex) {
-               Logger.getLogger(Ctrl_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+               Logger.getLogger(Ctrl_CuentasBancarias.class.getName()).log(Level.SEVERE, null, ex);
            }  
     }
     public void Limpiar()
     {
         
          frm.txtid.setText(null);
-         frm.txtnombre.setText("Ingrese Nombre y Apellidos");
-         frm.txtdireccion.setText("Ingrese Direccion");
-         frm.txtidentificacion.setText("Ingrese Identificación Social");
+         frm.txtnombre.setText("Ingrese Nombre del Banco");
+         frm.txtnumero.setText("Ingrese Numero de Cuenta");
+         frm.txtsaldo.setText("Ingrese Saldo");
         
        
     }
@@ -262,22 +254,22 @@ public class Ctrl_Clientes implements ActionListener{
              return  false;
             
              }
-         if("".equals(frm.txtdireccion.getText())){
-             JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo direccion");
+         if("".equals(frm.txtnumero.getText())){
+             JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo numero");
             
              return  false;
             
              }
-         if("".equals(frm.txtidentificacion.getText())){
-             JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo identificacion");
+         if("".equals(frm.txtsaldo.getText())){
+             JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo saldo");
             
              return  false;
             
              }
-         if(!isNumero(frm.txtidentificacion.getText().trim())) {
-		JOptionPane.showMessageDialog(null,"Inserte solo Numeros en el campo identificacion");
+         if(!isNumero(frm.txtsaldo.getText().trim())) {
+		JOptionPane.showMessageDialog(null,"Inserte solo Numeros en el campo saldo");
                 
-                    frm.txtidentificacion.setText("Ingrese Identificación Social");
+                    frm.txtsaldo.setText("Ingrese Identificación Social");
                      return  false;  
                    
           }
