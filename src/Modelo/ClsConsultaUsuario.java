@@ -15,10 +15,6 @@ import java.util.logging.Logger;
 
 
 
-
-import Vista.FrmUSUARIOS;
-
-
 /**
  *
  * @author juand

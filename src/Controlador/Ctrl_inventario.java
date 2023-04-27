@@ -4,10 +4,9 @@
  */
 package Controlador;
 import Modelo.ClsConsultainventario;
-import Modelo.ClsGastos;
 import Modelo.ClsInventario;
-import Vista.FrmGASTO;
 import Vista.FrmINVENTARIO;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -54,10 +53,16 @@ public class Ctrl_inventario implements ActionListener {
                  frm.txtprecioventa.setText(modelo.getValueAt(fila, 3).toString());
                 frm.txtcosto.setText(modelo.getValueAt(fila, 4).toString());
                 frm.txtcantidaddisponible.setText(modelo.getValueAt(fila, 5).toString());
+                frm.txtnombreproducto.setForeground(Color.black);
+                frm.txtdescripcion.setForeground(Color.black);
+                frm.txtprecioventa.setForeground(Color.black);
+                frm.txtcosto.setForeground(Color.black);
+                frm.txtcantidaddisponible.setForeground(Color.black);
                 frm.btnguardar.setEnabled(false);
                 frm.btnbuscar.setEnabled(false);
                  frm.btnactualizar.setEnabled(true);
                   frm.btneliminar.setEnabled(true);
+                   frm.btnmodificar.setEnabled(true);
               
             }
         });
@@ -68,7 +73,7 @@ public class Ctrl_inventario implements ActionListener {
     public void Iniciar()
     {
         frm.txtid.setVisible(false);
-         frm.btnmodificar.setEnabled(true);
+         frm.btnmodificar.setEnabled(false);
          frm.btneliminar.setEnabled(false);
         Mostrar();
     }
@@ -76,6 +81,16 @@ public class Ctrl_inventario implements ActionListener {
     public void actionPerformed(ActionEvent e)
     {
         if(e.getSource()==frm.btnactualizar){
+            Mostrar();
+            Limpiar();
+         frm.btnmodificar.setEnabled(false);
+         frm.btneliminar.setEnabled(false);
+         frm.txtbuscar.setEnabled(true);
+         frm.btnguardar.setEnabled(true);
+         frm.btnbuscar.setEnabled(true);
+         
+        }
+        if(e.getSource()==frm.btnborrar){
             Mostrar();
             Limpiar();
          frm.btnmodificar.setEnabled(false);
@@ -117,9 +132,15 @@ public class Ctrl_inventario implements ActionListener {
            var.setCosto(Double.parseDouble(frm.txtcosto.getText()));
            var.setCantidad_disponible(Integer.parseInt(frm.txtcantidaddisponible.getText()));
            if(sqlvar.Modificar(var))
-           {JOptionPane.showMessageDialog(null, "Se actualizo la informacion del Proveedor"); Limpiar(); Mostrar();}
+           {JOptionPane.showMessageDialog(null, "Se actualizo la informacion del Proveedor"); Limpiar(); Mostrar();
+           frm.btnguardar.setEnabled(true); 
+           frm.btnbuscar.setEnabled(true);frm.txtbuscar.setEnabled(true);
+                     frm.btnmodificar.setEnabled(false);frm.btneliminar.setEnabled(false);}
            else
-           {JOptionPane.showMessageDialog(null, "No se actualizo la informacion del Proveedor");Limpiar();}
+           {JOptionPane.showMessageDialog(null, "No se actualizo la informacion del Proveedor");Limpiar();
+           frm.btnguardar.setEnabled(true);
+           frm.btnbuscar.setEnabled(true);frm.txtbuscar.setEnabled(true);
+                     frm.btnmodificar.setEnabled(false);frm.btneliminar.setEnabled(false);}
        }
      
     
@@ -142,7 +163,7 @@ public class Ctrl_inventario implements ActionListener {
            if(sqlvar.BuscarTienda(var))
            {
 
-            String[] columnas ={"id,nombre_producto","descripcion","precio_venta","costo","cantidad_disponible"};
+            String[] columnas ={"ID","Nombre del producto","Descripcion","Precio Venta","Costo","Cantidad disponible"};
            Object[] datos = new Object[6];
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override
@@ -182,7 +203,7 @@ public class Ctrl_inventario implements ActionListener {
     }   
     private void Mostrar()
     {
-   String[] columnas ={"id","nombre_producto","descripcion","precio_venta","costo","cantidad_disponible"};
+   String[] columnas ={"ID","Nombre del producto","Descripcion","Precio Venta","Costo","Cantidad disponible"};
            Object[] datos = new Object[6];
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override
@@ -216,16 +237,25 @@ public class Ctrl_inventario implements ActionListener {
    public void Limpiar()
     {
         frm.txtid.setText(null);
-        frm.txtnombreproducto.setText(null);
-        frm.txtdescripcion.setText(null);
-        frm.txtprecioventa.setText(null);
-        frm.txtcosto.setText(null);
-        frm.txtcantidaddisponible.setText(null);
+        frm.txtnombreproducto.setText("Ingrese Producto");
+        frm.txtdescripcion.setText("Ingrese Descripcion");
+        frm.txtprecioventa.setText("Precio");
+        frm.txtcosto.setText("Ingrese costo");
+        frm.txtcantidaddisponible.setText("Cantidad");
         frm.txtnombreproducto.setFocusable(true);
+        frm.txtcantidaddisponible.setForeground(new Color(204,204,204));
+        frm.txtcosto.setForeground(new Color(204,204,204));
+        frm.txtdescripcion.setForeground(new Color(204,204,204));
+        frm.txtnombreproducto.setForeground(new Color(204,204,204));
+        frm.txtprecioventa.setForeground(new Color(204,204,204));
+        
+
+
+
     }
    private boolean Validar(){
         if("".equals(frm.txtnombreproducto.getText())){
-            JOptionPane.showMessageDialog(null,"Debe ingresar tipo datos");
+            JOptionPane.showMessageDialog(null,"Debe ingresar datos");
             
             return  false;
             

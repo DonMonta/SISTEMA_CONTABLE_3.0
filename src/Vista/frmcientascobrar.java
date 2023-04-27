@@ -51,6 +51,7 @@ public class frmcientascobrar extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 75, 159));
 
@@ -80,6 +81,8 @@ public class frmcientascobrar extends javax.swing.JPanel {
             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         txtbuscar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtbuscar.setForeground(new java.awt.Color(204, 204, 204));
         txtbuscar.setText("Buscar fechas de Pago");
@@ -88,8 +91,11 @@ public class frmcientascobrar extends javax.swing.JPanel {
                 txtbuscarMousePressed(evt);
             }
         });
+        add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 330, 30));
 
         btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
+        add(btnbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 50, 30));
+        add(txtid, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
 
         cmbfacturas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbfacturas.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +103,7 @@ public class frmcientascobrar extends javax.swing.JPanel {
                 cmbfacturasActionPerformed(evt);
             }
         });
+        add(cmbfacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 160, 40));
 
         txtimporte.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtimporte.setForeground(new java.awt.Color(204, 204, 204));
@@ -111,18 +118,23 @@ public class frmcientascobrar extends javax.swing.JPanel {
                 txtimporteKeyTyped(evt);
             }
         });
+        add(txtimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 160, 40));
 
         jDateChooser1.setBackground(new java.awt.Color(255, 255, 255));
         jDateChooser1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 160, 40));
 
         jDateChooser2.setBackground(new java.awt.Color(255, 255, 255));
         jDateChooser2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 160, 40));
 
         jLabel11.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel11.setText("Nª de Faturas");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel9.setText("Importe");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 173, 130, 30));
 
         btnagregar.setBackground(new java.awt.Color(0, 112, 224));
         btnagregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -134,12 +146,15 @@ public class frmcientascobrar extends javax.swing.JPanel {
                 btnagregarActionPerformed(evt);
             }
         });
+        add(btnagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 430, 90, 40));
 
         jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 10, 430));
 
         jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
         jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1180, 10));
 
         jScrollPane1.setBorder(null);
 
@@ -161,139 +176,31 @@ public class frmcientascobrar extends javax.swing.JPanel {
         tbtransacc.setSelectionBackground(new java.awt.Color(0, 112, 224));
         jScrollPane1.setViewportView(tbtransacc);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, 490, 260));
+
         jLabel8.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel8.setText("Fecha de Vencimineto");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 170, 30));
 
         jLabel10.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel10.setText("Fecha de Pago");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 170, 30));
 
         btngenerar.setBackground(new java.awt.Color(0, 112, 224));
         btngenerar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btngenerar.setForeground(new java.awt.Color(255, 255, 255));
         btngenerar.setText("GENERAR REPORTE");
         btngenerar.setBorder(null);
+        add(btngenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, 170, 40));
 
         btnactualizar.setBackground(new java.awt.Color(0, 112, 224));
         btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_update_30px.png"))); // NOI18N
         btnactualizar.setBorder(null);
+        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(589, 475, 50, 40));
 
         jLabel12.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel12.setText("Datos Guardados");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnactualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(541, 541, 541))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(320, 320, 320))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(30, 30, 30)
-                            .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtimporte, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(40, 40, 40)
-                            .addComponent(jLabel11))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(500, 500, 500)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(220, 220, 220)
-                            .addComponent(cmbfacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(740, 740, 740)
-                            .addComponent(btngenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(260, 260, 260)
-                            .addComponent(btnagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(550, 550, 550)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
-                .addComponent(btnactualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 130, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(40, 40, 40)
-                            .addComponent(txtimporte, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(30, 30, 30)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(jLabel11))
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(40, 40, 40)
-                            .addComponent(cmbfacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(150, 150, 150)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(180, 180, 180)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(320, 320, 320)
-                            .addComponent(btngenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(270, 270, 270)
-                            .addComponent(btnagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(50, 50, 50)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(80, 80, 80)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 173, 130, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtbuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtbuscarMousePressed

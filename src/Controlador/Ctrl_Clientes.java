@@ -53,9 +53,9 @@ public class Ctrl_Clientes implements ActionListener{
                 
                 frm.txtidentificacion.setText(modelo.getValueAt(fila, 3).toString());
                 frm.cmbforma.setSelectedItem(modelo.getValueAt(fila, 4).toString());
-               
-               
-              
+                frm.txtnombre.setForeground(Color.black);
+                frm.txtdireccion.setForeground(Color.black);
+                frm.txtidentificacion.setForeground(Color.black);
                 frm.btnIngresar.setEnabled(false);
                 frm.btnbuscar.setEnabled(false);
                 frm.btnUpdate.setEnabled(true);
@@ -251,7 +251,9 @@ public class Ctrl_Clientes implements ActionListener{
          frm.txtnombre.setText("Ingrese Nombre y Apellidos");
          frm.txtdireccion.setText("Ingrese Direccion");
          frm.txtidentificacion.setText("Ingrese Identificación Social");
-        
+            frm.txtidentificacion.setForeground(new Color(204,204,204));
+            frm.txtdireccion.setForeground(new Color(204,204,204));
+         frm.txtnombre.setForeground(new Color(204,204,204));
        
     }
      private boolean Validar(){

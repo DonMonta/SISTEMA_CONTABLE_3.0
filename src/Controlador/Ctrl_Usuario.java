@@ -7,6 +7,7 @@ package Controlador;
 import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
 import Vista.frmuser;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -47,7 +48,8 @@ public class Ctrl_Usuario implements ActionListener{
                   frm.txtID.setText(modelo.getValueAt(fila, 0).toString());
                   frm.txtUsuario.setText(modelo.getValueAt(fila, 1).toString());
                   frm.txtContraseña.setText(modelo.getValueAt(fila, 2).toString());
-              
+                 frm.txtContraseña.setForeground(Color.black);
+                  frm.txtUsuario.setForeground(Color.black);
               frm.btnIngresar.setEnabled(false);
                 frm.btnBusca.setEnabled(false);
                  frm.btnUpdate.setEnabled(true);
@@ -242,6 +244,8 @@ public class Ctrl_Usuario implements ActionListener{
         frm.txtUsuario.setText(null);
         frm.txtContraseña.setText(null);
         frm.txtUsuario.setFocusable(true);
+        frm.txtContraseña.setForeground(new Color(204,204,204));
+         frm.txtUsuario.setForeground(new Color(204,204,204));
     }
    private boolean Validar(){
         if("".equals(frm.txtUsuario.getText())){

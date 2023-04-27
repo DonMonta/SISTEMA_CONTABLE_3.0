@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class ClsConsultainventario extends Coneccion{
     
-     public boolean Guardar(ClsInventario inventario){
+    public boolean Guardar(ClsInventario inventario){
     PreparedStatement ps = null;
     Connection con = (Connection)getConexion();
     String sql = "INSERT INTO inventario (nombre_producto, descripcion, precio_venta, costo, cantidad_disponible) "

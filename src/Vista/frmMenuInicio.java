@@ -58,8 +58,8 @@ public class frmMenuInicio extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         execute();
-       frmLogin user = new frmLogin();
-        lbluser.setText(user.jtxtUsuario.getText());
+       Usuario user = new Usuario();
+        lbluser.setText(user.getUsuario());
     }
     
     frmcientascobrar cobrar = new frmcientascobrar();

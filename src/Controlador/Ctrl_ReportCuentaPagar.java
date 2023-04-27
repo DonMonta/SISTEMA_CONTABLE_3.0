@@ -4,13 +4,10 @@
  */
 package Controlador;
 
-import Modelo.ClsConsultaCuentasPorCobrar;
 import Modelo.ClsConsultaFactura;
 import Modelo.ClsConsultasCuentasPorPagar;
-import Modelo.ClsCuentasPorCobrar;
 import Modelo.ClsFactura;
 import Modelo.clsCuentasPorPagar;
-import Vista.frmcientascobrar;
 import Vista.frmcuentasporpagar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,12 +65,6 @@ public class Ctrl_ReportCuentaPagar implements ActionListener{
                     Logger.getLogger(Ctrl_ReportCuentaPagar.class.getName()).log(Level.SEVERE, null, ex);
                 }
               frm.cmbfacturas.setSelectedItem(modelo.getValueAt(fila, 4).toString());
-              
-              
-             
-              
-               //frm.btngenerar.setEnabled(false);
-                
               
               
             }

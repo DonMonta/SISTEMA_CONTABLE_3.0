@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import Modelo.ClsProveedor;
 import Modelo.ClsConsultaProveedor;
 import Vista.frmproveedore;
+import java.awt.Color;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +51,9 @@ public class Ctrl_Proveedor implements ActionListener {
                   frm.txtDireccion.setText(modelo.getValueAt(fila, 2).toString());
                   frm.cmbforma.setSelectedItem(modelo.getValueAt(fila, 3).toString());
                   frm.txtIdentificacion.setText(modelo.getValueAt(fila, 4).toString());
+                  frm.txtIdentificacion.setForeground(Color.black);
+                  frm.txtDireccion.setForeground(Color.black);
+                  frm.txtNombre.setForeground(Color.black);
                   frm.btnIngresar.setEnabled(false);
                   frm.btnBusca.setEnabled(false);
                   frm.btnUpdate.setEnabled(true);
@@ -257,7 +261,9 @@ public class Ctrl_Proveedor implements ActionListener {
          frm.txtNombre.setText("Ingrese Nombre del Proveedor");
          frm.txtDireccion.setText("Ingrese Direccion");
          frm.txtIdentificacion.setText("Ingrese Identificacion Fiscal");
-        
+          frm.txtIdentificacion.setForeground(new Color(204,204,204));
+          frm.txtDireccion.setForeground(new Color(204,204,204));
+           frm.txtNombre.setForeground(new Color(204,204,204));
     }
   
 }

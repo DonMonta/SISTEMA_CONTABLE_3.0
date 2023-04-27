@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import java.awt.Color;
+
 /**
  *
  * @author jorge
@@ -51,23 +53,87 @@ public class FrmINVENTARIO extends javax.swing.JPanel {
         tbltabla = new javax.swing.JTable();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(txtnombreproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 115, -1));
 
+        txtnombreproducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtnombreproducto.setForeground(new java.awt.Color(204, 204, 204));
+        txtnombreproducto.setText("Ingrese Producto");
+        txtnombreproducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtnombreproductoMousePressed(evt);
+            }
+        });
+        add(txtnombreproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 212, 270, 30));
+
+        lblnombredelproducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblnombredelproducto.setText("Nombre del producto");
-        add(lblnombredelproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+        add(lblnombredelproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
+        lbldescripcion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lbldescripcion.setText("Descripcion");
         add(lbldescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
-        add(txtdescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 115, -1));
 
+        txtdescripcion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtdescripcion.setForeground(new java.awt.Color(204, 204, 204));
+        txtdescripcion.setText("Ingrese Descripcion");
+        txtdescripcion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtdescripcionMousePressed(evt);
+            }
+        });
+        add(txtdescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 270, 40));
+
+        lblpreciodeventa.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblpreciodeventa.setText("Precio de venta");
-        add(lblpreciodeventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
-        add(txtprecioventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 115, -1));
-        add(txtcosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 110, -1));
+        add(lblpreciodeventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
 
+        txtprecioventa.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtprecioventa.setForeground(new java.awt.Color(204, 204, 204));
+        txtprecioventa.setText("Precio");
+        txtprecioventa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtprecioventaMousePressed(evt);
+            }
+        });
+        txtprecioventa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtprecioventaKeyTyped(evt);
+            }
+        });
+        add(txtprecioventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 115, 40));
+
+        txtcosto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtcosto.setForeground(new java.awt.Color(204, 204, 204));
+        txtcosto.setText("Ingrese costo");
+        txtcosto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtcostoMousePressed(evt);
+            }
+        });
+        txtcosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcostoKeyTyped(evt);
+            }
+        });
+        add(txtcosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 110, 30));
+
+        lblcantidaddisponible.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblcantidaddisponible.setText("Cantidad disponible");
-        add(lblcantidaddisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, -1, -1));
-        add(txtcantidaddisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 110, -1));
+        add(lblcantidaddisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, -1, -1));
+
+        txtcantidaddisponible.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtcantidaddisponible.setForeground(new java.awt.Color(204, 204, 204));
+        txtcantidaddisponible.setText("Cantidad");
+        txtcantidaddisponible.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtcantidaddisponibleMousePressed(evt);
+            }
+        });
+        txtcantidaddisponible.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcantidaddisponibleKeyTyped(evt);
+            }
+        });
+        add(txtcantidaddisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 120, 40));
 
         jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -75,35 +141,46 @@ public class FrmINVENTARIO extends javax.swing.JPanel {
 
         jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
         jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 170, 1180, 80));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 170, 1180, 20));
 
         txtbuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtbuscar.setForeground(new java.awt.Color(204, 204, 204));
         txtbuscar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtbuscar.setText("Buscar Por Nombre");
-        add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 272, -1));
+        txtbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtbuscarMousePressed(evt);
+            }
+        });
+        add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 272, -1));
 
         btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
-        add(btnbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 50, 30));
+        add(btnbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 50, 30));
         add(txtid, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
+        lblcosto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblcosto.setText("Costo");
-        add(lblcosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 70, 20));
+        add(lblcosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 70, 20));
 
         btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-guardar-94.png"))); // NOI18N
-        add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
+        btnguardar.setBorder(null);
+        add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
 
         btneliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-eliminar-40.png"))); // NOI18N
-        add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 460, -1, -1));
+        btneliminar.setBorder(null);
+        add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 460, -1, -1));
 
         btnmodificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-editar-40.png"))); // NOI18N
-        add(btnmodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, -1, -1));
+        btnmodificar.setBorder(null);
+        add(btnmodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, -1, -1));
 
         btnborrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-broom-with-a-lot-of-dust-40.png"))); // NOI18N
-        add(btnborrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, -1, -1));
+        btnborrar.setBorder(null);
+        add(btnborrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, -1, -1));
 
         btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-actualizar.gif"))); // NOI18N
-        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 460, -1, -1));
+        btnactualizar.setBorder(null);
+        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 460, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(0, 75, 159));
         jLabel4.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
@@ -137,6 +214,189 @@ public class FrmINVENTARIO extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 750, 360));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtbuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtbuscarMousePressed
+        if(this.txtbuscar.getText().equals("Buscar Por Nombre")){
+            this.txtbuscar.setText("");
+            this.txtbuscar.setForeground(Color.black);
+        }
+       
+        if(String.valueOf(this.txtnombreproducto.getText()).isEmpty()){
+            this.txtnombreproducto.setText("Ingrese Producto");
+            this.txtnombreproducto.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtcosto.getText()).isEmpty()){
+            this.txtcosto.setText("Ingrese costo");
+            this.txtcosto.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtdescripcion.getText()).isEmpty()){
+            this.txtdescripcion.setText("Ingrese Descripcion");
+            this.txtdescripcion.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtprecioventa.getText()).isEmpty()){
+            this.txtprecioventa.setText("Precio");
+            this.txtprecioventa.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtcantidaddisponible.getText()).isEmpty()){
+            this.txtcantidaddisponible.setText("Cantidad");
+            this.txtcantidaddisponible.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtbuscarMousePressed
+
+    private void txtnombreproductoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtnombreproductoMousePressed
+        if(this.txtnombreproducto.getText().equals("Ingrese Producto")){
+            this.txtnombreproducto.setText("");
+            this.txtnombreproducto.setForeground(Color.black);
+        }
+       
+        if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
+            this.txtbuscar.setText("Buscar Por Nombre");
+            this.txtbuscar.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtcosto.getText()).isEmpty()){
+            this.txtcosto.setText("Ingrese costo");
+            this.txtcosto.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtdescripcion.getText()).isEmpty()){
+            this.txtdescripcion.setText("Ingrese Descripcion");
+            this.txtdescripcion.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtprecioventa.getText()).isEmpty()){
+            this.txtprecioventa.setText("Precio");
+            this.txtprecioventa.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtcantidaddisponible.getText()).isEmpty()){
+            this.txtcantidaddisponible.setText("Cantidad");
+            this.txtcantidaddisponible.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtnombreproductoMousePressed
+
+    private void txtcostoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtcostoMousePressed
+         if(this.txtcosto.getText().equals("Ingrese costo")){
+            this.txtcosto.setText("");
+            this.txtcosto.setForeground(Color.black);
+        }
+       
+        if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
+            this.txtbuscar.setText("Buscar Por Nombre");
+            this.txtbuscar.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtnombreproducto.getText()).isEmpty()){
+            this.txtnombreproducto.setText("Ingrese Producto");
+            this.txtnombreproducto.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtdescripcion.getText()).isEmpty()){
+            this.txtdescripcion.setText("Ingrese Descripcion");
+            this.txtdescripcion.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtprecioventa.getText()).isEmpty()){
+            this.txtprecioventa.setText("Precio");
+            this.txtprecioventa.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtcantidaddisponible.getText()).isEmpty()){
+            this.txtcantidaddisponible.setText("Cantidad");
+            this.txtcantidaddisponible.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtcostoMousePressed
+
+    private void txtdescripcionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtdescripcionMousePressed
+        if(this.txtdescripcion.getText().equals("Ingrese Descripcion")){
+            this.txtdescripcion.setText("");
+            this.txtdescripcion.setForeground(Color.black);
+        }
+       
+        if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
+            this.txtbuscar.setText("Buscar Por Nombre");
+            this.txtbuscar.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtcosto.getText()).isEmpty()){
+            this.txtcosto.setText("Ingrese costo");
+            this.txtcosto.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtprecioventa.getText()).isEmpty()){
+            this.txtprecioventa.setText("Precio");
+            this.txtprecioventa.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtnombreproducto.getText()).isEmpty()){
+            this.txtnombreproducto.setText("Ingrese Producto");
+            this.txtnombreproducto.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtcantidaddisponible.getText()).isEmpty()){
+            this.txtcantidaddisponible.setText("Cantidad");
+            this.txtcantidaddisponible.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtdescripcionMousePressed
+
+    private void txtprecioventaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtprecioventaMousePressed
+         if(this.txtprecioventa.getText().equals("Precio")){
+            this.txtprecioventa.setText("");
+            this.txtprecioventa.setForeground(Color.black);
+        }
+       
+        if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
+            this.txtbuscar.setText("Buscar Por Nombre");
+            this.txtbuscar.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtcosto.getText()).isEmpty()){
+            this.txtcosto.setText("Ingrese costo");
+            this.txtcosto.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtdescripcion.getText()).isEmpty()){
+            this.txtdescripcion.setText("Ingrese Descripcion");
+            this.txtdescripcion.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtcantidaddisponible.getText()).isEmpty()){
+            this.txtcantidaddisponible.setText("Cantidad");
+            this.txtcantidaddisponible.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtnombreproducto.getText()).isEmpty()){
+            this.txtnombreproducto.setText("Ingrese Producto");
+            this.txtnombreproducto.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtprecioventaMousePressed
+
+    private void txtcostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcostoKeyTyped
+        char c = evt.getKeyChar();
+        if(c<'0'|| c>'9')   evt.consume();
+    }//GEN-LAST:event_txtcostoKeyTyped
+
+    private void txtprecioventaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprecioventaKeyTyped
+        char c = evt.getKeyChar();
+        if(c<'0'|| c>'9')   evt.consume();
+    }//GEN-LAST:event_txtprecioventaKeyTyped
+
+    private void txtcantidaddisponibleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcantidaddisponibleKeyTyped
+       char c = evt.getKeyChar();
+        if(c<'0'|| c>'9')   evt.consume();
+    }//GEN-LAST:event_txtcantidaddisponibleKeyTyped
+
+    private void txtcantidaddisponibleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtcantidaddisponibleMousePressed
+        if(this.txtcantidaddisponible.getText().equals("Cantidad")){
+            this.txtcantidaddisponible.setText("");
+            this.txtcantidaddisponible.setForeground(Color.black);
+        }
+       
+        if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
+            this.txtbuscar.setText("Buscar Por Nombre");
+            this.txtbuscar.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtcosto.getText()).isEmpty()){
+            this.txtcosto.setText("Ingrese costo");
+            this.txtcosto.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtdescripcion.getText()).isEmpty()){
+            this.txtdescripcion.setText("Ingrese Descripcion");
+            this.txtdescripcion.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtprecioventa.getText()).isEmpty()){
+            this.txtprecioventa.setText("Precio");
+            this.txtprecioventa.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtnombreproducto.getText()).isEmpty()){
+            this.txtnombreproducto.setText("Ingrese Producto");
+            this.txtnombreproducto.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtcantidaddisponibleMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

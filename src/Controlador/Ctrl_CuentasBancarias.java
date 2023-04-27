@@ -6,6 +6,7 @@ package Controlador;
 import Modelo.Cls_ConsultaCuentaBancarias;
 import Modelo.Cuentas_Bancarias;
 import Vista.frmCuenta_Bancaria;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
@@ -49,7 +50,9 @@ public class Ctrl_CuentasBancarias implements ActionListener{
                 frm.txtnumero.setText(modelo.getValueAt(fila, 2).toString());
                 
                 frm.txtsaldo.setText(modelo.getValueAt(fila, 3).toString());
-               
+                frm.txtsaldo.setForeground(Color.black);
+                frm.txtnumero.setForeground(Color.black);
+                frm.txtnombre.setForeground(Color.black);
                
               
                 frm.btnIngresar.setEnabled(false);
@@ -243,7 +246,10 @@ public class Ctrl_CuentasBancarias implements ActionListener{
          frm.txtnombre.setText("Ingrese Nombre del Banco");
          frm.txtnumero.setText("Ingrese Numero de Cuenta");
          frm.txtsaldo.setText("Ingrese Saldo");
-        
+        frm.txtsaldo.setForeground(new Color(204,204,204));
+        frm.txtnumero.setForeground(new Color(204,204,204));
+         frm.txtnombre.setForeground(new Color(204,204,204));
+         frm.txtsaldo.setForeground(Color.black);
        
     }
      private boolean Validar(){
