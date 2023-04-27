@@ -11,16 +11,19 @@ import Controlador.Ctrl_ReportCuentaCobrar;
 import Controlador.Ctrl_ReportCuentaPagar;
 import Controlador.Ctrl_Usuario;
 import Controlador.Ctrl_inventario;
+import Controlador.ctrl_Gastos;
 import Modelo.Cliente;
 import Modelo.ClsConsultaClientes;
 import Modelo.ClsConsultaCuentasPorCobrar;
 import Modelo.ClsConsultaFactura;
+import Modelo.ClsConsultaGastos;
 import Modelo.ClsConsultaProveedor;
 import Modelo.ClsConsultaUsuario;
 import Modelo.ClsConsultainventario;
 import Modelo.ClsConsultasCuentasPorPagar;
 import Modelo.ClsCuentasPorCobrar;
 import Modelo.ClsFactura;
+import Modelo.ClsGastos;
 import Modelo.ClsInventario;
 import Modelo.ClsProveedor;
 import Modelo.Cls_ConsultaCuentaBancarias;
@@ -64,7 +67,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
     frmClients clientes = new frmClients();
     FrmFACTURA factura = new FrmFACTURA();
     frmuser usuario = new frmuser();
-    FrmGASTO gasto = new FrmGASTO();
+    frmGastos gasto = new frmGastos();
     frmproveedore proveedores = new frmproveedore();
     FrmINVENTARIO inventario = new FrmINVENTARIO();
     frmCuenta_Bancaria bancarias = new frmCuenta_Bancaria();
@@ -201,6 +204,11 @@ public class frmMenuInicio extends javax.swing.JFrame {
 
                 // Agregar nuevo formulario
                      // Crea una nueva instancia del formulario
+                     ClsGastos obj = new ClsGastos();
+                    ClsConsultaGastos sqlobj = new ClsConsultaGastos();
+                    
+                    ctrl_Gastos ctrl = new ctrl_Gastos(obj,sqlobj,gasto);
+                    ctrl.Iniciar();
                     gasto.setVisible(true);
                     panelBody.add(gasto); // Agrega el nuevo formulario al panel
                     panelBody.repaint();
@@ -732,12 +740,12 @@ public class frmMenuInicio extends javax.swing.JFrame {
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelHeaderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jSeparator16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelHeaderLayout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)))
+                        .addComponent(jLabel7))
+                    .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 439, Short.MAX_VALUE)
                 .addComponent(lbluser, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

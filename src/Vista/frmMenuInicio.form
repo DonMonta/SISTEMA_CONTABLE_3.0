@@ -43,13 +43,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jSeparator16" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jLabel8" min="-2" pref="37" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jSeparator16" min="-2" pref="244" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="439" max="32767" attributes="0"/>
                   <Component id="lbluser" min="-2" pref="47" max="-2" attributes="0"/>
