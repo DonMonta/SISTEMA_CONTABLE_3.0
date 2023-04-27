@@ -6,7 +6,6 @@ package Controlador;
 
 import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
-import Vista.FrmUSUARIOS;
 import Vista.frmuser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -87,15 +86,29 @@ public class Ctrl_Usuario implements ActionListener{
        
        if(e.getSource()==frm.btnIngresar)
        {
-           
-                mat.setUsuario(frm.txtUsuario.getText());
-                mat.setPassword(frm.txtContraseña.getText());
+                if("".equals(frm.txtUsuario.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
 
-                if(sqlmat.Guardar(mat))
-                {JOptionPane.showMessageDialog(null, "Usuario guardado"); Limpiar();
-                 Mostrar();}
-                else
-                {JOptionPane.showMessageDialog(null, "No se guardó la informacion del Usuario");Limpiar();}
+                    
+
+                }
+                else if("".equals(frm.txtContraseña.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
+
+                    
+
+                }
+                else{
+                    mat.setUsuario(frm.txtUsuario.getText());
+                    mat.setPassword(frm.txtContraseña.getText());
+
+                    if(sqlmat.Guardar(mat))
+                    {JOptionPane.showMessageDialog(null, "Usuario guardado"); Limpiar();
+                     Mostrar();}
+                    else
+                    {JOptionPane.showMessageDialog(null, "No se guardó la informacion del Usuario");Limpiar();}
+                }
+                
           
         
        }   
@@ -106,16 +119,30 @@ public class Ctrl_Usuario implements ActionListener{
     
      if(e.getSource()==frm.btnUpdate)
        {
-         
-                mat.setIdUsuario(Integer.parseInt(frm.txtID.getText()));
-                mat.setUsuario(frm.txtUsuario.getText());
-                mat.setPassword(frm.txtContraseña.getText());
+                if("".equals(frm.txtUsuario.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
 
-                if(sqlmat.Modificar(mat))
-                {JOptionPane.showMessageDialog(null, "Se actualizo la informacion del Usuario"); Limpiar(); Mostrar();}
-                else
-                {JOptionPane.showMessageDialog(null, "No se actualizo la informacion del Usuario");Limpiar();}
-           
+                    
+
+                }
+                else if("".equals(frm.txtContraseña.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
+
+                    
+
+                }
+                else{
+                    mat.setIdUsuario(Integer.parseInt(frm.txtID.getText()));
+                    mat.setUsuario(frm.txtUsuario.getText());
+                    mat.setPassword(frm.txtContraseña.getText());
+
+                    if(sqlmat.Modificar(mat))
+                    {JOptionPane.showMessageDialog(null, "Se actualizo la informacion del Usuario"); Limpiar(); Mostrar();}
+                    else
+                    {JOptionPane.showMessageDialog(null, "No se actualizo la informacion del Usuario");Limpiar();}
+
+                }
+                
            
        }
     

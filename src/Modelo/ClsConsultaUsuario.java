@@ -24,6 +24,38 @@ import Vista.FrmUSUARIOS;
  * @author juand
  */
 public class ClsConsultaUsuario extends Coneccion {
+     public boolean Login(Usuario obj){
+        PreparedStatement ps =null;
+        Connection con= (Connection)getConexion();
+        ResultSet res=null;
+        String sql="SELECT * FROM usuario WHERE user=? and clave=?";
+
+            try {    
+                ps=con.prepareStatement(sql);
+                 ps.setString(1, obj.getUsuario());
+                 ps.setString(2, obj.getPassword());
+                res=ps.executeQuery();
+                //paso el resultado de la consulta al modelo
+               if(res.next())
+                {
+                     obj.setIdUsuario(res.getInt("id"));
+                    obj.setUsuario(res.getString("user"));
+                    obj.setPassword(res.getString("clave"));
+                    return true;  
+                }
+                return false;
+            } catch (SQLException ex) {
+                Logger.getLogger(Clsconsulta_usuario.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+            finally{
+                    try {
+                        con.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Clsconsulta_usuario.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+    }
     public boolean Guardar(Usuario tienda){
             PreparedStatement ps =null;
             Connection con= (Connection)getConexion();
@@ -123,35 +155,7 @@ public class ClsConsultaUsuario extends Coneccion {
                 }
         }return listaUsuarios;
      }
-public List Mostrar()throws Exception{
-         ResultSet res;
-         List listaCompras = new ArrayList();
-         PreparedStatement ps =null;
-         Connection con= (Connection)getConexion();
-         String sql="select * from usuario";
-         try {
-             ps=con.prepareStatement(sql);
-             res = ps.executeQuery();
-             while (res.next()) {                 
-                Usuario obj = new Usuario();
-                obj.setIdUsuario(res.getInt("id"));
-                obj.setUsuario(res.getNString("user"));
-                obj.setPassword(res.getNString("clave"));
-                
-                 
-                listaCompras.add(obj);
-             }
-         } catch (SQLException ex) {
-            Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }return listaCompras;
-     }
+
 public List MostrarUsuario()throws Exception{
          ResultSet res;
          List obList = new ArrayList();
@@ -239,4 +243,5 @@ public List ListarBussqueda(String nombre)throws Exception{
                 }
         }return listaMaterias;
      }
+    
 }

@@ -5,8 +5,9 @@
 package Vista;
 
 import Controlador.ctrl_Login;
-import Modelo.Clsconsulta_usuario;
+import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
+import java.awt.Color;
 
 /**
  *
@@ -89,12 +90,29 @@ public class frmLogin extends javax.swing.JFrame {
         });
         jPanel2.add(jbtnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 189, 49));
 
+        jtxtClave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtxtClave.setForeground(new java.awt.Color(204, 204, 204));
+        jtxtClave.setText("Ingrese contraseña");
+        jtxtClave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtxtClaveMousePressed(evt);
+            }
+        });
         jtxtClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtClaveActionPerformed(evt);
             }
         });
         jPanel2.add(jtxtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 240, 34));
+
+        jtxtUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtxtUsuario.setForeground(new java.awt.Color(204, 204, 204));
+        jtxtUsuario.setText("Ingrese usuario");
+        jtxtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtxtUsuarioMousePressed(evt);
+            }
+        });
         jPanel2.add(jtxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 240, 35));
 
         jButton2.setBackground(new java.awt.Color(0, 75, 159));
@@ -117,7 +135,7 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void jbtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIngresarActionPerformed
         Usuario usuario = new Usuario();
-        Clsconsulta_usuario consulta_usuario = new Clsconsulta_usuario();
+        ClsConsultaUsuario consulta_usuario = new ClsConsultaUsuario();
         frmLogin frmlogin = new frmLogin();
         ctrl_Login ctrl = new ctrl_Login(frmlogin,usuario,consulta_usuario);
         if(ctrl.Log(jtxtUsuario.getText(),jtxtClave.getText())){
@@ -126,12 +144,38 @@ public class frmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnIngresarActionPerformed
 
     private void jtxtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtClaveActionPerformed
-        // TODO add your handling code here:
+         
     }//GEN-LAST:event_jtxtClaveActionPerformed
 
     private void jbtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalirActionPerformed
       System.exit(0);
     }//GEN-LAST:event_jbtnSalirActionPerformed
+
+    private void jtxtUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtxtUsuarioMousePressed
+        if(this.jtxtUsuario.getText().equals("Ingrese usuario")){
+            this.jtxtUsuario.setText("");
+            this.jtxtUsuario.setForeground(Color.black);
+        }
+
+       
+        if(String.valueOf(this.jtxtClave.getText()).isEmpty()){
+            this.jtxtClave.setText("Ingrese contraseña");
+            this.jtxtClave.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_jtxtUsuarioMousePressed
+
+    private void jtxtClaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtxtClaveMousePressed
+        if(this.jtxtClave.getText().equals("Ingrese contraseña")){
+            this.jtxtClave.setText("");
+            this.jtxtClave.setForeground(Color.black);
+        }
+
+        
+        if(String.valueOf(this.jtxtUsuario.getText()).isEmpty()){
+            this.jtxtUsuario.setText("Ingrese usuario");
+            this.jtxtUsuario.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_jtxtClaveMousePressed
 
     /**
      * @param args the command line arguments

@@ -4,10 +4,9 @@
  */
 package Controlador;
 
-import Modelo.Clsconsulta_usuario;
+import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
 import Vista.frmLogin;
-import Vista.frmMenuInicio;
 import Vista.frmMenuP;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,9 +20,9 @@ public class ctrl_Login implements ActionListener{
 
     frmLogin frm;
      Usuario usuario;
-     Clsconsulta_usuario clsconsulta_usuario;
+     ClsConsultaUsuario clsconsulta_usuario;
      
-    public ctrl_Login(frmLogin frm, Usuario usuario, Clsconsulta_usuario clsconsulta_usuario) {
+    public ctrl_Login(frmLogin frm, Usuario usuario, ClsConsultaUsuario clsconsulta_usuario) {
         this.frm = frm;
         this.usuario = usuario;
         this.clsconsulta_usuario = clsconsulta_usuario;
