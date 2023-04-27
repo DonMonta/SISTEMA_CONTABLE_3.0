@@ -7,12 +7,33 @@ import Modelo.ClsConsultaCuentasPorCobrar;
 import Modelo.ClsConsultaFactura;
 import Modelo.ClsCuentasPorCobrar;
 import Modelo.ClsFactura;
+import Modelo.Coneccion;
 import Vista.frmcientascobrar;
-
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
@@ -29,7 +50,7 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author monta
  */
-public class Ctrl_ReportCuentaCobrar implements ActionListener{
+public class Ctrl_ReportCuentaCobrar implements ActionListener {
     ClsCuentasPorCobrar est;
     ClsConsultaCuentasPorCobrar sqlest;
     frmcientascobrar frm;
@@ -102,6 +123,77 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
         }
 
     }
+     public void ReportesCuentasCobrar() throws Exception {
+         List notas; 
+       ClsCuentasPorCobrar cls;
+       ClsFactura factura;
+        Document documento = new Document();
+        try {
+           String rutaArchivo = System.getProperty("user.home") + File.separator + "Downloads" + File.separator + "Reporte Cuentas por Cobrar.pdf";
+            PdfWriter.getInstance(documento, new FileOutputStream(rutaArchivo));
+            Image header = Image.getInstance("src/imagenes/header.jpg");
+            header.scaleToFit(650, 1000);
+            header.setAlignment(Chunk.ALIGN_CENTER);
+            //formato al texto
+            Paragraph parrafo = new Paragraph();
+            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafo.add("Reporte creado por \nGrupo #1\n\n");
+            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
+            parrafo.add("Reporte de Cuentas por Cobrar \n\n");
+
+            documento.open();
+            //agregamos los datos
+            documento.add(header);
+            documento.add(parrafo);
+
+            PdfPTable tabla = new PdfPTable(5);
+            PdfPCell celda;
+            Font fuenteCabecera = new Font(BaseFont.createFont(), 12, Font.BOLD, BaseColor.WHITE);
+            celda = new PdfPCell(new Phrase("ID", fuenteCabecera));
+            celda.setBackgroundColor(new BaseColor(0,75,159));
+            tabla.addCell(celda);
+            celda = new PdfPCell(new Phrase("Importe", fuenteCabecera));
+            celda.setBackgroundColor(new BaseColor(0,75,159));
+            tabla.addCell(celda);
+            celda = new PdfPCell(new Phrase("Fecha de Vencimiento", fuenteCabecera));
+            celda.setBackgroundColor(new BaseColor(0,75,159));
+            tabla.addCell(celda);
+            celda = new PdfPCell(new Phrase("Fecha de Pago", fuenteCabecera));
+            celda.setBackgroundColor(new BaseColor(0,75,159));
+            tabla.addCell(celda);
+            celda = new PdfPCell(new Phrase("Numero de Factura", fuenteCabecera));
+            celda.setBackgroundColor(new BaseColor(0,75,159));
+            tabla.addCell(celda);
+
+                notas= sqlest.Mostrar();
+                if(!notas.isEmpty()){
+                     for (int i = 0; i < notas.size(); i++) {
+
+                       cls = (ClsCuentasPorCobrar) notas.get(i);
+                       tabla.addCell( String.valueOf(cls.getId()));
+                       
+                        tabla.addCell(String.valueOf(cls.getImporte()));
+                        tabla.addCell(String.valueOf(cls.getFecha_venci()));
+                        tabla.addCell(String.valueOf(cls.getFecha_pag()));
+                        factura = sqlest.BuscarFactura(cls);
+                        tabla.addCell(String.valueOf(factura.getNumero()));
+                        
+                     }
+                     documento.add(tabla);
+                }
+                 
+            documento.close();
+            
+            JOptionPane.showMessageDialog(null, "Reporte creado");
+
+        } catch (DocumentException e) {
+            System.out.println("Error 1 en: " + e);
+        } catch (FileNotFoundException ex) {
+            System.out.println("Error 2 en: " + ex);
+        } catch (IOException ex) {
+            System.out.println("Error 3 en: " + ex);
+        }
+    }
      @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==frm.btnactualizar){
@@ -113,6 +205,15 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener{
         if(e.getSource()==frm.cmbfacturas)
         {   
            Mostrar();
+         
+        }
+        if(e.getSource()==frm.btngenerar)
+        {   
+            try {
+                ReportesCuentasCobrar();
+            } catch (Exception ex) {
+                Logger.getLogger(Ctrl_ReportCuentaCobrar.class.getName()).log(Level.SEVERE, null, ex);
+            }
          
         }
          if(e.getSource()==frm.btnagregar)

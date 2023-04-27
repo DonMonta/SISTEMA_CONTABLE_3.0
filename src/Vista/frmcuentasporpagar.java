@@ -66,7 +66,7 @@ public class frmcuentasporpagar extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(357, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
@@ -151,12 +151,13 @@ public class frmcuentasporpagar extends javax.swing.JPanel {
         btnagregar.setBackground(new java.awt.Color(0, 112, 224));
         btnagregar.setForeground(new java.awt.Color(255, 255, 255));
         btnagregar.setText("AGREGAR");
-        add(btnagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 453, -1, 40));
+        btnagregar.setBorder(null);
+        add(btnagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 453, 110, 50));
 
         btnactualizar.setBackground(new java.awt.Color(0, 112, 224));
         btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_update_30px.png"))); // NOI18N
         btnactualizar.setBorder(null);
-        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1092, 323, 50, 40));
+        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, 50, 40));
 
         btngenerar.setBackground(new java.awt.Color(0, 112, 224));
         btngenerar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
