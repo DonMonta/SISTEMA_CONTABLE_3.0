@@ -15,17 +15,91 @@ import java.util.logging.Logger;
  * @author monta
  */
 public class ClsConsultaFactura extends Coneccion{
+     public boolean Guardar(ClsFactura em){
+          PreparedStatement ps =null;
+            Connection con= (Connection)getConexion();
+            String sql="INSERT INTO facturas (numero_factura,fecha,importe_total,id_cliente,id_proveedor) "
+                    + "values(?,?,?,?,?)";
+            
+        try {    
+            ps=con.prepareStatement(sql);
+             ps.setString(1, em.getNumero());
+             ps.setDate(2, new java.sql.Date(em.getFecha().getTime()));
+             ps.setDouble(3, em.getImporte());
+             ps.setInt(4, em.getCliente());
+             ps.setInt(5, em.getProveedor());
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        finally{
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+    }
+     //Metodo Para Editar
+     public boolean Modificar(ClsFactura em){
+           PreparedStatement ps =null;
+           Connection con= (Connection)getConexion();
+           String sql="UPDATE facturas SET numero_factura=?,fecha=?,importe_total=?,id_cliente=?"
+                   + ",id_proveedor=? WHERE id=?";
+            
+        try {    
+            ps=con.prepareStatement(sql);
+            
+              ps.setString(1, em.getNumero());
+             ps.setDate(2, new java.sql.Date(em.getFecha().getTime()));
+             ps.setDouble(3, em.getImporte());
+             ps.setInt(4, em.getCliente());
+             ps.setInt(5, em.getProveedor());
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        finally{
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+    }
+     //Metodo Para Eliminar
+     public boolean Eliminar(ClsFactura em){
+            PreparedStatement ps =null;
+            Connection con= (Connection)getConexion();
+            String sql="DELETE FROM facturas WHERE id=?";
+            
+        try {    
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, em.getId());
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        finally{
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+    }
     public List Mostrar()throws Exception{
          ResultSet res;
          List listaCompras = new ArrayList();
          PreparedStatement ps =null;
          Connection con= (Connection)getConexion();
-         String sql= "SELECT f.id, f.numero_factura, c.nombre AS nombre_cliente, p.nombre AS nombre_proveedor, f.fecha," +
-        "SUM(fp.cantidad * fp.precio_unitario) AS total_importe" +
-        "FROM factura f" +
-        "JOIN cliente c ON f.id_cliente = c.id " +
-        "JOIN proveedor p ON f.id_proveedor = p.id" +
-        "JOIN factura_producto fp ON f.id = fp.id_factura";
+         String sql= "SELECT * from facturas";
          try {
              ps=con.prepareStatement(sql);
              res = ps.executeQuery();
@@ -45,5 +119,77 @@ public class ClsConsultaFactura extends Coneccion{
                     Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }return listaCompras;
-     } 
+     }
+     public  Cliente BuscarCliente(ClsFactura am){
+    Cliente cliente = new Cliente();
+    PreparedStatement ps =null;
+    Connection con= (Connection)getConexion();
+    ResultSet rs=null;
+    String sql="SELECT * FROM clientes WHERE id=?";
+            
+        try {    
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, am.getCliente());
+            rs=ps.executeQuery();
+            //paso el resultado de la consulta cliente modelo
+           if(rs.next())
+            {
+                cliente.setId(Integer.parseInt(rs.getString("id")));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setIdentificacion_fiscal(rs.getString("identificacion_fiscal"));
+                cliente.setForma_pago_preferida(rs.getString("forma_pago_preferida"));
+                
+                return cliente;  
+            }
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        finally{
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+   
+    }
+    public  ClsProveedor BuscarClsProveedor(ClsFactura am){
+        ClsProveedor proveedor = new ClsProveedor();
+        PreparedStatement ps =null;
+        Connection con= (Connection)getConexion();
+        ResultSet rs=null;
+        String sql="SELECT * FROM proveedores WHERE id=?";
+
+            try {    
+                ps=con.prepareStatement(sql);
+                ps.setInt(1, am.getProveedor());
+                rs=ps.executeQuery();
+                //paso el resultado de la consulta cliente modelo
+               if(rs.next())
+                {
+                    proveedor.setId(Integer.parseInt(rs.getString("id")));
+                    proveedor.setNombre(rs.getString("nombre"));
+                    proveedor.setDireccion(rs.getString("direccion"));
+                    proveedor.setIdentificacionFiscal(rs.getString("identificacion_fiscal"));
+                     proveedor.setFormaPagoPreferida(rs.getString("forma_pago_preferida"));
+
+                    return proveedor;  
+                }
+                return null;
+            } catch (SQLException ex) {
+                Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+            finally{
+                    try {
+                        con.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+   
+    }
 }

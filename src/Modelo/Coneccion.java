@@ -17,10 +17,10 @@ import java.util.logging.Logger;
 public class Coneccion {
 
     //conexion local
-   final String bdd="sistema_contable"; 
+   final String bdd="sistemacontable"; 
    final String user="root";
     String pwd="";
-    String url="jdbc:mysql://localhost:3306/" + bdd;
+    String url="jdbc:mysql://localhost:3309/" + bdd;
     
     Connection conexion;
     
