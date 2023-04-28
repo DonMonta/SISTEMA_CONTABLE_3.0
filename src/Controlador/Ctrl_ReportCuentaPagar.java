@@ -14,15 +14,18 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.BarcodeQRCode;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -97,7 +100,7 @@ public class Ctrl_ReportCuentaPagar implements ActionListener{
         try {
            String rutaArchivo = System.getProperty("user.home") + File.separator + "Downloads" + File.separator + "Reporte Cuentas por Pagar.pdf";
             PdfWriter.getInstance(documento, new FileOutputStream(rutaArchivo));
-            Image header = Image.getInstance("src/imagenes/header.jpg");
+            Image header = Image.getInstance("src/imagenes/header3.png");
             header.scaleToFit(650, 1000);
             header.setAlignment(Chunk.ALIGN_CENTER);
             //formato al texto
@@ -116,19 +119,28 @@ public class Ctrl_ReportCuentaPagar implements ActionListener{
             PdfPCell celda;
             Font fuenteCabecera = new Font(BaseFont.createFont(), 12, Font.BOLD, BaseColor.WHITE);
             celda = new PdfPCell(new Phrase("ID", fuenteCabecera));
-            celda.setBackgroundColor(new BaseColor(0,75,159));
+            celda.setBackgroundColor(new BaseColor(247,190,123));
+            celda.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(celda);
+            
             celda = new PdfPCell(new Phrase("Importe", fuenteCabecera));
-            celda.setBackgroundColor(new BaseColor(0,75,159));
+            celda.setBackgroundColor(new BaseColor(247,190,123));
+            celda.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(celda);
+            
             celda = new PdfPCell(new Phrase("Fecha de Vencimiento", fuenteCabecera));
-            celda.setBackgroundColor(new BaseColor(0,75,159));
+            celda.setBackgroundColor(new BaseColor(247,190,123));
+            celda.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(celda);
+            
             celda = new PdfPCell(new Phrase("Fecha de Pago", fuenteCabecera));
-            celda.setBackgroundColor(new BaseColor(0,75,159));
+            celda.setBackgroundColor(new BaseColor(247,190,123));
+            celda.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(celda);
+            
             celda = new PdfPCell(new Phrase("Numero de Factura", fuenteCabecera));
-            celda.setBackgroundColor(new BaseColor(0,75,159));
+            celda.setBackgroundColor(new BaseColor(247,190,123));
+            celda.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(celda);
 
                 notas= sqlest.Mostrar();
@@ -146,11 +158,19 @@ public class Ctrl_ReportCuentaPagar implements ActionListener{
                         
                      }
                      documento.add(tabla);
+                     BarcodeQRCode qr = new BarcodeQRCode("https://github.com/DonMonta/SISTEMA_CONTABLE_3.0", 1000, 1000, null);
+                        Image qrImage = qr.getImage();
+                        qrImage.scaleToFit(100, 100);
+                        qrImage.setAbsolutePosition((documento.getPageSize().getWidth() - qrImage.getScaledWidth()) / 2, documento.bottom() + 20);
+                         documento.add(qrImage);
                 }
                  
             documento.close();
             
             JOptionPane.showMessageDialog(null, "Reporte creado");
+             if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(new File(rutaArchivo));
+            }
 
         } catch (DocumentException e) {
             System.out.println("Error 1 en: " + e);

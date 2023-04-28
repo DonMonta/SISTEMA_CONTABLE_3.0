@@ -72,7 +72,7 @@ public class frmLogin extends javax.swing.JFrame {
                 jbtnSalirActionPerformed(evt);
             }
         });
-        jPanel2.add(jbtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 90, 50));
+        jPanel2.add(jbtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 90, 50));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/149071.png"))); // NOI18N

@@ -18,8 +18,8 @@ public class ClsConsultaFactura extends Coneccion{
      public boolean Guardar(ClsFactura em){
           PreparedStatement ps =null;
             Connection con= (Connection)getConexion();
-            String sql="INSERT INTO facturas (numero_factura,fecha,importe_total,id_cliente,id_proveedor) "
-                    + "values(?,?,?,?,?)";
+            String sql="INSERT INTO facturas (numero_factura,fecha,importe_total,id_cliente,importe_cliente,id_proveedor,importe_proveedor) "
+                    + "values(?,?,?,?,?,?,?)";
             
         try {    
             ps=con.prepareStatement(sql);
@@ -27,7 +27,9 @@ public class ClsConsultaFactura extends Coneccion{
              ps.setDate(2, new java.sql.Date(em.getFecha().getTime()));
              ps.setDouble(3, em.getImporte());
              ps.setInt(4, em.getCliente());
-             ps.setInt(5, em.getProveedor());
+             ps.setDouble(5, em.getImporteclient());
+             ps.setInt(6, em.getProveedor());
+              ps.setDouble(7, em.getImporteprove());
             ps.execute();
             return true;
         } catch (SQLException ex) {
@@ -43,60 +45,10 @@ public class ClsConsultaFactura extends Coneccion{
         }
     }
      //Metodo Para Editar
-     public boolean Modificar(ClsFactura em){
-           PreparedStatement ps =null;
-           Connection con= (Connection)getConexion();
-           String sql="UPDATE facturas SET numero_factura=?,fecha=?,importe_total=?,id_cliente=?"
-                   + ",id_proveedor=? WHERE id=?";
-            
-        try {    
-            ps=con.prepareStatement(sql);
-            
-              ps.setString(1, em.getNumero());
-             ps.setDate(2, new java.sql.Date(em.getFecha().getTime()));
-             ps.setDouble(3, em.getImporte());
-             ps.setInt(4, em.getCliente());
-             ps.setInt(5, em.getProveedor());
-            ps.execute();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-        finally{
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-    }
-     //Metodo Para Eliminar
-     public boolean Eliminar(ClsFactura em){
-            PreparedStatement ps =null;
-            Connection con= (Connection)getConexion();
-            String sql="DELETE FROM facturas WHERE id=?";
-            
-        try {    
-            ps=con.prepareStatement(sql);
-            ps.setInt(1, em.getId());
-            ps.execute();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-        finally{
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-    }
+    
     public List Mostrar()throws Exception{
          ResultSet res;
-         List listaCompras = new ArrayList();
+         List lista = new ArrayList();
          PreparedStatement ps =null;
          Connection con= (Connection)getConexion();
          String sql= "SELECT * from facturas";
@@ -107,7 +59,13 @@ public class ClsConsultaFactura extends Coneccion{
                 ClsFactura obj = new ClsFactura();
                 obj.setId(res.getInt("id"));
                 obj.setNumero(res.getString("numero_factura"));
-                listaCompras.add(obj);
+                obj.setFecha(res.getDate("fecha"));
+                obj.setImporte(res.getDouble("importe_total"));
+                 obj.setCliente(res.getInt("id_cliente"));
+                 obj.setImporteclient(res.getDouble("importe_cliente"));
+                 obj.setProveedor(res.getInt("id_proveedor"));
+                 obj.setImporteprove(res.getDouble("importe_proveedor"));
+                lista.add(obj);
              }
          } catch (SQLException ex) {
             Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +76,7 @@ public class ClsConsultaFactura extends Coneccion{
                 } catch (SQLException ex) {
                     Logger.getLogger(ClsConsultaFactura.class.getName()).log(Level.SEVERE, null, ex);
                 }
-        }return listaCompras;
+        }return lista;
      }
      public  Cliente BuscarCliente(ClsFactura am){
     Cliente cliente = new Cliente();

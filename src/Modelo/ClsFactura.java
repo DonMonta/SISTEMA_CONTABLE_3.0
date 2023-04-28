@@ -14,7 +14,7 @@ public class ClsFactura {
     int id,cliente,proveedor;
     String numero;
     Date fecha;
-    Double importe;
+    Double importe,importeclient,importeprove;
 
     public int getId() {
         return id;
@@ -63,6 +63,23 @@ public class ClsFactura {
     public void setImporte(Double importe) {
         this.importe = importe;
     }
+
+    public Double getImporteclient() {
+        return importeclient;
+    }
+
+    public void setImporteclient(Double importeclient) {
+        this.importeclient = importeclient;
+    }
+
+    public Double getImporteprove() {
+        return importeprove;
+    }
+
+    public void setImporteprove(Double importeprove) {
+        this.importeprove = importeprove;
+    }
+    
      @Override
     public String toString() {
          return "Tienda: "+ getNumero();

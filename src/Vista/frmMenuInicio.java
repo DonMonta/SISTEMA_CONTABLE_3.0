@@ -7,6 +7,7 @@ package Vista;
 import Controlador.Ctrl_Proveedor;
 import Controlador.Ctrl_Clientes;
 import Controlador.Ctrl_CuentasBancarias;
+import Controlador.Ctrl_Factura;
 import Controlador.Ctrl_ReportCuentaCobrar;
 import Controlador.Ctrl_ReportCuentaPagar;
 import Controlador.Ctrl_Usuario;
@@ -65,7 +66,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
     frmcientascobrar cobrar = new frmcientascobrar();
     frmcuentasporpagar pagar = new frmcuentasporpagar();
     frmClients clientes = new frmClients();
-    FrmFACTURA factura = new FrmFACTURA();
+    frmFacturas factura = new frmFacturas();
     frmuser usuario = new frmuser();
     frmGastos gasto = new frmGastos();
     frmproveedore proveedores = new frmproveedore();
@@ -668,8 +669,15 @@ public class frmMenuInicio extends javax.swing.JFrame {
                  
                 
 
-                // Agregar nuevo formulario
-                     // Crea una nueva instancia del formulario
+                    ClsFactura obj = new ClsFactura();
+                    ClsConsultaFactura sqlobj = new  ClsConsultaFactura();
+                    
+                    Ctrl_Factura ctrl = new Ctrl_Factura(obj,sqlobj,factura);
+                try {
+                    ctrl.Iniciar();
+                } catch (Exception ex) {
+                    Logger.getLogger(frmMenuInicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
                     factura.setVisible(true);
                     panelBody.add(factura); // Agrega el nuevo formulario al panel
                     panelBody.repaint();

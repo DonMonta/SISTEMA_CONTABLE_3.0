@@ -56,6 +56,7 @@ public class frmFacturas extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         txtimportepro = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        btnsumar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -95,7 +96,7 @@ public class frmFacturas extends javax.swing.JPanel {
                 txtimporteKeyTyped(evt);
             }
         });
-        add(txtimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 160, 40));
+        add(txtimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, 160, 40));
 
         jDateChooser1.setBackground(new java.awt.Color(255, 255, 255));
         jDateChooser1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -107,7 +108,7 @@ public class frmFacturas extends javax.swing.JPanel {
 
         jLabel9.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel9.setText("Importe Total");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 130, 30));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 130, 30));
 
         btnagregar.setBackground(new java.awt.Color(0, 112, 224));
         btnagregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -154,7 +155,7 @@ public class frmFacturas extends javax.swing.JPanel {
         btnactualizar.setBackground(new java.awt.Color(0, 112, 224));
         btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_update_30px.png"))); // NOI18N
         btnactualizar.setBorder(null);
-        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(589, 475, 50, 40));
+        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 480, 50, 40));
 
         btngenerar.setBackground(new java.awt.Color(0, 112, 224));
         btngenerar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -238,6 +239,11 @@ public class frmFacturas extends javax.swing.JPanel {
         jLabel16.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel16.setText("importe");
         add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, -1));
+
+        btnsumar.setBackground(new java.awt.Color(0, 112, 224));
+        btnsumar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_update_30px.png"))); // NOI18N
+        btnsumar.setBorder(null);
+        add(btnsumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 50, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbclienteActionPerformed
@@ -297,6 +303,7 @@ public class frmFacturas extends javax.swing.JPanel {
     public javax.swing.JButton btnactualizar;
     public javax.swing.JButton btnagregar;
     public javax.swing.JButton btngenerar;
+    public javax.swing.JButton btnsumar;
     public javax.swing.JComboBox<Cliente> cmbcliente;
     public javax.swing.JComboBox<ClsProveedor> cmbprovee;
     public com.toedter.calendar.JDateChooser jDateChooser1;
