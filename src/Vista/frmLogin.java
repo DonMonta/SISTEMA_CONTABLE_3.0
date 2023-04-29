@@ -8,6 +8,8 @@ import Controlador.ctrl_Login;
 import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
 import java.awt.Color;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -21,6 +23,8 @@ public class frmLogin extends javax.swing.JFrame {
     public frmLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        txtpassword.setEchoChar((char) 0); 
+        txtpassword.setText("Ingrese contraseña");
     }
 
     /**
@@ -38,10 +42,12 @@ public class frmLogin extends javax.swing.JFrame {
         jbtnSalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jbtnIngresar = new javax.swing.JButton();
-        jtxtClave = new javax.swing.JTextField();
         jtxtUsuario = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnver = new javax.swing.JButton();
+        btnocultar = new javax.swing.JButton();
+        txtpassword = new javax.swing.JPasswordField();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -72,7 +78,7 @@ public class frmLogin extends javax.swing.JFrame {
                 jbtnSalirActionPerformed(evt);
             }
         });
-        jPanel2.add(jbtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 90, 50));
+        jPanel2.add(jbtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 90, 50));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/149071.png"))); // NOI18N
@@ -90,21 +96,6 @@ public class frmLogin extends javax.swing.JFrame {
         });
         jPanel2.add(jbtnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 189, 49));
 
-        jtxtClave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtxtClave.setForeground(new java.awt.Color(204, 204, 204));
-        jtxtClave.setText("Ingrese contraseña");
-        jtxtClave.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jtxtClaveMousePressed(evt);
-            }
-        });
-        jtxtClave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtClaveActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jtxtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 240, 34));
-
         jtxtUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtxtUsuario.setForeground(new java.awt.Color(204, 204, 204));
         jtxtUsuario.setText("Ingrese usuario");
@@ -115,11 +106,6 @@ public class frmLogin extends javax.swing.JFrame {
         });
         jPanel2.add(jtxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 240, 35));
 
-        jButton2.setBackground(new java.awt.Color(0, 75, 159));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_microsoft_admin_24px.png"))); // NOI18N
-        jButton2.setBorder(null);
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 40, 40));
-
         jButton1.setBackground(new java.awt.Color(0, 75, 159));
         jButton1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_client_management_24px.png"))); // NOI18N
@@ -127,6 +113,40 @@ public class frmLogin extends javax.swing.JFrame {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 40, 40));
+
+        btnver.setBackground(new java.awt.Color(0, 75, 159));
+        btnver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_eye_24px.png"))); // NOI18N
+        btnver.setBorder(null);
+        btnver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnverActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnver, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 40, 40));
+
+        btnocultar.setBackground(new java.awt.Color(0, 75, 159));
+        btnocultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_invisible_24px_1.png"))); // NOI18N
+        btnocultar.setBorder(null);
+        btnocultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnocultarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnocultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 40, 40));
+
+        txtpassword.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtpassword.setForeground(new java.awt.Color(204, 204, 204));
+        txtpassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtpasswordMousePressed(evt);
+            }
+        });
+        jPanel2.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 240, 40));
+
+        jButton3.setBackground(new java.awt.Color(0, 75, 159));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_microsoft_admin_24px.png"))); // NOI18N
+        jButton3.setBorder(null);
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 40, 40));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 560, 330));
 
@@ -137,15 +157,13 @@ public class frmLogin extends javax.swing.JFrame {
         Usuario usuario = new Usuario();
         ClsConsultaUsuario consulta_usuario = new ClsConsultaUsuario();
         frmLogin frmlogin = new frmLogin();
+        
         ctrl_Login ctrl = new ctrl_Login(frmlogin,usuario,consulta_usuario);
-        if(ctrl.Log(jtxtUsuario.getText(),jtxtClave.getText())){
+        if(ctrl.Log(jtxtUsuario.getText(),txtpassword.getText())){
+            
             dispose();
         }
     }//GEN-LAST:event_jbtnIngresarActionPerformed
-
-    private void jtxtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtClaveActionPerformed
-         
-    }//GEN-LAST:event_jtxtClaveActionPerformed
 
     private void jbtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalirActionPerformed
       System.exit(0);
@@ -158,16 +176,39 @@ public class frmLogin extends javax.swing.JFrame {
         }
 
        
-        if(String.valueOf(this.jtxtClave.getText()).isEmpty()){
-            this.jtxtClave.setText("Ingrese contraseña");
-            this.jtxtClave.setForeground(new Color(204,204,204));
+        if(String.valueOf(this.txtpassword.getText()).isEmpty()){
+           txtpassword.setEchoChar((char) 0); 
+        txtpassword.setText("Ingrese contraseña");
+            this.txtpassword.setForeground(new Color(204,204,204));
         }
     }//GEN-LAST:event_jtxtUsuarioMousePressed
 
-    private void jtxtClaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtxtClaveMousePressed
-        if(this.jtxtClave.getText().equals("Ingrese contraseña")){
-            this.jtxtClave.setText("");
-            this.jtxtClave.setForeground(Color.black);
+    private void btnverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnverActionPerformed
+        txtpassword.setEchoChar((char) 0);
+          btnver.setVisible(false);
+           btnocultar.setVisible(true);
+    }//GEN-LAST:event_btnverActionPerformed
+
+    private void btnocultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnocultarActionPerformed
+      
+            char echoChar = '*';
+            SimpleAttributeSet attrs = new SimpleAttributeSet();
+            StyleConstants.setBold(attrs, true);
+            this.txtpassword.setEchoChar(echoChar);
+            this.txtpassword.setForeground(Color.black);
+             btnocultar.setVisible(false);
+             btnver.setVisible(true);
+    }//GEN-LAST:event_btnocultarActionPerformed
+
+    private void txtpasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtpasswordMousePressed
+        if(this.txtpassword.getText().equals("Ingrese contraseña")){
+             this.txtpassword.setText("");
+             char echoChar = '*';
+            SimpleAttributeSet attrs = new SimpleAttributeSet();
+            StyleConstants.setBold(attrs, true);
+            this.txtpassword.setEchoChar(echoChar);
+            this.txtpassword.setForeground(Color.black);
+           
         }
 
         
@@ -175,7 +216,7 @@ public class frmLogin extends javax.swing.JFrame {
             this.jtxtUsuario.setText("Ingrese usuario");
             this.jtxtUsuario.setForeground(new Color(204,204,204));
         }
-    }//GEN-LAST:event_jtxtClaveMousePressed
+    }//GEN-LAST:event_txtpasswordMousePressed
 
     /**
      * @param args the command line arguments
@@ -213,15 +254,17 @@ public class frmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnocultar;
+    public javax.swing.JButton btnver;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel jPanel2;
     public javax.swing.JButton jbtnIngresar;
     public javax.swing.JButton jbtnSalir;
-    public javax.swing.JTextField jtxtClave;
     public javax.swing.JTextField jtxtUsuario;
+    public javax.swing.JPasswordField txtpassword;
     // End of variables declaration//GEN-END:variables
 }

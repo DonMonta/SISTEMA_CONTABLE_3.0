@@ -77,7 +77,7 @@ public class Ctrl_Factura implements ActionListener{
                 frm.txtid.setText(modelo.getValueAt(fila, 0).toString());
                 frm.txtnumero.setText(modelo.getValueAt(fila, 1).toString());
                 frm.txtimporte.setText(modelo.getValueAt(fila, 2).toString());
-                
+                frm.txtimporteclie.setText(modelo.getValueAt(fila, 3).toString());
                 String fecha=String.valueOf(modelo.getValueAt(fila, 3));
                 frm.cmbcliente.setSelectedItem(modelo.getValueAt(fila, 4).toString());
                 frm.cmbprovee.setSelectedItem(modelo.getValueAt(fila, 5).toString());
