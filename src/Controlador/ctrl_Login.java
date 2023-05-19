@@ -7,7 +7,6 @@ package Controlador;
 import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
 import Vista.frmLogin;
-import Vista.frmMenuInicio;
 import Vista.frmMenuP;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +21,7 @@ public class ctrl_Login implements ActionListener{
     frmLogin frm;
      Usuario usuario;
      ClsConsultaUsuario clsconsulta_usuario;
+     
      
     public ctrl_Login(frmLogin frm, Usuario usuario, ClsConsultaUsuario clsconsulta_usuario) {
         this.frm = frm;
@@ -67,9 +67,11 @@ public class ctrl_Login implements ActionListener{
                 if (clsconsulta_usuario.Login(usuario)) {
                     JOptionPane.showMessageDialog(null, "Bienvenido Usuario " + us);
                     
- 
-                    frmMenuP menu = new frmMenuP(); 
+                  
+                    frmMenuP menu = new frmMenuP();
+                    
                    menu.setVisible(true);
+                   menu.userlbl.setText(us);
 
                     return true;
                 } else {

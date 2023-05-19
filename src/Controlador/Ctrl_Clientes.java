@@ -185,9 +185,12 @@ public class Ctrl_Clientes implements ActionListener{
                  
                              DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
                              Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
-                             for(int i=4; i<7;i++){
-                                 frm.tbcliente.getColumnModel().getColumn(i).setCellRenderer(Alinear);
-                             }
+                             if (frm.tbcliente.getColumnCount() >= 7) {
+                                for(int i=4; i<7;i++)
+                                {  
+                                    frm.tbcliente.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+                                }
+                            }
                          }
                          else{
                              JOptionPane.showMessageDialog(null, "No encontro información"); 
@@ -234,8 +237,12 @@ public class Ctrl_Clientes implements ActionListener{
                  
                  DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
                  Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
-                 for(int i=4; i<7;i++)
-                 {  frm.tbcliente.getColumnModel().getColumn(i).setCellRenderer(Alinear);}
+                 if (frm.tbcliente.getColumnCount() >= 7) {
+                                for(int i=4; i<7;i++)
+                                {  
+                                    frm.tbcliente.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+                                }
+                            }
                }
                 else
                {JOptionPane.showMessageDialog(null, "No encontro información"); Limpiar();frm.txtbuscar.setText(null);}

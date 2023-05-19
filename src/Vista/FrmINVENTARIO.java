@@ -141,7 +141,7 @@ public class FrmINVENTARIO extends javax.swing.JPanel {
 
         jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
         jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 170, 1180, 20));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 1180, 20));
 
         txtbuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtbuscar.setForeground(new java.awt.Color(204, 204, 204));

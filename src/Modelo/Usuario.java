@@ -12,16 +12,12 @@ public class Usuario {
 
     //Atributos
     private int idUsuario;
+    private String correo;
+
     private String usuario;
     private String clave;
    
 
-    //Contructor vacío
-    public Usuario() {
-        this.idUsuario = 0;
-        this.usuario = "";
-        this.clave = "";
-    }
 
     //set and get
     public int getIdUsuario() {
@@ -30,6 +26,14 @@ public class Usuario {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
    

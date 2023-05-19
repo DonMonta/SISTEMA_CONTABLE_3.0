@@ -35,8 +35,9 @@ public class ClsConsultaUsuario extends Coneccion {
                if(res.next())
                 {
                      obj.setIdUsuario(res.getInt("id"));
-                    obj.setUsuario(res.getString("user"));
-                    obj.setPassword(res.getString("clave"));
+                     obj.setCorreo(res.getString("correo"));
+                     obj.setUsuario(res.getString("user"));
+                     obj.setPassword(res.getString("clave"));
                     return true;  
                 }
                 return false;
@@ -52,16 +53,17 @@ public class ClsConsultaUsuario extends Coneccion {
                     }
             }
     }
-    public boolean Guardar(Usuario tienda){
+    public boolean Guardar(Usuario user){
             PreparedStatement ps =null;
             Connection con= (Connection)getConexion();
-            String sql="INSERT INTO usuario (user,clave) "
-                    + "values(?,?)";
+            String sql="INSERT INTO usuario (correo,user,clave) "
+                    + "values(?,?,?)";
             
         try {    
             ps=con.prepareStatement(sql);
-             ps.setString(1, tienda.getUsuario());
-             ps.setString(2, tienda.getPassword());
+            ps.setString(1, user.getCorreo());
+            ps.setString(2, user.getUsuario());
+            ps.setString(3, user.getPassword());
             ps.execute();
             return true;
         } catch (SQLException ex) {
@@ -79,14 +81,15 @@ public class ClsConsultaUsuario extends Coneccion {
      public boolean Modificar(Usuario user){
             PreparedStatement ps =null;
             Connection con= (Connection)getConexion();
-            String sql="UPDATE usuario SET user=?,clave=? WHERE id=?";
+            String sql="UPDATE usuario SET correo=?,user=?,clave=? WHERE id=?";
             
         try {    
             ps=con.prepareStatement(sql);
             
-             ps.setString(1, user.getUsuario());
-             ps.setString(2, user.getPassword());
-             ps.setInt(3, user.getIdUsuario());
+            ps.setString(1, user.getCorreo());
+            ps.setString(2, user.getUsuario());
+            ps.setString(3, user.getPassword());
+            ps.setInt(4, user.getIdUsuario());
             ps.execute();
             return true;
         } catch (SQLException ex) {
@@ -136,6 +139,7 @@ public class ClsConsultaUsuario extends Coneccion {
              while (res.next()) {                 
                 Usuario mat = new Usuario();
                 mat.setIdUsuario(res.getInt("id"));
+                mat.setCorreo(res.getString("correo"));
                 mat.setUsuario(res.getString("user"));
                 mat.setPassword(res.getString("clave"));        
                 listaUsuarios.add(mat);
@@ -164,6 +168,7 @@ public List MostrarUsuario()throws Exception{
              while (res.next()) {                 
                 Usuario obj = new Usuario();
                 obj.setIdUsuario(res.getInt("id"));
+                obj.setCorreo(res.getString("correo"));
                 obj.setUsuario(res.getString("user"));
                 obj.setPassword(res.getString("clave"));
                 
@@ -194,7 +199,9 @@ public boolean BuscarUsuario(Usuario obj){
            if(res.next())
             {
                  obj.setIdUsuario(res.getInt("id"));
-                obj.setPassword(res.getString("user"));
+                 obj.setCorreo(res.getString("correo"));
+                 obj.setUsuario(res.getString("user"));
+                 obj.setPassword(res.getString("clave"));
                 return true;  
             }
             return false;
@@ -223,7 +230,8 @@ public List ListarBussqueda(String nombre)throws Exception{
              res = ps.executeQuery();
              while (res.next()) {                 
                 Usuario obj = new Usuario();
-               obj.setIdUsuario(res.getInt("id"));
+                obj.setIdUsuario(res.getInt("id"));
+                obj.setCorreo(res.getString("correo"));
                 obj.setUsuario(res.getString("user"));
                 obj.setPassword(res.getString("clave"));
                 listaMaterias.add(obj);

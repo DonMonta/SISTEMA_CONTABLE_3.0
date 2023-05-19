@@ -153,27 +153,27 @@ public class Ctrl_ReportCuentaCobrar implements ActionListener {
             PdfPCell celda;
             Font fuenteCabecera = new Font(BaseFont.createFont(), 12, Font.BOLD, BaseColor.WHITE);
             celda = new PdfPCell(new Phrase("ID", fuenteCabecera));
-            celda.setBackgroundColor(new BaseColor(247,190,123));
+            celda.setBackgroundColor(new BaseColor(0,75,159));
             celda.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(celda);
             
             celda = new PdfPCell(new Phrase("Importe", fuenteCabecera));
-            celda.setBackgroundColor(new BaseColor(247,190,123));
+            celda.setBackgroundColor(new BaseColor(0,75,159));
             celda.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(celda);
             
             celda = new PdfPCell(new Phrase("Fecha de Vencimiento", fuenteCabecera));
-            celda.setBackgroundColor(new BaseColor(247,190,123));
+            celda.setBackgroundColor(new BaseColor(0,75,159));
             celda.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(celda);
             
             celda = new PdfPCell(new Phrase("Fecha de Pago", fuenteCabecera));
-            celda.setBackgroundColor(new BaseColor(247,190,123));
+            celda.setBackgroundColor(new BaseColor(0,75,159));
             celda.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(celda);
             
             celda = new PdfPCell(new Phrase("Numero de Factura", fuenteCabecera));
-            celda.setBackgroundColor(new BaseColor(247,190,123));
+            celda.setBackgroundColor(new BaseColor(0,75,159));
             celda.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(celda);
 

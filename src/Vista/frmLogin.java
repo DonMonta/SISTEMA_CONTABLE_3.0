@@ -26,7 +26,7 @@ public class frmLogin extends javax.swing.JFrame {
         txtpassword.setEchoChar((char) 0); 
         txtpassword.setText("Ingrese contraseña");
     }
-
+public static String user,pwd;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -157,9 +157,10 @@ public class frmLogin extends javax.swing.JFrame {
         Usuario usuario = new Usuario();
         ClsConsultaUsuario consulta_usuario = new ClsConsultaUsuario();
         frmLogin frmlogin = new frmLogin();
-        
+        user = jtxtUsuario.getText();
+        pwd = txtpassword.getText();
         ctrl_Login ctrl = new ctrl_Login(frmlogin,usuario,consulta_usuario);
-        if(ctrl.Log(jtxtUsuario.getText(),txtpassword.getText())){
+        if(ctrl.Log(user,pwd)){
             
             dispose();
         }

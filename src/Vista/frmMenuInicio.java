@@ -31,6 +31,7 @@ import Modelo.Cls_ConsultaCuentaBancarias;
 import Modelo.Cuentas_Bancarias;
 import Modelo.Usuario;
 import Modelo.clsCuentasPorPagar;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +44,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -59,9 +61,13 @@ public class frmMenuInicio extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         execute();
-        
-//       Usuario user = new Usuario();
-//        lbluser.setText(user.getUsuario());
+        ImageIcon imagenIcono = new ImageIcon(getClass().getResource("/imagenes/monosp.png"));
+        lblfondo = new JLabel(imagenIcono);
+        lblfondo.setHorizontalAlignment(JLabel.CENTER);
+
+        // Agregar el JLabel al panel principal
+        panelBody.add(lblfondo, BorderLayout.CENTER);
+      
     }
     
     
@@ -140,7 +146,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                 }
                  
                 
-
+                 lblfondo.setVisible(false);
                  Cliente obj = new Cliente();
                     ClsConsultaClientes sqlobj = new ClsConsultaClientes();
                     
@@ -204,7 +210,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                 }
                  
                 
-
+                   lblfondo.setVisible(false);
                 // Agregar nuevo formulario
                      // Crea una nueva instancia del formulario
                      ClsGastos obj = new ClsGastos();
@@ -276,7 +282,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     ctrl.Iniciar();     
                 
                 
-
+                      lblfondo.setVisible(false);
                 // Agregar nuevo formulario
                      // Crea una nueva instancia del formulario
                     inventario.setVisible(true);
@@ -336,7 +342,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.revalidate();
                 }
                  
-                
+                      lblfondo.setVisible(false);
                      ClsProveedor obj = new ClsProveedor();
                     ClsConsultaProveedor sqlobj = new ClsConsultaProveedor();
                     
@@ -400,7 +406,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.revalidate();
                 }
                  
-                
+                  lblfondo.setVisible(false);
 
                 // Agregar nuevo formulario
 //                      Crea una nueva instancia del formulario
@@ -467,7 +473,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
                 }
-                 
+                    lblfondo.setVisible(false);
                     Usuario obj = new Usuario();
                     ClsConsultaUsuario sqlobj = new ClsConsultaUsuario();
                    
@@ -538,7 +544,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                  
 
                 // Agregar nuevo formulario
-                     
+                      lblfondo.setVisible(false);
                     ClsCuentasPorCobrar obj = new ClsCuentasPorCobrar();
                     ClsConsultaCuentasPorCobrar sqlobj = new ClsConsultaCuentasPorCobrar();
                     
@@ -611,7 +617,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     Ctrl_ReportCuentaPagar ctrl = new Ctrl_ReportCuentaPagar(obj,sqlobj,pagar);
                     ctrl.Iniciar();
                 
-
+                     lblfondo.setVisible(false);
                 // Agregar nuevo formulario
                      // Crea una nueva instancia del formulario
                     pagar.setVisible(true);
@@ -670,7 +676,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                 }
                  
                 
-
+                       lblfondo.setVisible(false);
                     ClsFactura obj = new ClsFactura();
                     ClsConsultaFactura sqlobj = new  ClsConsultaFactura();
                     
@@ -685,7 +691,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     panelBody.repaint();
                     panelBody.revalidate();
             }
-        });
+        }); 
        
         // Create Menus
         MenuItem MenuManteni = new MenuItem(new Color(0,75,159),iconManteni, "Mantenimiento", null, subMclient, 
@@ -725,6 +731,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         menus = new javax.swing.JPanel();
         panelBody = new javax.swing.JPanel();
+        lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -795,13 +802,15 @@ public class frmMenuInicio extends javax.swing.JFrame {
         );
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
         );
 
         getContentPane().add(panelMenu, java.awt.BorderLayout.LINE_START);
 
         panelBody.setBackground(new java.awt.Color(255, 255, 255));
         panelBody.setLayout(new java.awt.BorderLayout());
+        panelBody.add(lblfondo, java.awt.BorderLayout.CENTER);
+
         getContentPane().add(panelBody, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -848,6 +857,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new frmMenuInicio().setVisible(true);
+                
             }
         });
     }
@@ -857,6 +867,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator16;
+    public javax.swing.JLabel lblfondo;
     public javax.swing.JLabel lbluser;
     private javax.swing.JPanel menus;
     private javax.swing.JPanel panelBody;

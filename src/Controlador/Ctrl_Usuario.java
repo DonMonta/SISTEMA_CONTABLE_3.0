@@ -7,14 +7,21 @@ package Controlador;
 import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
 import Vista.frmuser;
+import java.util.Base64;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.crypto.spec.PBEKeySpec;
+import java.security.spec.KeySpec;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -24,6 +31,7 @@ public class Ctrl_Usuario implements ActionListener{
     Usuario mat;
     ClsConsultaUsuario sqlmat;
     frmuser frm;
+    
     public Ctrl_Usuario(Usuario mat, ClsConsultaUsuario sqlmat, frmuser frm) {
         this.mat = mat;
         this.sqlmat = sqlmat;
@@ -39,20 +47,30 @@ public class Ctrl_Usuario implements ActionListener{
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
               DefaultTableModel modelo = (DefaultTableModel) frm.tbMaterias.getModel();
-              int fila;
+                  int fila;
               
-              fila=frm.tbMaterias.getSelectedRow();
+                  fila=frm.tbMaterias.getSelectedRow();
                 
-               
+                  frm.txtContraseña.setText("");
                   frm.txtBuscar.setEnabled(false);
                   frm.txtID.setText(modelo.getValueAt(fila, 0).toString());
-                  frm.txtUsuario.setText(modelo.getValueAt(fila, 1).toString());
-                  frm.txtContraseña.setText(modelo.getValueAt(fila, 2).toString());
-                 frm.txtContraseña.setForeground(Color.black);
+                  frm.txtcorreo.setText(modelo.getValueAt(fila, 1).toString());
+                  frm.txtUsuario.setText(modelo.getValueAt(fila, 2).toString());
+                  String valorEncriptado = modelo.getValueAt(fila, 3).toString();
+                  String desencriptado = desencriptar(valorEncriptado);
+                    if (desencriptado != null) {
+                        frm.txtContraseña.setText(desencriptado);
+                    } else {
+                        // No se pudo desencriptar el valor, maneja el error apropiadamente
+                        System.out.println("Error al desencriptar el valor.");
+                    }
+
+                  frm.txtContraseña.setForeground(Color.black);
+                  frm.txtcorreo.setForeground(Color.black);
                   frm.txtUsuario.setForeground(Color.black);
-              frm.btnIngresar.setEnabled(false);
-                frm.btnBusca.setEnabled(false);
-                 frm.btnUpdate.setEnabled(true);
+                  frm.btnIngresar.setEnabled(false);
+                  frm.btnBusca.setEnabled(false);
+                  frm.btnUpdate.setEnabled(true);
                   frm.btnEliminar.setEnabled(true);
               
             }
@@ -66,6 +84,53 @@ public class Ctrl_Usuario implements ActionListener{
          frm.btnEliminar.setEnabled(false);
         Mostrar();
     }
+    private static final String ALGORITHM = "AES";
+    String originalValue = "mi_clave_oculta";
+   
+    public SecretKeySpec generarClave(String llave) {
+        try {
+            // Generar clave utilizando PBKDF2
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+            KeySpec spec = new PBEKeySpec(llave.toCharArray(), "salt".getBytes(StandardCharsets.UTF_8), 65536, 128);
+            SecretKeySpec secretKeySpec = new SecretKeySpec(factory.generateSecret(spec).getEncoded(), ALGORITHM);
+            return secretKeySpec;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String encriptar(String valor) {
+        try {
+            SecretKeySpec secretKeySpec = generarClave(originalValue);
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+
+            byte[] valorBytes = valor.getBytes(StandardCharsets.UTF_8);
+            byte[] encryptedBytes = cipher.doFinal(valorBytes);
+            return Base64.getEncoder().encodeToString(encryptedBytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String desencriptar(String valorEncriptado) {
+        try {
+            SecretKeySpec secretKeySpec = generarClave(originalValue);
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
+            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
+
+            byte[] valorEncriptadoBytes = Base64.getDecoder().decode(valorEncriptado);
+            byte[] decryptedBytes = cipher.doFinal(valorEncriptadoBytes);
+            return new String(decryptedBytes, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
     /**
      *
@@ -88,7 +153,13 @@ public class Ctrl_Usuario implements ActionListener{
        
        if(e.getSource()==frm.btnIngresar)
        {
-                if("".equals(frm.txtUsuario.getText())){
+                if("".equals(frm.txtcorreo.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Correo");
+
+                    
+
+                }
+                else if("".equals(frm.txtUsuario.getText())){
                     JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
 
                     
@@ -101,8 +172,10 @@ public class Ctrl_Usuario implements ActionListener{
 
                 }
                 else{
+                    String encryptedValue = encriptar(frm.txtContraseña.getText());
+                    mat.setCorreo(frm.txtcorreo.getText());
                     mat.setUsuario(frm.txtUsuario.getText());
-                    mat.setPassword(frm.txtContraseña.getText());
+                    mat.setPassword(encryptedValue);
 
                     if(sqlmat.Guardar(mat))
                     {JOptionPane.showMessageDialog(null, "Usuario guardado"); Limpiar();
@@ -168,8 +241,8 @@ public class Ctrl_Usuario implements ActionListener{
            if(sqlmat.BuscarUsuario(mat))
            {
 
-            String[] columnas ={"ID","Usuario","Contraseña"};
-           Object[] datos = new Object[3];
+            String[] columnas ={"ID","Correo","Usuario","Contraseña"};
+           Object[] datos = new Object[4];
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override
              public boolean isCellEditable(int i, int j)
@@ -185,8 +258,9 @@ public class Ctrl_Usuario implements ActionListener{
                     cls = (Usuario) objList.get(i);
                    
                     datos[0] = cls.getIdUsuario();
-                    datos[1] = cls.getUsuario();
-                    datos[2] = cls.getPassword();
+                    datos[1] = cls.getCorreo();
+                    datos[2] = cls.getUsuario();
+                    datos[3] = cls.getPassword();
                     tabla.addRow(datos);
                   }  
                  frm.tbMaterias.setModel(tabla);
@@ -210,8 +284,8 @@ public class Ctrl_Usuario implements ActionListener{
     }   
      private void Mostrar()
     {
-   String[] columnas ={"ID","Usuario","Contraseña"};
-           Object[] datos = new Object[3];
+   String[] columnas ={"ID","Correo","Usuario","Contraseña"};
+           Object[] datos = new Object[4];
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override
              public boolean isCellEditable(int i, int j)
@@ -226,8 +300,9 @@ public class Ctrl_Usuario implements ActionListener{
                  for (int i = 0; i < objList.size(); i++) {
                     cls = (Usuario) objList.get(i);
                     datos[0] = cls.getIdUsuario();
-                    datos[1] = cls.getUsuario();
-                    datos[2] = cls.getPassword();
+                    datos[1] = cls.getCorreo();
+                    datos[2] = cls.getUsuario();
+                    datos[3] = cls.getPassword();
                     tabla.addRow(datos);
                   }  
                  frm.tbMaterias.setModel(tabla);

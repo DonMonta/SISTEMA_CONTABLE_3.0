@@ -44,17 +44,19 @@ public class frmuser extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtcorreo = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Usuario");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 187, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Contraseña");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 258, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
         txtUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
@@ -69,7 +71,7 @@ public class frmuser extends javax.swing.JPanel {
                 txtUsuarioActionPerformed(evt);
             }
         });
-        add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 220, 30));
+        add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 210, 30));
 
         txtContraseña.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtContraseña.setForeground(new java.awt.Color(204, 204, 204));
@@ -79,19 +81,19 @@ public class frmuser extends javax.swing.JPanel {
                 txtContraseñaMousePressed(evt);
             }
         });
-        add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 248, 210, 30));
+        add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 210, 30));
         add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 40, -1));
 
         tbMaterias.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         tbMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Usuario", "Contraseña"
+                "ID", "Correo", "Usuario", "Contraseña"
             }
         ));
         tbMaterias.setGridColor(new java.awt.Color(255, 255, 255));
@@ -100,7 +102,7 @@ public class frmuser extends javax.swing.JPanel {
         tbMaterias.setSelectionBackground(new java.awt.Color(0, 112, 224));
         jScrollPane1.setViewportView(tbMaterias);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 360, 240));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 430, 240));
 
         txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtBuscar.setForeground(new java.awt.Color(204, 204, 204));
@@ -118,17 +120,17 @@ public class frmuser extends javax.swing.JPanel {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 311, 40, 40));
+        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, 40, 40));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-eliminar-40.png"))); // NOI18N
-        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 311, 30, 40));
+        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 460, 30, 40));
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-editar-40.png"))); // NOI18N
         btnUpdate.setBorder(null);
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 311, -1, -1));
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 460, -1, -1));
 
         btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-actualizar.gif"))); // NOI18N
-        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 311, 40, 40));
+        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, 40, 40));
 
         btnIngresar.setBackground(new java.awt.Color(0, 112, 224));
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -139,7 +141,7 @@ public class frmuser extends javax.swing.JPanel {
                 btnIngresarActionPerformed(evt);
             }
         });
-        add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 311, -1, -1));
+        add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
 
         btnBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
         add(btnBusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 50, 30));
@@ -165,6 +167,25 @@ public class frmuser extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Datos Guardados");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 150, 30));
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setText("Correo");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+
+        txtcorreo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtcorreo.setForeground(new java.awt.Color(204, 204, 204));
+        txtcorreo.setText("Ingrese correo");
+        txtcorreo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtcorreoMousePressed(evt);
+            }
+        });
+        txtcorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcorreoActionPerformed(evt);
+            }
+        });
+        add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 210, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
@@ -193,6 +214,10 @@ public class frmuser extends javax.swing.JPanel {
             this.txtContraseña.setText("Ingrese contraseña");
             this.txtContraseña.setForeground(new Color(204,204,204));
         }
+        if(String.valueOf(this.txtcorreo.getText()).isEmpty()){
+            this.txtcorreo.setText("Ingrese correo");
+            this.txtcorreo.setForeground(new Color(204,204,204));
+        }
     }//GEN-LAST:event_txtUsuarioMousePressed
 
     private void txtBuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMousePressed
@@ -207,6 +232,10 @@ public class frmuser extends javax.swing.JPanel {
         if(String.valueOf(this.txtContraseña.getText()).isEmpty()){
             this.txtContraseña.setText("Ingrese contraseña");
             this.txtContraseña.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtcorreo.getText()).isEmpty()){
+            this.txtcorreo.setText("Ingrese correo");
+            this.txtcorreo.setForeground(new Color(204,204,204));
         }
     }//GEN-LAST:event_txtBuscarMousePressed
 
@@ -224,7 +253,35 @@ public class frmuser extends javax.swing.JPanel {
             this.txtUsuario.setText("Ingrese usuario");
             this.txtUsuario.setForeground(new Color(204,204,204));
         }
+        if(String.valueOf(this.txtcorreo.getText()).isEmpty()){
+            this.txtcorreo.setText("Ingrese correo");
+            this.txtcorreo.setForeground(new Color(204,204,204));
+        }
     }//GEN-LAST:event_txtContraseñaMousePressed
+
+    private void txtcorreoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtcorreoMousePressed
+        if(this.txtcorreo.getText().equals("Ingrese correo")){
+            this.txtcorreo.setText("");
+            this.txtcorreo.setForeground(Color.black);
+        }
+
+        if(String.valueOf(this.txtBuscar.getText()).isEmpty()){
+            this.txtBuscar.setText("Buscar Por nombre de Usuario");
+            this.txtBuscar.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtUsuario.getText()).isEmpty()){
+            this.txtUsuario.setText("Ingrese usuario");
+            this.txtUsuario.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtContraseña.getText()).isEmpty()){
+            this.txtContraseña.setText("Ingrese contraseña");
+            this.txtContraseña.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtcorreoMousePressed
+
+    private void txtcorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcorreoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -238,6 +295,7 @@ public class frmuser extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     public javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -246,5 +304,6 @@ public class frmuser extends javax.swing.JPanel {
     public javax.swing.JTextField txtContraseña;
     public javax.swing.JTextField txtID;
     public javax.swing.JTextField txtUsuario;
+    public javax.swing.JTextField txtcorreo;
     // End of variables declaration//GEN-END:variables
 }

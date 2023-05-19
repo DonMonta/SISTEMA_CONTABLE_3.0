@@ -41,6 +41,7 @@ public final static int TWO_SECOND=20;
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
+        userlbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,6 +50,8 @@ public final static int TWO_SECOND=20;
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ilustracion-concepto-bienvenida-saludo-nuevo-miembro-equipo-empresarial-banner-web-presentacion-idea-cuenta-redes-sociales-ilustracion_277904-4626.jpg"))); // NOI18N
 
         jProgressBar1.setBackground(new java.awt.Color(255, 255, 255));
+
+        userlbl.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -61,6 +64,10 @@ public final static int TWO_SECOND=20;
                 .addGap(84, 84, 84)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userlbl)
+                .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,7 +75,8 @@ public final static int TWO_SECOND=20;
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(userlbl))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -96,8 +104,10 @@ public final static int TWO_SECOND=20;
                 tiempo.stop();
                 
                   frmMenuInicio ventana = new frmMenuInicio();
-            ventana.show();
-            dispose();
+                  frmLogin login = new frmLogin();
+                 ventana.lbluser.setText(login.user);
+                    ventana.show();
+                    dispose();
             }
         }
     }
@@ -137,5 +147,6 @@ public final static int TWO_SECOND=20;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
+    public javax.swing.JLabel userlbl;
     // End of variables declaration//GEN-END:variables
 }
