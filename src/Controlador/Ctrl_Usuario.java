@@ -6,6 +6,7 @@ package Controlador;
 
 import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
+import Vista.frmRegistrarse;
 import Vista.frmuser;
 import java.util.Base64;
 import java.awt.Color;
@@ -22,6 +23,8 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.SecretKeySpec;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -129,6 +132,27 @@ public class Ctrl_Usuario implements ActionListener{
         }
         return null;
     }
+    public void Guardar(String correo,String user, String clave){
+        String encryptedValue = encriptar(clave);
+        mat.setCorreo(correo);
+        mat.setUsuario(user);
+        mat.setPassword(encryptedValue);
+        if(sqlmat.ExisteUsuario(mat)){
+            JOptionPane.showMessageDialog(null, "El Usuario Ingresado Ya Existe. Ingrese otro Usuario"); 
+            frm.txtUsuario.setText("Ingrese usuario");
+            frm.txtUsuario.setForeground(new Color(204,204,204));
+        }
+        else if(sqlmat.ExisteCorreoUsuario(mat)){
+            JOptionPane.showMessageDialog(null, "El Correo Ingresado Ya Existe. Ingrese otro Correo");
+            frm.txtcorreo.setForeground(new Color(204,204,204));
+            frm.txtcorreo.setText("Ingrese correo");
+        }
+        else if(sqlmat.Guardar(mat))
+            {JOptionPane.showMessageDialog(null, "Usuario guardado"); Limpiar();
+            Mostrar();}
+        else
+            {JOptionPane.showMessageDialog(null, "No se guardó la informacion del Usuario");}
+    }
 
 
 
@@ -172,26 +196,14 @@ public class Ctrl_Usuario implements ActionListener{
 
                 }
                 else{
-                    String encryptedValue = encriptar(frm.txtContraseña.getText());
-                    mat.setCorreo(frm.txtcorreo.getText());
-                    mat.setUsuario(frm.txtUsuario.getText());
-                    mat.setPassword(encryptedValue);
-
-                    if(sqlmat.Guardar(mat))
-                    {JOptionPane.showMessageDialog(null, "Usuario guardado"); Limpiar();
-                     Mostrar();}
-                    else
-                    {JOptionPane.showMessageDialog(null, "No se guardó la informacion del Usuario");Limpiar();}
+                    Guardar(frm.txtcorreo.getText(),frm.txtUsuario.getText(),frm.txtContraseña.getText());
+                    Limpiar();
                 }
                 
           
         
        }   
-            
-             
-            
-       
-    
+
      if(e.getSource()==frm.btnUpdate)
        {
                 if("".equals(frm.txtUsuario.getText())){
@@ -207,9 +219,11 @@ public class Ctrl_Usuario implements ActionListener{
 
                 }
                 else{
+                     String encryptedValue = encriptar(frm.txtContraseña.getText());
                     mat.setIdUsuario(Integer.parseInt(frm.txtID.getText()));
+                    mat.setCorreo(frm.txtcorreo.getText());
                     mat.setUsuario(frm.txtUsuario.getText());
-                    mat.setPassword(frm.txtContraseña.getText());
+                    mat.setPassword(encryptedValue);
 
                     if(sqlmat.Modificar(mat))
                     {JOptionPane.showMessageDialog(null, "Se actualizo la informacion del Usuario"); Limpiar(); Mostrar();}
@@ -266,6 +280,14 @@ public class Ctrl_Usuario implements ActionListener{
                  frm.tbMaterias.setModel(tabla);
                  Limpiar();
                  frm.txtBuscar.setText(null);
+                 DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
+                             Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
+                             if (frm.tbMaterias.getColumnCount() >= 7) {
+                                for(int i=4; i<7;i++)
+                                {  
+                                    frm.tbMaterias.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+                                }
+                            }
                }
                else
                {JOptionPane.showMessageDialog(null, "No encontro información"); Limpiar();frm.txtBuscar.setText(null);}
@@ -306,6 +328,16 @@ public class Ctrl_Usuario implements ActionListener{
                     tabla.addRow(datos);
                   }  
                  frm.tbMaterias.setModel(tabla);
+                 Limpiar();
+                 frm.txtBuscar.setText(null);
+                  DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
+                             Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
+                             if (frm.tbMaterias.getColumnCount() >= 7) {
+                                for(int i=4; i<7;i++)
+                                {  
+                                    frm.tbMaterias.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+                                }
+                            }
                }
                else
                {JOptionPane.showMessageDialog(null, "No encontro información"); }

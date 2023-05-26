@@ -42,14 +42,78 @@ public class ClsConsultaUsuario extends Coneccion {
                 }
                 return false;
             } catch (SQLException ex) {
-                Logger.getLogger(Clsconsulta_usuario.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
             }
             finally{
                     try {
                         con.close();
                     } catch (SQLException ex) {
-                        Logger.getLogger(Clsconsulta_usuario.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+    }
+     public boolean ExisteUsuario(Usuario obj){
+        PreparedStatement ps =null;
+        Connection con= (Connection)getConexion();
+        ResultSet res=null;
+        String sql="SELECT * FROM usuario WHERE user=?";
+
+            try {    
+                ps=con.prepareStatement(sql);
+                 ps.setString(1, obj.getUsuario());
+                res=ps.executeQuery();
+                //paso el resultado de la consulta al modelo
+               if(res.next())
+                {
+                     obj.setIdUsuario(res.getInt("id"));
+                     obj.setCorreo(res.getString("correo"));
+                     obj.setUsuario(res.getString("user"));
+                     obj.setPassword(res.getString("clave"));
+                    return true;  
+                }
+                return false;
+            } catch (SQLException ex) {
+                Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+            finally{
+                    try {
+                        con.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+    }
+      public boolean ExisteCorreoUsuario(Usuario obj){
+        PreparedStatement ps =null;
+        Connection con= (Connection)getConexion();
+        ResultSet res=null;
+        String sql="SELECT * FROM usuario WHERE correo=?";
+
+            try {    
+                ps=con.prepareStatement(sql);
+                 ps.setString(1, obj.getCorreo());
+                res=ps.executeQuery();
+                //paso el resultado de la consulta al modelo
+               if(res.next())
+                {
+                     obj.setIdUsuario(res.getInt("id"));
+                     obj.setCorreo(res.getString("correo"));
+                     obj.setUsuario(res.getString("user"));
+                     obj.setPassword(res.getString("clave"));
+                    return true;  
+                }
+                return false;
+            } catch (SQLException ex) {
+                Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+            finally{
+                    try {
+                        con.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
                     }
             }
     }
@@ -247,5 +311,37 @@ public List ListarBussqueda(String nombre)throws Exception{
                 }
         }return listaMaterias;
      }
+    public boolean RecuperarClave(Usuario obj){
+        PreparedStatement ps =null;
+        Connection con= (Connection)getConexion();
+        ResultSet res=null;
+        String sql="SELECT * FROM usuario WHERE user=?";
+
+            try {    
+                ps=con.prepareStatement(sql);
+                 ps.setString(1, obj.getUsuario());
+                res=ps.executeQuery();
+                //paso el resultado de la consulta al modelo
+               if(res.next())
+                {
+                     obj.setIdUsuario(res.getInt("id"));
+                     obj.setCorreo(res.getString("correo"));
+                     obj.setUsuario(res.getString("user"));
+                     obj.setPassword(res.getString("clave"));
+                    return true;  
+                }
+                return false;
+            } catch (SQLException ex) {
+                Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+            finally{
+                    try {
+                        con.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+        }
     
 }

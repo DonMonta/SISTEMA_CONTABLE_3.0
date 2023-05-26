@@ -8,6 +8,7 @@ import Controlador.ctrl_Login;
 import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
@@ -48,9 +49,16 @@ public static String user,pwd;
         btnocultar = new javax.swing.JButton();
         txtpassword = new javax.swing.JPasswordField();
         jButton3 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        btnregistrate = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        btnolvidado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 75, 159));
@@ -78,7 +86,7 @@ public static String user,pwd;
                 jbtnSalirActionPerformed(evt);
             }
         });
-        jPanel2.add(jbtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 90, 50));
+        jPanel2.add(jbtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 90, 50));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/149071.png"))); // NOI18N
@@ -148,22 +156,69 @@ public static String user,pwd;
         jButton3.setBorder(null);
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 40, 40));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 560, 330));
+        jSeparator1.setForeground(new java.awt.Color(0, 75, 159));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 80, 10));
+
+        btnregistrate.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnregistrate.setForeground(new java.awt.Color(0, 75, 159));
+        btnregistrate.setText("Regístrate aquí");
+        btnregistrate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnregistrateMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnregistrate, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
+
+        jSeparator2.setForeground(new java.awt.Color(0, 75, 159));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 70, 10));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel4.setText("¿No Tienes Cuenta?");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel5.setText("¿Has Olvidado tu Contraseña? ");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
+
+        btnolvidado.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnolvidado.setForeground(new java.awt.Color(0, 75, 159));
+        btnolvidado.setText("Haz clic aquí");
+        btnolvidado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnolvidadoMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnolvidado, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 560, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIngresarActionPerformed
-        Usuario usuario = new Usuario();
-        ClsConsultaUsuario consulta_usuario = new ClsConsultaUsuario();
-        frmLogin frmlogin = new frmLogin();
-        user = jtxtUsuario.getText();
-        pwd = txtpassword.getText();
-        ctrl_Login ctrl = new ctrl_Login(frmlogin,usuario,consulta_usuario);
-        if(ctrl.Log(user,pwd)){
-            
-            dispose();
-        }
+        if("Ingrese usuario".equals(jtxtUsuario.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo usuario"); 
+            }
+            else if("Ingrese contraseña".equals(txtpassword.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo clave");
+            }
+            else if("".equals(txtpassword.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo clave");
+            }
+            else if("".equals(jtxtUsuario.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo usuario");
+            }else{
+                 Usuario usuario = new Usuario();
+                ClsConsultaUsuario consulta_usuario = new ClsConsultaUsuario();
+                user = jtxtUsuario.getText();
+                pwd = txtpassword.getText();
+                ctrl_Login ctrl = new ctrl_Login(usuario,consulta_usuario);
+                if(ctrl.Log(user,pwd)){
+
+                    dispose();
+                }
+            }
+       
     }//GEN-LAST:event_jbtnIngresarActionPerformed
 
     private void jbtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalirActionPerformed
@@ -179,7 +234,7 @@ public static String user,pwd;
        
         if(String.valueOf(this.txtpassword.getText()).isEmpty()){
            txtpassword.setEchoChar((char) 0); 
-        txtpassword.setText("Ingrese contraseña");
+            txtpassword.setText("Ingrese contraseña");
             this.txtpassword.setForeground(new Color(204,204,204));
         }
     }//GEN-LAST:event_jtxtUsuarioMousePressed
@@ -219,6 +274,18 @@ public static String user,pwd;
         }
     }//GEN-LAST:event_txtpasswordMousePressed
 
+    private void btnregistrateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnregistrateMouseClicked
+        frmRegistrarse re = new frmRegistrarse();
+        re.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnregistrateMouseClicked
+
+    private void btnolvidadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnolvidadoMouseClicked
+       frmRecuperacion re = new frmRecuperacion();
+        re.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnolvidadoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -256,13 +323,19 @@ public static String user,pwd;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnocultar;
+    private javax.swing.JLabel btnolvidado;
+    private javax.swing.JLabel btnregistrate;
     public javax.swing.JButton btnver;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     public javax.swing.JButton jbtnIngresar;
     public javax.swing.JButton jbtnSalir;
     public javax.swing.JTextField jtxtUsuario;
