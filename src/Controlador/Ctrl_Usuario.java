@@ -26,6 +26,19 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.security.Security;
+import java.util.Properties;
+import java.util.Random;
 /**
  *
  * @author juand
@@ -89,6 +102,109 @@ public class Ctrl_Usuario implements ActionListener{
     }
     private static final String ALGORITHM = "AES";
     String originalValue = "mi_clave_oculta";
+    public  boolean validarCorreo(String correo) {
+        boolean esValido = false;
+
+        try {
+            InternetAddress internetAddress = new InternetAddress(correo);
+            internetAddress.validate();
+            esValido = true;
+
+            if (esValido) {
+                esValido = existeCorreo(correo);
+            }
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, "Error "+ e); 
+        }
+
+        return esValido;
+    }
+
+    private  boolean existeCorreo(String correo) {
+        try {
+            String codigoVerificacion = generarCodigoVerificacion();
+            String correoPrueba = "soporte.tecnico.2023.dm@gmail.com"; // Correo de prueba
+            String dominio = correo.substring(correo.indexOf("@") + 1);
+
+            // Configurar propiedades para la conexión SMTP
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp." + dominio);
+            props.put("mail.smtp.port", "587");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.auth", "true");
+            props.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+
+            // Configurar un TrustManager personalizado para aceptar todos los certificados SSL
+            TrustManager[] trustAllCerts = new TrustManager[] {
+                    new X509TrustManager() {
+                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                            return null;
+                        }
+
+                        public void checkClientTrusted(
+                                java.security.cert.X509Certificate[] certs, String authType) {
+                        }
+
+                        public void checkServerTrusted(
+                                java.security.cert.X509Certificate[] certs, String authType) {
+                        }
+                    }
+            };
+
+            // Obtener una instancia de SSLContext y configurar el TrustManager personalizado
+            SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+            SSLContext.setDefault(sslContext);
+
+            // Crear la sesión de correo electrónico utilizando las propiedades y la autenticación
+            Session session = Session.getInstance(props, new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("soporte.tecnico.2023.dm@gmail.com", "zjayvubdpmuinmtr");
+                }
+            });
+
+            // Crear el mensaje de correo electrónico
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(correoPrueba));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correo));
+            message.setSubject("Validación de correo electrónico");
+           message.setText("Tu código de verificación es: " + codigoVerificacion);
+
+            // Enviar el mensaje de correo electrónico
+            Transport.send(message);
+             // Solicitar al usuario que ingrese el código de verificación
+            String codigoIngresado = JOptionPane.showInputDialog(null, "Ingresa el código de verificación enviado al correo " + correo );
+
+            while (codigoIngresado != null) {
+                if (codigoIngresado.equals(codigoVerificacion)) {
+                    JOptionPane.showMessageDialog(null, "Código de verificación correcto. El correo electrónico está validado.");
+                    return true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Código de verificación incorrecto. El correo electrónico no está validado.");
+                    codigoIngresado = JOptionPane.showInputDialog(null, "Ingresa el código de verificación enviado al correo electrónico");
+                }
+            }
+
+            return false;
+
+            
+        } catch (AuthenticationFailedException e) {
+            JOptionPane.showMessageDialog(null, "Autenticación fallida. Verifica las credenciales SMTP");
+            return false;
+        } catch (MessagingException e) {
+            JOptionPane.showMessageDialog(null, "No se pudo conectar al servidor SMTP. Verifica la configuración de conexión");
+            return false;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+            return false;
+        }
+    }
+ private String generarCodigoVerificacion() {
+        // Generar un código de verificación aleatorio
+        Random random = new Random();
+        int codigo = 100000 + random.nextInt(900000);
+        return String.valueOf(codigo);
+    }
    
     public SecretKeySpec generarClave(String llave) {
         try {
@@ -146,6 +262,9 @@ public class Ctrl_Usuario implements ActionListener{
             JOptionPane.showMessageDialog(null, "El Correo Ingresado Ya Existe. Ingrese otro Correo");
             frm.txtcorreo.setForeground(new Color(204,204,204));
             frm.txtcorreo.setText("Ingrese correo");
+        }
+        else if(!validarCorreo(correo)){
+            JOptionPane.showMessageDialog(null, "El Correo Ingresado No es Válido"); Limpiar();
         }
         else if(sqlmat.Guardar(mat))
             {JOptionPane.showMessageDialog(null, "Usuario guardado"); Limpiar();
