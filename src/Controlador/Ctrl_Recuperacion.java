@@ -45,7 +45,7 @@ public class Ctrl_Recuperacion{
      private static final String ALGORITHM = "AES";
     String originalValue = "mi_clave_oculta";
     private static String remitente = "soporte.tecnico.2023.dm@gmail.com";
-    private static String claveremitente = "zjayvubdpmuinmtr";
+    private static String claveremitente = "vvjpfuaymmqqybdz";
     public static String destinatario;
     private String emailTo;
     private String subject;

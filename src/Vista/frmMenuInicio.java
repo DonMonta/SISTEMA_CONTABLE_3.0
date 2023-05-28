@@ -61,13 +61,17 @@ public class frmMenuInicio extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         execute();
+        Cargar();
+        
+      
+    }
+    public void Cargar(){
         ImageIcon imagenIcono = new ImageIcon(getClass().getResource("/imagenes/monosp.png"));
         lblfondo = new JLabel(imagenIcono);
         lblfondo.setHorizontalAlignment(JLabel.CENTER);
 
         // Agregar el JLabel al panel principal
         panelBody.add(lblfondo, BorderLayout.CENTER);
-      
     }
     
     
@@ -870,7 +874,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
     public javax.swing.JLabel lblfondo;
     public javax.swing.JLabel lbluser;
     private javax.swing.JPanel menus;
-    private javax.swing.JPanel panelBody;
+    public javax.swing.JPanel panelBody;
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables

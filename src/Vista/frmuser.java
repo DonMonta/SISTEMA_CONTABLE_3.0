@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Vista;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 /**
  *
  * @author monta
@@ -102,7 +105,7 @@ public class frmuser extends javax.swing.JPanel {
         tbMaterias.setSelectionBackground(new java.awt.Color(0, 112, 224));
         jScrollPane1.setViewportView(tbMaterias);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 430, 240));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 430, 240));
 
         txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtBuscar.setForeground(new java.awt.Color(204, 204, 204));

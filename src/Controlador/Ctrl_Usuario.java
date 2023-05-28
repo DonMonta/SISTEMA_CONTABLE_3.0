@@ -84,6 +84,7 @@ public class Ctrl_Usuario implements ActionListener{
                   frm.txtContraseña.setForeground(Color.black);
                   frm.txtcorreo.setForeground(Color.black);
                   frm.txtUsuario.setForeground(Color.black);
+                  frm.txtBuscar.setForeground(Color.black);
                   frm.btnIngresar.setEnabled(false);
                   frm.btnBusca.setEnabled(false);
                   frm.btnUpdate.setEnabled(true);
@@ -125,7 +126,11 @@ public class Ctrl_Usuario implements ActionListener{
             String codigoVerificacion = generarCodigoVerificacion();
             String correoPrueba = "soporte.tecnico.2023.dm@gmail.com"; // Correo de prueba
             String dominio = correo.substring(correo.indexOf("@") + 1);
-
+            if("utelvt.edu.ec".equals(dominio)){
+                dominio="gmail.com";
+                
+            }
+           
             // Configurar propiedades para la conexión SMTP
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp." + dominio);
@@ -159,7 +164,7 @@ public class Ctrl_Usuario implements ActionListener{
             // Crear la sesión de correo electrónico utilizando las propiedades y la autenticación
             Session session = Session.getInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("soporte.tecnico.2023.dm@gmail.com", "zjayvubdpmuinmtr");
+                    return new PasswordAuthentication("soporte.tecnico.2023.dm@gmail.com", "vvjpfuaymmqqybdz");
                 }
             });
 
@@ -168,7 +173,7 @@ public class Ctrl_Usuario implements ActionListener{
             message.setFrom(new InternetAddress(correoPrueba));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correo));
             message.setSubject("Validación de correo electrónico");
-           message.setText("Tu código de verificación es: " + codigoVerificacion);
+            message.setText("Tu código de verificación es: " + codigoVerificacion);
 
             // Enviar el mensaje de correo electrónico
             Transport.send(message);
@@ -272,6 +277,31 @@ public class Ctrl_Usuario implements ActionListener{
         else
             {JOptionPane.showMessageDialog(null, "No se guardó la informacion del Usuario");}
     }
+     public void Editar(String id,String correo,String user, String clave){
+        String encryptedValue = encriptar(clave);
+        mat.setIdUsuario(Integer.parseInt(id));
+        mat.setCorreo(correo);
+        mat.setUsuario(user);
+        mat.setPassword(encryptedValue);
+        if(sqlmat.ExisteUsuario(mat)){
+            JOptionPane.showMessageDialog(null, "El Usuario Ingresado Ya Existe. Ingrese otro Usuario"); 
+            frm.txtUsuario.setText("Ingrese usuario");
+            frm.txtUsuario.setForeground(new Color(204,204,204));
+        }
+        else if(sqlmat.ExisteCorreoUsuario(mat)){
+            JOptionPane.showMessageDialog(null, "El Correo Ingresado Ya Existe. Ingrese otro Correo");
+            frm.txtcorreo.setForeground(new Color(204,204,204));
+            frm.txtcorreo.setText("Ingrese correo");
+        }
+        else if(!validarCorreo(correo)){
+            JOptionPane.showMessageDialog(null, "El Correo Ingresado No es Válido"); Limpiar();
+        }
+        else if(sqlmat.Modificar(mat))
+            {JOptionPane.showMessageDialog(null, "Se Actualizó la Información"); Limpiar();
+            Mostrar();}
+        else
+            {JOptionPane.showMessageDialog(null, "No se actualizó la informacion del Usuario");}
+    }
 
 
 
@@ -293,31 +323,38 @@ public class Ctrl_Usuario implements ActionListener{
          frm.btnBusca.setEnabled(true);
           frm.txtBuscar.setText(null);
         }
+        
        
        if(e.getSource()==frm.btnIngresar)
        {
-                if("".equals(frm.txtcorreo.getText())){
-                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Correo");
+            if("".equals(frm.txtcorreo.getText())){
+            JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Correo");
 
-                    
+            }
+            else if("".equals(frm.txtUsuario.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
 
-                }
-                else if("".equals(frm.txtUsuario.getText())){
-                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
+            }
+            else if("".equals(frm.txtContraseña.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
 
-                    
+            }
+            else if("Ingrese usuario".equals(frm.txtUsuario.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
 
-                }
-                else if("".equals(frm.txtContraseña.getText())){
-                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
+            }
+            else if("Ingrese contraseña".equals(frm.txtContraseña.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
 
-                    
+            }
+            else if("Ingrese correo".equals(frm.txtcorreo.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Correo");
 
-                }
-                else{
-                    Guardar(frm.txtcorreo.getText(),frm.txtUsuario.getText(),frm.txtContraseña.getText());
-                    Limpiar();
-                }
+            }
+            else{
+                Guardar(frm.txtcorreo.getText(),frm.txtUsuario.getText(),frm.txtContraseña.getText());
+               
+            }
                 
           
         
@@ -325,32 +362,33 @@ public class Ctrl_Usuario implements ActionListener{
 
      if(e.getSource()==frm.btnUpdate)
        {
-                if("".equals(frm.txtUsuario.getText())){
-                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
+               if("".equals(frm.txtcorreo.getText())){
+            JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Correo");
 
-                    
+            }
+            else if("".equals(frm.txtUsuario.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
 
-                }
-                else if("".equals(frm.txtContraseña.getText())){
-                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
+            }
+            else if("".equals(frm.txtContraseña.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
 
-                    
+            }
+            else if("Ingrese usuario".equals(frm.txtUsuario.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
 
-                }
-                else{
-                     String encryptedValue = encriptar(frm.txtContraseña.getText());
-                    mat.setIdUsuario(Integer.parseInt(frm.txtID.getText()));
-                    mat.setCorreo(frm.txtcorreo.getText());
-                    mat.setUsuario(frm.txtUsuario.getText());
-                    mat.setPassword(encryptedValue);
+            }
+            else if("Ingrese contraseña".equals(frm.txtContraseña.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
 
-                    if(sqlmat.Modificar(mat))
-                    {JOptionPane.showMessageDialog(null, "Se actualizo la informacion del Usuario"); Limpiar(); Mostrar();}
-                    else
-                    {JOptionPane.showMessageDialog(null, "No se actualizo la informacion del Usuario");Limpiar();}
+            }
+            else if("Ingrese correo".equals(frm.txtcorreo.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Correo");
 
-                }
-                
+            }
+            else{
+                   Editar(frm.txtID.getText(), frm.txtcorreo.getText(), frm.txtUsuario.getText(),frm.txtContraseña.getText());
+            }   
            
        }
     
@@ -368,64 +406,65 @@ public class Ctrl_Usuario implements ActionListener{
        }
        if(e.getSource()==frm.btnBusca)
        {
-        
-               mat.setUsuario(frm.txtBuscar.getText());
-         
-           if(sqlmat.BuscarUsuario(mat))
-           {
-
-            String[] columnas ={"ID","Correo","Usuario","Contraseña"};
-           Object[] datos = new Object[4];
-           DefaultTableModel tabla = new DefaultTableModel(null,columnas){
-             @Override
-             public boolean isCellEditable(int i, int j)
-             { if(i==6){return true;} else {return false;}}
-           };
-          
-           List objList; Usuario cls;
-           try {
-                objList= sqlmat.ListarBussqueda(mat.getUsuario());
-                if(!objList.isEmpty())
-                {
-                 for (int i = 0; i < objList.size(); i++) {
-                    cls = (Usuario) objList.get(i);
+           mat.setUsuario(frm.txtBuscar.getText());
+           if(sqlmat.BuscarUsuario(mat)){
+               String[] columnas ={"ID","Correo","Usuario","Contraseña"};
+               Object[] datos = new Object[4];
+               DefaultTableModel tabla = new DefaultTableModel(null,columnas){
                    
-                    datos[0] = cls.getIdUsuario();
-                    datos[1] = cls.getCorreo();
-                    datos[2] = cls.getUsuario();
-                    datos[3] = cls.getPassword();
-                    tabla.addRow(datos);
-                  }  
-                 frm.tbMaterias.setModel(tabla);
-                 Limpiar();
-                 frm.txtBuscar.setText(null);
-                 DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
-                             Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
-                             if (frm.tbMaterias.getColumnCount() >= 7) {
-                                for(int i=4; i<7;i++)
-                                {  
-                                    frm.tbMaterias.getColumnModel().getColumn(i).setCellRenderer(Alinear);
-                                }
-                            }
-               }
-               else
-               {JOptionPane.showMessageDialog(null, "No encontro información"); Limpiar();frm.txtBuscar.setText(null);}
-           } catch (Exception ex) {
-               Logger.getLogger(Ctrl_Usuario.class.getName()).log(Level.SEVERE, null, ex);
-                }  
-              
-               
-             }
-                 else
-                 {
-                     JOptionPane.showMessageDialog(null, "No encontro una Tienda Con ese Nombre"); Limpiar();frm.txtBuscar.setText(null);
+                  @Override
+                  public boolean isCellEditable(int i, int j)
+                  { if(i==6){return true;} else {return false;}}
+                };
+          
+                List objList; Usuario cls;
+                try {
+                     objList= sqlmat.ListarBussqueda(mat.getUsuario());
+                     if(!objList.isEmpty())
+                     {
+                      for (int i = 0; i < objList.size(); i++) {
+                         cls = (Usuario) objList.get(i);
+
+                         datos[0] = cls.getIdUsuario();
+                         datos[1] = cls.getCorreo();
+                         datos[2] = cls.getUsuario();
+                         datos[3] = cls.getPassword();
+                         tabla.addRow(datos);
+                       }  
+                      frm.tbMaterias.setModel(tabla);
+                      Limpiar();
+                      frm.txtBuscar.setText(null);
+                      DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
+                                  Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
+                                  if (frm.tbMaterias.getColumnCount() >= 7) {
+                                     for(int i=4; i<7;i++)
+                                     {  
+                                         frm.tbMaterias.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+                                     }
+                                 }
                     }
-                }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "No encontro información"); 
+                        Limpiar();frm.txtBuscar.setText(null);
+                    }
+                } catch (Exception ex) {
+                    
+                    Logger.getLogger(Ctrl_Usuario.class.getName()).log(Level.SEVERE, null, ex);
+                
+                }  
+
+
+           }else
+           {
+             JOptionPane.showMessageDialog(null, "No encontraron Datos"); Limpiar();frm.txtBuscar.setText(null);
+           }
+       }
            
     }   
      private void Mostrar()
     {
-   String[] columnas ={"ID","Correo","Usuario","Contraseña"};
+        String[] columnas ={"ID","Correo","Usuario","Contraseña"};
            Object[] datos = new Object[4];
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override
@@ -467,25 +506,13 @@ public class Ctrl_Usuario implements ActionListener{
    public void Limpiar()
     {
         frm.txtID.setText(null);
-        frm.txtUsuario.setText(null);
-        frm.txtContraseña.setText(null);
+        frm.txtUsuario.setText("Ingrese usuario");
+        frm.txtContraseña.setText("Ingrese contraseña");
+        frm.txtcorreo.setText("Ingrese correo");
         frm.txtUsuario.setFocusable(true);
         frm.txtContraseña.setForeground(new Color(204,204,204));
-         frm.txtUsuario.setForeground(new Color(204,204,204));
+        frm.txtUsuario.setForeground(new Color(204,204,204));
+        frm.txtcorreo.setForeground(new Color(204,204,204));
     }
-   private boolean Validar(){
-        if("".equals(frm.txtUsuario.getText())){
-            JOptionPane.showMessageDialog(null,"Debe ingresar datos");
-            
-            return  false;
-            
-        }
-        if("".equals(frm.txtContraseña.getText())){
-            JOptionPane.showMessageDialog(null,"Debe ingresar datos");
-            
-            return  false;
-          
-        }
-        return false;
-    }
+  
 }

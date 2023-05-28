@@ -70,6 +70,7 @@ public class frmRegistrarse extends javax.swing.JFrame {
         txtcorreo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtcorreo.setForeground(new java.awt.Color(204, 204, 204));
         txtcorreo.setText("Ingrese correo");
+        txtcorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtcorreo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtcorreoMousePressed(evt);
