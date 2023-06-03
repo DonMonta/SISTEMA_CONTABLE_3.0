@@ -6,6 +6,7 @@ package Controlador;
 import Modelo.ClsConsultaGastos;
 import Modelo.ClsGastos;
 import Vista.frmGastos;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -63,7 +64,7 @@ public class ctrl_Gastos implements ActionListener{
                     Logger.getLogger(ctrl_Gastos.class.getName()).log(Level.SEVERE, null, ex);
                 } 
                
-              
+                frm.txtimporte.setForeground(Color.black);
                 frm.btnIngresar.setEnabled(false);
                 frm.btnbuscar.setEnabled(false);
                 frm.btnUpdate.setEnabled(true);
@@ -88,7 +89,6 @@ public class ctrl_Gastos implements ActionListener{
             frm.txtbuscar.setEnabled(true);
             frm.btnIngresar.setEnabled(true);
             frm.btnbuscar.setEnabled(true);
-            frm.txtbuscar.setText(null);
         }
         if(e.getSource()==frm.btnLimpiar){
             
@@ -206,24 +206,30 @@ public class ctrl_Gastos implements ActionListener{
                              
                              frm.tbgastos.setModel(tabla);
                              Limpiar();
-                             frm.txtbuscar.setText(null);
                 
                  
                              DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
                              Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
-                             for(int i=4; i<7;i++){
-                                 frm.tbgastos.getColumnModel().getColumn(i).setCellRenderer(Alinear);
-                             }
+                             if (frm.tbgastos.getColumnCount() >= 7) {
+                                for(int i=4; i<7;i++)
+                                {  
+                                    frm.tbgastos.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+                                }
+                            }
                          }
                          else{
                              JOptionPane.showMessageDialog(null, "No encontro información"); 
-                             Limpiar();frm.txtbuscar.setText(null);
+                             Limpiar();
                         }
                      
                  }catch (Exception ex){
                      Logger.getLogger(ctrl_Gastos.class.getName()).log(Level.SEVERE, null, ex);
                  }
              }
+             else
+            {
+              JOptionPane.showMessageDialog(null, "No encontraron Datos"); Limpiar();
+            }
          }
     }
     public void Mostrar(){
@@ -244,23 +250,27 @@ public class ctrl_Gastos implements ActionListener{
                 notas= sqlgast.MostrarClsGastos();
                 if(!notas.isEmpty())
                 {
-                 for (int i = 0; i < notas.size(); i++) {
-                  
-                    cls = (ClsGastos) notas.get(i);
-                     datos[0] = cls.getId();
-                     datos[1]= cls.getTipo_gasto();
-                     datos[2]= cls.getImporte();
-                     datos[3]= cls.getFecha();
-                   
-                    tabla.addRow(datos);
-                  }  
-                 frm.tbgastos.setModel(tabla);
-                
-                 
-                 DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
-                 Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
-                 for(int i=4; i<7;i++)
-                 {  frm.tbgastos.getColumnModel().getColumn(i).setCellRenderer(Alinear);}
+                    for (int i = 0; i < notas.size(); i++) {
+
+                       cls = (ClsGastos) notas.get(i);
+                        datos[0] = cls.getId();
+                        datos[1]= cls.getTipo_gasto();
+                        datos[2]= cls.getImporte();
+                        datos[3]= cls.getFecha();
+
+                       tabla.addRow(datos);
+                     }  
+                    frm.tbgastos.setModel(tabla);
+
+
+                    DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
+                    Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
+                     if (frm.tbgastos.getColumnCount() >= 7) {
+                                for(int i=4; i<7;i++)
+                                {  
+                                    frm.tbgastos.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+                                }
+                            }
                }
                 else
                {JOptionPane.showMessageDialog(null, "No encontro información"); Limpiar();frm.txtbuscar.setText(null);}
@@ -274,6 +284,9 @@ public class ctrl_Gastos implements ActionListener{
         
          frm.txtid.setText(null);
          frm.txtimporte.setText("Ingrese importe");
+         frm.txtbuscar.setText("Buscar  tipo de gastos");
+         frm.txtimporte.setForeground(new Color(204,204,204));
+         frm.txtbuscar.setForeground(new Color(204,204,204));
          
         
        

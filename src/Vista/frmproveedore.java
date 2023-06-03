@@ -171,7 +171,7 @@ public class frmproveedore extends javax.swing.JPanel {
         add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setText("Identificacion Fiscal:");
+        jLabel5.setText("Cédula");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
 
         jSeparator2.setForeground(new java.awt.Color(102, 102, 102));

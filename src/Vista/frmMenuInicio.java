@@ -42,6 +42,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -65,6 +66,8 @@ public class frmMenuInicio extends javax.swing.JFrame {
         
       
     }
+    
+    
     public void Cargar(){
         ImageIcon imagenIcono = new ImageIcon(getClass().getResource("/imagenes/monosp.png"));
         lblfondo = new JLabel(imagenIcono);
@@ -73,6 +76,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
         // Agregar el JLabel al panel principal
         panelBody.add(lblfondo, BorderLayout.CENTER);
     }
+   
     
     
     frmcientascobrar cobrar = new frmcientascobrar();

@@ -6,12 +6,19 @@ package Controlador;
 
 import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
+import Vista.frmMenuInicio;
 import Vista.frmRegistrarse;
 import Vista.frmuser;
+import java.awt.BorderLayout;
 import java.util.Base64;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,8 +44,31 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.security.Security;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.Random;
+import java.util.TimerTask;
+import javax.swing.JLabel;
+
+
+import marytts.LocalMaryInterface;
+import marytts.MaryInterface;
+import marytts.modules.synthesis.Voice;
+
+
+import javax.swing.SwingUtilities;
+import javax.speech.Central;
+import javax.speech.EngineException;
+import javax.speech.EngineStateError;
+import javax.speech.synthesis.Synthesizer;
+import javax.speech.synthesis.SynthesizerModeDesc;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
 /**
  *
  * @author juand
@@ -177,18 +207,31 @@ public class Ctrl_Usuario implements ActionListener{
 
             // Enviar el mensaje de correo electrónico
             Transport.send(message);
-             // Solicitar al usuario que ingrese el código de verificación
-            String codigoIngresado = JOptionPane.showInputDialog(null, "Ingresa el código de verificación enviado al correo " + correo );
+            int intentos = 0;
+            String mensaje;
 
-            while (codigoIngresado != null) {
+            while (intentos < 3) {
+                String codigoIngresado = JOptionPane.showInputDialog(null, "Ingresa el código de verificación enviado al correo " + correo);
+
+                if (codigoIngresado == null) {
+                    // El usuario ha cancelado la entrada del código
+                    return false;
+                }
+
                 if (codigoIngresado.equals(codigoVerificacion)) {
-                    JOptionPane.showMessageDialog(null, "Código de verificación correcto. El correo electrónico está validado.");
+                    mensaje = "Código de verificación correcto. El correo electrónico está validado.";
+                    SSMC(mensaje);
                     return true;
                 } else {
-                    JOptionPane.showMessageDialog(null, "Código de verificación incorrecto. El correo electrónico no está validado.");
-                    codigoIngresado = JOptionPane.showInputDialog(null, "Ingresa el código de verificación enviado al correo electrónico");
+                    mensaje = "Código de verificación incorrecto. El correo electrónico no está validado.";
+                    SSMI(mensaje);
+                    intentos++;
                 }
             }
+
+            // El usuario ha agotado los intentos permitidos
+            mensaje = "Has agotado los intentos permitidos. El correo electrónico no está validado.";
+            SSMI(mensaje);
 
             return false;
 
@@ -238,7 +281,7 @@ public class Ctrl_Usuario implements ActionListener{
         }
         return null;
     }
-
+ private JFrame frame;
     public String desencriptar(String valorEncriptado) {
         try {
             SecretKeySpec secretKeySpec = generarClave(originalValue);
@@ -253,54 +296,200 @@ public class Ctrl_Usuario implements ActionListener{
         }
         return null;
     }
+    public void Voz(String mensaje){
+        try {
+            // Emitir un sonido para llamar la atención
+            Toolkit.getDefaultToolkit().beep();
+
+            // Configurar el sintetizador de voz
+            System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+            Central.registerEngineCentral("com.sun.speech.freetts.jsapi.FreeTTSEngineCentral");
+            Synthesizer synthesizer = Central.createSynthesizer(new SynthesizerModeDesc(Locale.US));
+            synthesizer.allocate();
+            synthesizer.resume();
+
+            // Iniciar un hilo para mostrar el diálogo
+            Thread dialogThread = new Thread(() -> {
+                ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/mokey60.gif")); // Reemplaza "/ruta/del/icono.png" con la ruta correcta del icono
+                JLabel label = new JLabel(mensaje, icono, JLabel.CENTER);
+                 label.setFont(new Font("Arial", Font.BOLD, 16));
+                 label.setHorizontalAlignment(JLabel.CENTER);
+                 label.setForeground(new Color(255,255,255));
+                 // Crear el JFrame y configurarlo
+                 frame = new JFrame("Mensaje");
+                 frame.setUndecorated(true); // Quitar los bordes del JFrame
+                 frame.getContentPane().setBackground(new Color(0,75,159)); // Establecer color de fondo
+                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                 frame.addWindowListener(new WindowAdapter() {
+                     @Override
+                     public void windowClosed(WindowEvent e) {
+                         try {
+                             // Liberar los recursos del sintetizador cuando se cierra la ventana
+                             synthesizer.deallocate();
+                         } catch (EngineException | EngineStateError ex) {
+                             ex.printStackTrace();
+                         }
+                     }
+                 });
+
+                 // Agregar el JLabel al JFrame
+                 frame.getContentPane().add(label);
+
+                int width = Math.max(600, icono.getIconWidth()); // Ajustar el ancho mínimo del JFrame a 600
+                int height = Math.min(600, icono.getIconHeight() + mensaje.split("\\n").length * 40); // Ajustar el alto máximo del JFrame a 600
+                frame.setSize(width, height);
+
+                 // Centrar el JFrame en la pantalla
+                 frame.setLocationRelativeTo(null);
+
+                 // Mostrar el JFrame
+                 frame.setVisible(true);
+            });
+
+            // Iniciar un hilo para leer el mensaje en voz alta
+            Thread voiceThread = new Thread(() -> {
+                try {
+                    synthesizer.speakPlainText(mensaje, null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
+            // Iniciar ambos hilos al mismo tiempo
+            dialogThread.start();
+            voiceThread.start();
+
+            // Esperar a que el hilo de la voz termine
+            voiceThread.join();
+
+            // Esperar a que el hilo del diálogo termine
+            dialogThread.join();
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    frame.dispose(); // Cerrar el JFrame
+                }
+            }, mensaje.length() * 200);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     
+     public void SSMC(String mensaje){
+         // Obtener la imagen desde un archivo
+             ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/feli.gif"));
+            // Crear un panel personalizado con la imagen y el mensaje
+           
+            JPanel panel = new JPanel();
+            JLabel label2 = new JLabel(icono);
+            JLabel label = new JLabel(mensaje, JLabel.CENTER);
+            label.setFont(new Font("Arial", Font.BOLD, 12));
+            label.setHorizontalAlignment(JLabel.CENTER);
+            panel.setLayout(new BorderLayout());
+            panel.add(label2, BorderLayout.WEST); // Agregar la imagen en la parte superior del panel
+            panel.add(label); // Agregar el mensaje en el centro del panel
+
+            // Mostrar el JOptionPane con el panel personalizado
+            JOptionPane.showMessageDialog(null, panel, "Verificación de Usuario", JOptionPane.PLAIN_MESSAGE);
+    }
+    public void SSMI(String mensaje){
+         // Obtener la imagen desde un archivo
+             ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/monotriste.gif"));
+            // Crear un panel personalizado con la imagen y el mensaje
+           
+            JPanel panel = new JPanel();
+            JLabel label2 = new JLabel(icono);
+            JLabel label = new JLabel(mensaje, JLabel.CENTER);
+            label.setFont(new Font("Arial", Font.BOLD, 12));
+            label.setHorizontalAlignment(JLabel.CENTER);
+            panel.setLayout(new BorderLayout());
+            panel.add(label2, BorderLayout.WEST); // Agregar la imagen en la parte superior del panel
+            panel.add(label); // Agregar el mensaje en el centro del panel
+
+            // Mostrar el JOptionPane con el panel personalizado
+            JOptionPane.showMessageDialog(null, panel, "Verificación de Usuario", JOptionPane.PLAIN_MESSAGE);
+    }
     public void Guardar(String correo,String user, String clave){
-        String encryptedValue = encriptar(clave);
-        mat.setCorreo(correo);
-        mat.setUsuario(user);
-        mat.setPassword(encryptedValue);
-        if(sqlmat.ExisteUsuario(mat)){
-            JOptionPane.showMessageDialog(null, "El Usuario Ingresado Ya Existe. Ingrese otro Usuario"); 
-            frm.txtUsuario.setText("Ingrese usuario");
-            frm.txtUsuario.setForeground(new Color(204,204,204));
+         try {
+
+                String mensaje;
+                String encryptedValue = encriptar(clave);
+                mat.setCorreo(correo);
+                mat.setUsuario(user);
+                mat.setPassword(encryptedValue);
+                if(sqlmat.ExisteUsuario(mat)){
+                    mensaje = "El Usuario Ingresado Ya Existe. Ingrese otro Usuario";
+                    SSMI(mensaje);
+
+                    frm.txtUsuario.setText("Ingrese usuario");
+                    frm.txtUsuario.setForeground(new Color(204,204,204));
+                }
+                else if(sqlmat.ExisteCorreoUsuario(mat)){
+                    mensaje = "El Correo Ingresado Ya Existe. Ingrese otro Correo";
+                    SSMI(mensaje);
+
+                    frm.txtcorreo.setForeground(new Color(204,204,204));
+                    frm.txtcorreo.setText("Ingrese correo");
+                }
+                else if(!validarCorreo(correo)){
+                    mensaje = "El Correo Ingresado No es Válido";
+                    SSMI(mensaje);
+
+                    Limpiar();
+                }
+                else if(sqlmat.Guardar(mat))
+                    {
+                         mensaje = "Usuario guardado";
+                         SSMC(mensaje);
+
+                        Limpiar();
+                        Mostrar();
+                    }
+                else
+                    {
+                        mensaje = "No se guardó la informacion del Usuario";
+                        SSMI(mensaje);
+
+                    }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else if(sqlmat.ExisteCorreoUsuario(mat)){
-            JOptionPane.showMessageDialog(null, "El Correo Ingresado Ya Existe. Ingrese otro Correo");
-            frm.txtcorreo.setForeground(new Color(204,204,204));
-            frm.txtcorreo.setText("Ingrese correo");
-        }
-        else if(!validarCorreo(correo)){
-            JOptionPane.showMessageDialog(null, "El Correo Ingresado No es Válido"); Limpiar();
-        }
-        else if(sqlmat.Guardar(mat))
-            {JOptionPane.showMessageDialog(null, "Usuario guardado"); Limpiar();
-            Mostrar();}
-        else
-            {JOptionPane.showMessageDialog(null, "No se guardó la informacion del Usuario");}
+        
     }
      public void Editar(String id,String correo,String user, String clave){
-        String encryptedValue = encriptar(clave);
-        mat.setIdUsuario(Integer.parseInt(id));
-        mat.setCorreo(correo);
-        mat.setUsuario(user);
-        mat.setPassword(encryptedValue);
-        if(sqlmat.ExisteUsuario(mat)){
-            JOptionPane.showMessageDialog(null, "El Usuario Ingresado Ya Existe. Ingrese otro Usuario"); 
-            frm.txtUsuario.setText("Ingrese usuario");
-            frm.txtUsuario.setForeground(new Color(204,204,204));
-        }
-        else if(sqlmat.ExisteCorreoUsuario(mat)){
-            JOptionPane.showMessageDialog(null, "El Correo Ingresado Ya Existe. Ingrese otro Correo");
-            frm.txtcorreo.setForeground(new Color(204,204,204));
-            frm.txtcorreo.setText("Ingrese correo");
-        }
-        else if(!validarCorreo(correo)){
-            JOptionPane.showMessageDialog(null, "El Correo Ingresado No es Válido"); Limpiar();
-        }
-        else if(sqlmat.Modificar(mat))
-            {JOptionPane.showMessageDialog(null, "Se Actualizó la Información"); Limpiar();
-            Mostrar();}
-        else
-            {JOptionPane.showMessageDialog(null, "No se actualizó la informacion del Usuario");}
+         try {
+            String mensaje; 
+            String encryptedValue = encriptar(clave);
+            mat.setIdUsuario(Integer.parseInt(id));
+            mat.setCorreo(correo);
+            mat.setUsuario(user);
+            mat.setPassword(encryptedValue);
+            if(sqlmat.ExisteUsuario(mat)){
+                mensaje = "El Usuario Ingresado Ya Existe. Ingrese otro Usuario";
+                SSMI(mensaje);
+                frm.txtUsuario.setText("Ingrese usuario");
+                frm.txtUsuario.setForeground(new Color(204,204,204));
+            }
+           
+            else if(!validarCorreo(correo)){
+                mensaje = "El Correo Ingresado No es Válido";
+                SSMI(mensaje);
+                Limpiar();
+            }
+            else if(sqlmat.Modificar(mat))
+                {mensaje = "Usuario guardado";
+                        SSMC(mensaje);
+                        Limpiar();
+                Mostrar();}
+            else
+                { mensaje = "No se guardó la informacion del Usuario";
+                        SSMI(mensaje);}
+         } catch (Exception e) {
+              e.printStackTrace();
+         }
+         
     }
 
 
@@ -324,31 +513,40 @@ public class Ctrl_Usuario implements ActionListener{
           frm.txtBuscar.setText(null);
         }
         
+        
        
        if(e.getSource()==frm.btnIngresar)
        {
+           String mensaje; 
             if("".equals(frm.txtcorreo.getText())){
-            JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Correo");
+                
+                mensaje="Debe ingresar datos en el campo Correo";
+                SSMI(mensaje);
 
             }
             else if("".equals(frm.txtUsuario.getText())){
-                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
+                mensaje="Debe ingresar datos en el campo Usuario";
+               SSMI(mensaje);
 
             }
             else if("".equals(frm.txtContraseña.getText())){
-                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
+                mensaje="Debe ingresar datos en el campo Contraseña";
+                 SSMI(mensaje);
 
             }
             else if("Ingrese usuario".equals(frm.txtUsuario.getText())){
-                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
+                mensaje="Debe ingresar datos en el campo Usuario";
+                 SSMI(mensaje);
 
             }
             else if("Ingrese contraseña".equals(frm.txtContraseña.getText())){
-                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
+                mensaje="Debe ingresar datos en el campo Contraseña";
+                 SSMI(mensaje);
 
             }
             else if("Ingrese correo".equals(frm.txtcorreo.getText())){
-                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Correo");
+                mensaje="Debe ingresar datos en el campo Correo";
+                SSMI(mensaje);
 
             }
             else{
@@ -362,29 +560,34 @@ public class Ctrl_Usuario implements ActionListener{
 
      if(e.getSource()==frm.btnUpdate)
        {
+            String mensaje; 
                if("".equals(frm.txtcorreo.getText())){
-            JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Correo");
+             mensaje="Debe ingresar datos en el campo Correo";
+                SSMI(mensaje);
 
             }
             else if("".equals(frm.txtUsuario.getText())){
-                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
+                 mensaje="Debe ingresar datos en el campo Usuario";
+               SSMI(mensaje);
 
             }
             else if("".equals(frm.txtContraseña.getText())){
-                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
+                mensaje="Debe ingresar datos en el campo Contraseña";
+                 SSMI(mensaje);
 
             }
             else if("Ingrese usuario".equals(frm.txtUsuario.getText())){
-                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
-
+                mensaje="Debe ingresar datos en el campo Usuario";
+                SSMI(mensaje);
             }
             else if("Ingrese contraseña".equals(frm.txtContraseña.getText())){
-                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
+                mensaje="Debe ingresar datos en el campo Contraseña";
+                 SSMI(mensaje);
 
             }
             else if("Ingrese correo".equals(frm.txtcorreo.getText())){
-                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Correo");
-
+                 mensaje="Debe ingresar datos en el campo Correo";
+                SSMI(mensaje);
             }
             else{
                    Editar(frm.txtID.getText(), frm.txtcorreo.getText(), frm.txtUsuario.getText(),frm.txtContraseña.getText());
@@ -394,18 +597,23 @@ public class Ctrl_Usuario implements ActionListener{
     
        if(e.getSource()==frm.btnEliminar)
        {
-          
+          String mensaje;
           mat.setIdUsuario(Integer.parseInt(frm.txtID.getText()));
            if(sqlmat.Eliminar(mat))
-           {JOptionPane.showMessageDialog(null, "Se elimino"); Limpiar();Mostrar();frm.btnIngresar.setEnabled(true);
-            frm.btnBusca.setEnabled(true);frm.txtBuscar.setEnabled(true);frm.btnUpdate.setEnabled(false);frm.btnEliminar.setEnabled(false);
-            Mostrar();}
+           {
+                mensaje="Se elimino"; SSMC(mensaje);Limpiar();Mostrar();frm.btnIngresar.setEnabled(true);
+                frm.btnBusca.setEnabled(true);frm.txtBuscar.setEnabled(true);frm.btnUpdate.setEnabled(false);frm.btnEliminar.setEnabled(false);
+                Mostrar();
+           }
            else
-           {JOptionPane.showMessageDialog(null, "No se elimino");Limpiar();frm.btnIngresar.setEnabled(true);
-            frm.btnBusca.setEnabled(true);frm.txtBuscar.setEnabled(true);frm.btnUpdate.setEnabled(false);frm.btnEliminar.setEnabled(false);}
+           {
+               mensaje="No se elimino"; SSMI(mensaje);Limpiar();frm.btnIngresar.setEnabled(true);
+               frm.btnBusca.setEnabled(true);frm.txtBuscar.setEnabled(true);frm.btnUpdate.setEnabled(false);frm.btnEliminar.setEnabled(false);
+           }
        }
        if(e.getSource()==frm.btnBusca)
        {
+           String mensaje;
            mat.setUsuario(frm.txtBuscar.getText());
            if(sqlmat.BuscarUsuario(mat)){
                String[] columnas ={"ID","Correo","Usuario","Contraseña"};
@@ -445,7 +653,7 @@ public class Ctrl_Usuario implements ActionListener{
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null, "No encontro información"); 
+                        mensaje="No encontro información";SSMI(mensaje);
                         Limpiar();frm.txtBuscar.setText(null);
                     }
                 } catch (Exception ex) {
@@ -457,13 +665,14 @@ public class Ctrl_Usuario implements ActionListener{
 
            }else
            {
-             JOptionPane.showMessageDialog(null, "No encontraron Datos"); Limpiar();frm.txtBuscar.setText(null);
+             mensaje="No encontraron Datos";SSMI(mensaje); Limpiar();frm.txtBuscar.setText(null);
            }
        }
            
     }   
      private void Mostrar()
     {
+        String mensaje;
         String[] columnas ={"ID","Correo","Usuario","Contraseña"};
            Object[] datos = new Object[4];
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
@@ -498,7 +707,7 @@ public class Ctrl_Usuario implements ActionListener{
                             }
                }
                else
-               {JOptionPane.showMessageDialog(null, "No encontro información"); }
+               {mensaje="No encontro información"; SSMI(mensaje); }
            } catch (Exception ex) {
                Logger.getLogger(Ctrl_Usuario.class.getName()).log(Level.SEVERE, null, ex);
            }  
