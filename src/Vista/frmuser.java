@@ -3,10 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Vista;
+import Controlador.Ctrl_Usuario;
+import Modelo.ClsConsultaUsuario;
+import Modelo.Usuario;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author monta
@@ -49,17 +55,22 @@ public class frmuser extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtcorreo = new javax.swing.JTextField();
+        btnsugerir = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        lblImagen = new javax.swing.JLabel();
+        btnregistrate1 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Usuario");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Contraseña");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, -1, -1));
 
         txtUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
@@ -74,7 +85,7 @@ public class frmuser extends javax.swing.JPanel {
                 txtUsuarioActionPerformed(evt);
             }
         });
-        add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 210, 30));
+        add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 210, 30));
 
         txtContraseña.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtContraseña.setForeground(new java.awt.Color(204, 204, 204));
@@ -84,19 +95,19 @@ public class frmuser extends javax.swing.JPanel {
                 txtContraseñaMousePressed(evt);
             }
         });
-        add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 210, 30));
+        add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 210, 30));
         add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 40, -1));
 
         tbMaterias.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         tbMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Correo", "Usuario", "Contraseña"
+                "ID", "Correo", "Usuario", "Contraseña", "Imagen"
             }
         ));
         tbMaterias.setGridColor(new java.awt.Color(255, 255, 255));
@@ -123,17 +134,17 @@ public class frmuser extends javax.swing.JPanel {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, 40, 40));
+        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 550, 40, 40));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-eliminar-40.png"))); // NOI18N
-        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 460, 30, 40));
+        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, 30, 40));
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-editar-40.png"))); // NOI18N
         btnUpdate.setBorder(null);
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 460, -1, -1));
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, -1, -1));
 
         btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-actualizar.gif"))); // NOI18N
-        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, 40, 40));
+        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, 40, 40));
 
         btnIngresar.setBackground(new java.awt.Color(0, 112, 224));
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -144,7 +155,7 @@ public class frmuser extends javax.swing.JPanel {
                 btnIngresarActionPerformed(evt);
             }
         });
-        add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
+        add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, -1, -1));
 
         btnBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
         add(btnBusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 50, 30));
@@ -173,7 +184,7 @@ public class frmuser extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Correo");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         txtcorreo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtcorreo.setForeground(new java.awt.Color(204, 204, 204));
@@ -188,7 +199,39 @@ public class frmuser extends javax.swing.JPanel {
                 txtcorreoActionPerformed(evt);
             }
         });
-        add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 210, 30));
+        add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 210, 30));
+
+        btnsugerir.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnsugerir.setForeground(new java.awt.Color(0, 75, 159));
+        btnsugerir.setText("Clic aquí para Sugerir Clave Segura");
+        btnsugerir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnsugerirMouseClicked(evt);
+            }
+        });
+        add(btnsugerir, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, -1, -1));
+
+        jSeparator3.setForeground(new java.awt.Color(0, 75, 159));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 190, 10));
+
+        lblImagen.setBackground(new java.awt.Color(255, 255, 255));
+        lblImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_user_100px.png"))); // NOI18N
+        lblImagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 75, 159)));
+        add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 140, 130));
+
+        btnregistrate1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnregistrate1.setForeground(new java.awt.Color(0, 75, 159));
+        btnregistrate1.setText("Seleccionar Imagen");
+        btnregistrate1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnregistrate1MouseClicked(evt);
+            }
+        });
+        add(btnregistrate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, -1, -1));
+
+        jSeparator4.setForeground(new java.awt.Color(0, 75, 159));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, 150, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
@@ -286,6 +329,34 @@ public class frmuser extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcorreoActionPerformed
 
+    private void btnsugerirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsugerirMouseClicked
+        Usuario usuario = new Usuario();
+        ClsConsultaUsuario consultaUsuario = new ClsConsultaUsuario();
+        frmuser registrarse = new frmuser();
+        Ctrl_Usuario ctrl = new Ctrl_Usuario(usuario, consultaUsuario, registrarse);
+        String sugerenciaClave = ctrl.generarClaveSugerida();
+        this.txtContraseña.setForeground(Color.black);
+        txtContraseña.setText(sugerenciaClave);
+
+    }//GEN-LAST:event_btnsugerirMouseClicked
+
+    private void btnregistrate1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnregistrate1MouseClicked
+        Usuario usuario = new Usuario();
+        ClsConsultaUsuario consultaUsuario = new ClsConsultaUsuario();
+        frmuser registrarse = new frmuser();
+        Ctrl_Usuario ctrl = new Ctrl_Usuario(usuario, consultaUsuario, registrarse);
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
+        fileChooser.setFileFilter(extensionFilter);
+
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            ctrl.Ruta = fileChooser.getSelectedFile().getAbsolutePath();
+            Image mImagen = new ImageIcon(ctrl.Ruta).getImage();
+            ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), 0));
+            lblImagen.setIcon(mIcono);
+        }
+    }//GEN-LAST:event_btnregistrate1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBusca;
@@ -294,6 +365,8 @@ public class frmuser extends javax.swing.JPanel {
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnUpdate;
     public javax.swing.JButton btnactualizar;
+    private javax.swing.JLabel btnregistrate1;
+    public javax.swing.JLabel btnsugerir;
     public javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -302,6 +375,9 @@ public class frmuser extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    public javax.swing.JLabel lblImagen;
     public javax.swing.JTable tbMaterias;
     public javax.swing.JTextField txtBuscar;
     public javax.swing.JTextField txtContraseña;

@@ -16,6 +16,15 @@ public class Usuario {
 
     private String usuario;
     private String clave;
+    byte [] imagen;
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
    
 
 

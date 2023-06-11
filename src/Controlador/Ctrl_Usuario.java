@@ -13,12 +13,21 @@ import java.awt.BorderLayout;
 import java.util.Base64;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +35,7 @@ import javax.swing.JOptionPane;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.spec.KeySpec;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
@@ -66,8 +76,12 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -92,37 +106,66 @@ public class Ctrl_Usuario implements ActionListener{
            
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-              DefaultTableModel modelo = (DefaultTableModel) frm.tbMaterias.getModel();
-                  int fila;
-              
-                  fila=frm.tbMaterias.getSelectedRow();
-                
-                  frm.txtContraseña.setText("");
-                  frm.txtBuscar.setEnabled(false);
-                  frm.txtID.setText(modelo.getValueAt(fila, 0).toString());
-                  frm.txtcorreo.setText(modelo.getValueAt(fila, 1).toString());
-                  frm.txtUsuario.setText(modelo.getValueAt(fila, 2).toString());
-                  String valorEncriptado = modelo.getValueAt(fila, 3).toString();
-                  String desencriptado = desencriptar(valorEncriptado);
-                    if (desencriptado != null) {
-                        frm.txtContraseña.setText(desencriptado);
-                    } else {
-                        // No se pudo desencriptar el valor, maneja el error apropiadamente
-                        System.out.println("Error al desencriptar el valor.");
+                DefaultTableModel modelo = (DefaultTableModel) frm.tbMaterias.getModel();
+                    
+                    
+                    int fila=frm.tbMaterias.getSelectedRow();
+                    if (fila == -1) {
+                        // No se ha seleccionado ninguna fila, maneja el error apropiadamente
+                        return;
                     }
 
-                  frm.txtContraseña.setForeground(Color.black);
-                  frm.txtcorreo.setForeground(Color.black);
-                  frm.txtUsuario.setForeground(Color.black);
-                  frm.txtBuscar.setForeground(Color.black);
-                  frm.btnIngresar.setEnabled(false);
-                  frm.btnBusca.setEnabled(false);
-                  frm.btnUpdate.setEnabled(true);
-                  frm.btnEliminar.setEnabled(true);
-              
-            }
+
+                    frm.txtContraseña.setText("");
+                    frm.txtBuscar.setEnabled(false);
+                    frm.txtID.setText(modelo.getValueAt(fila, 0).toString());
+                    frm.txtcorreo.setText(modelo.getValueAt(fila, 1).toString());
+                    frm.txtUsuario.setText(modelo.getValueAt(fila, 2).toString());
+                    String valorEncriptado = modelo.getValueAt(fila, 3).toString();
+                     JLabel imagenLabel = (JLabel) modelo.getValueAt(fila, 4);
+
+                    // Obtiene el icono del JLabel
+                    Icon icono = imagenLabel.getIcon();
+                    if (icono instanceof ImageIcon) {
+                        ImageIcon imagenIcono = (ImageIcon) icono;
+
+                        // Escala la imagen al tamaño deseado y crea un nuevo ImageIcon
+                        Image imagen = imagenIcono.getImage().getScaledInstance(frm.lblImagen.getWidth(), frm.lblImagen.getHeight(), Image.SCALE_SMOOTH);
+                        ImageIcon mIcono = new ImageIcon(imagen);
+
+                        // Establece el ImageIcon en el componente lblImagen
+                        frm.lblImagen.setIcon(mIcono);
+                    } else {
+                        // No se pudo obtener el icono de la imagen, maneja el error apropiadamente
+                        System.out.println("Error al obtener el icono de la imagen.");
+                    }
+
+                    String desencriptado = desencriptar(valorEncriptado);
+                      if (desencriptado != null) {
+                          frm.txtContraseña.setText(desencriptado);
+                      } else {
+                          // No se pudo desencriptar el valor, maneja el error apropiadamente
+                          System.out.println("Error al desencriptar el valor.");
+                      }
+
+                    frm.txtContraseña.setForeground(Color.black);
+                    frm.txtcorreo.setForeground(Color.black);
+                    frm.txtUsuario.setForeground(Color.black);
+                    frm.txtBuscar.setForeground(Color.black);
+                    frm.btnIngresar.setEnabled(false);
+                    frm.btnBusca.setEnabled(false);
+                    frm.btnUpdate.setEnabled(true);
+                    frm.btnEliminar.setEnabled(true);
+
+              }
         });
         
+    }
+    public static BufferedImage scaleImage(BufferedImage originalImage, int targetWidth, int targetHeight) {
+        Image scaledImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH);
+        BufferedImage bufferedScaledImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+        bufferedScaledImage.getGraphics().drawImage(scaledImage, 0, 0, null);
+        return bufferedScaledImage;
     }
     public void Iniciar()
     {
@@ -133,6 +176,7 @@ public class Ctrl_Usuario implements ActionListener{
     }
     private static final String ALGORITHM = "AES";
     String originalValue = "mi_clave_oculta";
+    private static final String CARACTERES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     public  boolean validarCorreo(String correo) {
         boolean esValido = false;
 
@@ -149,6 +193,55 @@ public class Ctrl_Usuario implements ActionListener{
         }
 
         return esValido;
+    }
+     public String generarClaveSugerida() {
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder();
+
+        // Generar al menos un número
+        sb.append((char) ('0' + random.nextInt(10)));
+
+        // Generar al menos una letra minúscula
+        sb.append((char) ('a' + random.nextInt(26)));
+
+        // Generar al menos una letra mayúscula
+        sb.append((char) ('A' + random.nextInt(26)));
+
+        // Generar el resto de caracteres
+        for (int i = 0; i < 7; i++) {
+            sb.append(CARACTERES.charAt(random.nextInt(CARACTERES.length())));
+        }
+
+        return sb.toString();
+    }
+    public boolean validarContraseña(String contraseña) {
+        // Verificar la longitud mínima de la contraseña
+        if (contraseña.length() < 10) {
+            return false;
+        }
+
+        boolean tieneNumero = false;
+        boolean tieneMinuscula = false;
+        boolean tieneMayuscula = false;
+
+        // Verificar cada carácter de la contraseña
+        for (char c : contraseña.toCharArray()) {
+            if (Character.isDigit(c)) {
+                tieneNumero = true;
+            } else if (Character.isLowerCase(c)) {
+                tieneMinuscula = true;
+            } else if (Character.isUpperCase(c)) {
+                tieneMayuscula = true;
+            }
+
+            // Si se cumplen todos los requisitos, se puede salir del bucle
+            if (tieneNumero && tieneMinuscula && tieneMayuscula) {
+                break;
+            }
+        }
+
+        // Verificar si se cumplen todos los requisitos
+        return tieneNumero && tieneMinuscula && tieneMayuscula;
     }
 
     private  boolean existeCorreo(String correo) {
@@ -282,6 +375,31 @@ public class Ctrl_Usuario implements ActionListener{
         return null;
     }
  private JFrame frame;
+ public static String Ruta = "";
+ 
+ public void BuscarImg(){
+      JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
+        fileChooser.setFileFilter(extensionFilter);
+        frmRegistrarse registrarse = new frmRegistrarse();
+        if (fileChooser.showOpenDialog(registrarse) == JFileChooser.APPROVE_OPTION) {
+            Ruta = fileChooser.getSelectedFile().getAbsolutePath();
+            Image mImagen = new ImageIcon(Ruta).getImage();
+            ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(registrarse.lblImagen.getWidth(), registrarse.lblImagen.getHeight(), 0));
+            registrarse.lblImagen.setIcon(mIcono);
+        }
+ }
+  public byte[] getImagen(String Ruta) {
+        File imagen = new File(Ruta);
+        try {
+            byte[] icono = new byte[(int) imagen.length()];
+            InputStream input = new FileInputStream(imagen);
+            input.read(icono);
+            return icono;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
     public String desencriptar(String valorEncriptado) {
         try {
             SecretKeySpec secretKeySpec = generarClave(originalValue);
@@ -413,46 +531,54 @@ public class Ctrl_Usuario implements ActionListener{
     }
     public void Guardar(String correo,String user, String clave){
          try {
-
                 String mensaje;
-                String encryptedValue = encriptar(clave);
-                mat.setCorreo(correo);
-                mat.setUsuario(user);
-                mat.setPassword(encryptedValue);
-                if(sqlmat.ExisteUsuario(mat)){
-                    mensaje = "El Usuario Ingresado Ya Existe. Ingrese otro Usuario";
+                if (!validarContraseña(clave)) {
+                    mensaje ="La contraseña debe tener al menos 10 caracteres entre MIN,MAY y números";
                     SSMI(mensaje);
+                }else{
+                    String encryptedValue = encriptar(clave);
+                    mat.setCorreo(correo);
+                    mat.setUsuario(user);
+                    mat.setPassword(encryptedValue);
+                    mat.setImagen(getImagen(Ruta));
 
-                    frm.txtUsuario.setText("Ingrese usuario");
-                    frm.txtUsuario.setForeground(new Color(204,204,204));
-                }
-                else if(sqlmat.ExisteCorreoUsuario(mat)){
-                    mensaje = "El Correo Ingresado Ya Existe. Ingrese otro Correo";
-                    SSMI(mensaje);
-
-                    frm.txtcorreo.setForeground(new Color(204,204,204));
-                    frm.txtcorreo.setText("Ingrese correo");
-                }
-                else if(!validarCorreo(correo)){
-                    mensaje = "El Correo Ingresado No es Válido";
-                    SSMI(mensaje);
-
-                    Limpiar();
-                }
-                else if(sqlmat.Guardar(mat))
-                    {
-                         mensaje = "Usuario guardado";
-                         SSMC(mensaje);
-
-                        Limpiar();
-                        Mostrar();
-                    }
-                else
-                    {
-                        mensaje = "No se guardó la informacion del Usuario";
+                    if(sqlmat.ExisteUsuario(mat)){
+                        mensaje = "El Usuario Ingresado Ya Existe. Ingrese otro Usuario";
                         SSMI(mensaje);
 
+                        frm.txtUsuario.setText("Ingrese usuario");
+                        frm.txtUsuario.setForeground(new Color(204,204,204));
                     }
+                    else if(sqlmat.ExisteCorreoUsuario(mat)){
+                        mensaje = "El Correo Ingresado Ya Existe. Ingrese otro Correo";
+                        SSMI(mensaje);
+
+                        frm.txtcorreo.setForeground(new Color(204,204,204));
+                        frm.txtcorreo.setText("Ingrese correo");
+                    }
+                    else if(!validarCorreo(correo)){
+                        mensaje = "El Correo Ingresado No es Válido";
+                        SSMI(mensaje);
+
+                        Limpiar();
+                    }
+                    else if(sqlmat.Guardar(mat))
+                        {
+                             mensaje = "Usuario guardado";
+                             SSMC(mensaje);
+
+                            Limpiar();
+                            Mostrar();
+                        }
+                    else
+                        {
+                            mensaje = "No se guardó la informacion del Usuario";
+                            SSMI(mensaje);
+
+                        }
+                }
+                
+                
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -512,6 +638,7 @@ public class Ctrl_Usuario implements ActionListener{
          frm.btnBusca.setEnabled(true);
           frm.txtBuscar.setText(null);
         }
+       
         
         
        
@@ -613,16 +740,17 @@ public class Ctrl_Usuario implements ActionListener{
        }
        if(e.getSource()==frm.btnBusca)
        {
+           frm.tbMaterias.setDefaultRenderer(Object.class, new Render());
            String mensaje;
            mat.setUsuario(frm.txtBuscar.getText());
            if(sqlmat.BuscarUsuario(mat)){
-               String[] columnas ={"ID","Correo","Usuario","Contraseña"};
-               Object[] datos = new Object[4];
+               String[] columnas ={"ID","Correo","Usuario","Contraseña","Imagen"};
+               Object[] datos = new Object[5];
                DefaultTableModel tabla = new DefaultTableModel(null,columnas){
                    
                   @Override
                   public boolean isCellEditable(int i, int j)
-                  { if(i==6){return true;} else {return false;}}
+                  { if(i==5){return true;} else {return false;}}
                 };
           
                 List objList; Usuario cls;
@@ -637,11 +765,17 @@ public class Ctrl_Usuario implements ActionListener{
                          datos[1] = cls.getCorreo();
                          datos[2] = cls.getUsuario();
                          datos[3] = cls.getPassword();
+                         byte[] imagen = cls.getImagen();
+                         BufferedImage bufferedImage = null;
+                         InputStream inputStream = new ByteArrayInputStream(imagen);
+                         bufferedImage = ImageIO.read(inputStream);
+                         ImageIcon mIcono = new ImageIcon(bufferedImage.getScaledInstance(100, 100, 0));
+                         datos[4] = new JLabel(mIcono);
                          tabla.addRow(datos);
                        }  
                       frm.tbMaterias.setModel(tabla);
                       Limpiar();
-                      frm.txtBuscar.setText(null);
+                       frm.txtBuscar.setText("Buscar Por nombre de Usuario");
                       DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
                                   Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
                                   if (frm.tbMaterias.getColumnCount() >= 7) {
@@ -654,7 +788,7 @@ public class Ctrl_Usuario implements ActionListener{
                     else
                     {
                         mensaje="No encontro información";SSMI(mensaje);
-                        Limpiar();frm.txtBuscar.setText(null);
+                        Limpiar(); frm.txtBuscar.setText("Buscar Por nombre de Usuario");
                     }
                 } catch (Exception ex) {
                     
@@ -665,20 +799,21 @@ public class Ctrl_Usuario implements ActionListener{
 
            }else
            {
-             mensaje="No encontraron Datos";SSMI(mensaje); Limpiar();frm.txtBuscar.setText(null);
+             mensaje="No encontraron Datos";SSMI(mensaje); Limpiar(); frm.txtBuscar.setText("Buscar Por nombre de Usuario");
            }
        }
            
     }   
      private void Mostrar()
     {
+         frm.tbMaterias.setDefaultRenderer(Object.class, new Render());
         String mensaje;
-        String[] columnas ={"ID","Correo","Usuario","Contraseña"};
-           Object[] datos = new Object[4];
+        String[] columnas ={"ID","Correo","Usuario","Contraseña","Imagen"};
+           Object[] datos = new Object[5];
            DefaultTableModel tabla = new DefaultTableModel(null,columnas){
              @Override
              public boolean isCellEditable(int i, int j)
-             { if(i==3){return true;} else {return false;}}
+             { if(i==5){return true;} else {return false;}}
            };
           
            List objList; Usuario cls;
@@ -692,11 +827,18 @@ public class Ctrl_Usuario implements ActionListener{
                     datos[1] = cls.getCorreo();
                     datos[2] = cls.getUsuario();
                     datos[3] = cls.getPassword();
+                     byte[] imagen = cls.getImagen();
+                        BufferedImage bufferedImage = null;
+                        InputStream inputStream = new ByteArrayInputStream(imagen);
+                        bufferedImage = ImageIO.read(inputStream);
+                        ImageIcon mIcono = new ImageIcon(bufferedImage.getScaledInstance(100, 100, 0));
+                        datos[4] = new JLabel(mIcono);
                     tabla.addRow(datos);
                   }  
                  frm.tbMaterias.setModel(tabla);
                  Limpiar();
-                 frm.txtBuscar.setText(null);
+                  frm.txtBuscar.setText("Buscar Por nombre de Usuario");
+                 
                   DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
                              Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
                              if (frm.tbMaterias.getColumnCount() >= 7) {
@@ -717,11 +859,15 @@ public class Ctrl_Usuario implements ActionListener{
         frm.txtID.setText(null);
         frm.txtUsuario.setText("Ingrese usuario");
         frm.txtContraseña.setText("Ingrese contraseña");
+        frm.txtBuscar.setText("Buscar Por nombre de Usuario");
         frm.txtcorreo.setText("Ingrese correo");
         frm.txtUsuario.setFocusable(true);
         frm.txtContraseña.setForeground(new Color(204,204,204));
         frm.txtUsuario.setForeground(new Color(204,204,204));
         frm.txtcorreo.setForeground(new Color(204,204,204));
+        ImageIcon imagenIcono = new ImageIcon(getClass().getResource("/imagenes/icons8_user_100px.png"));
+        frm.lblImagen.setIcon(imagenIcono);
+        frm.lblImagen.setHorizontalAlignment(JLabel.CENTER);
     }
   
 }

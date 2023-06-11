@@ -38,6 +38,7 @@ public class ClsConsultaUsuario extends Coneccion {
                      obj.setCorreo(res.getString("correo"));
                      obj.setUsuario(res.getString("user"));
                      obj.setPassword(res.getString("clave"));
+                     obj.setImagen(res.getBytes("imagen")); 
                     return true;  
                 }
                 return false;
@@ -70,6 +71,7 @@ public class ClsConsultaUsuario extends Coneccion {
                      obj.setCorreo(res.getString("correo"));
                      obj.setUsuario(res.getString("user"));
                      obj.setPassword(res.getString("clave"));
+                     obj.setImagen(res.getBytes("imagen")); 
                     return true;  
                 }
                 return false;
@@ -102,6 +104,7 @@ public class ClsConsultaUsuario extends Coneccion {
                      obj.setCorreo(res.getString("correo"));
                      obj.setUsuario(res.getString("user"));
                      obj.setPassword(res.getString("clave"));
+                     obj.setImagen(res.getBytes("imagen")); 
                     return true;  
                 }
                 return false;
@@ -120,14 +123,15 @@ public class ClsConsultaUsuario extends Coneccion {
     public boolean Guardar(Usuario user){
             PreparedStatement ps =null;
             Connection con= (Connection)getConexion();
-            String sql="INSERT INTO usuario (correo,user,clave) "
-                    + "values(?,?,?)";
+            String sql="INSERT INTO usuario (correo,user,clave,imagen) "
+                    + "values(?,?,?,?)";
             
         try {    
             ps=con.prepareStatement(sql);
             ps.setString(1, user.getCorreo());
             ps.setString(2, user.getUsuario());
             ps.setString(3, user.getPassword());
+            ps.setBytes(4, user.getImagen());
             ps.execute();
             return true;
         } catch (SQLException ex) {
@@ -145,7 +149,7 @@ public class ClsConsultaUsuario extends Coneccion {
      public boolean Modificar(Usuario user){
             PreparedStatement ps =null;
             Connection con= (Connection)getConexion();
-            String sql="UPDATE usuario SET correo=?,user=?,clave=? WHERE id=?";
+            String sql="UPDATE usuario SET correo=?,user=?,clave=?,imagen=? WHERE id=?";
             
         try {    
             ps=con.prepareStatement(sql);
@@ -153,7 +157,9 @@ public class ClsConsultaUsuario extends Coneccion {
             ps.setString(1, user.getCorreo());
             ps.setString(2, user.getUsuario());
             ps.setString(3, user.getPassword());
-            ps.setInt(4, user.getIdUsuario());
+            ps.setBytes(4, user.getImagen());
+            ps.setInt(5, user.getIdUsuario());
+            
             ps.execute();
             return true;
         } catch (SQLException ex) {
@@ -205,7 +211,8 @@ public class ClsConsultaUsuario extends Coneccion {
                 mat.setIdUsuario(res.getInt("id"));
                 mat.setCorreo(res.getString("correo"));
                 mat.setUsuario(res.getString("user"));
-                mat.setPassword(res.getString("clave"));        
+                mat.setPassword(res.getString("clave")); 
+                mat.setImagen(res.getBytes("imagen")); 
                 listaUsuarios.add(mat);
              }
          } catch (SQLException ex) {
@@ -235,7 +242,7 @@ public List MostrarUsuario()throws Exception{
                 obj.setCorreo(res.getString("correo"));
                 obj.setUsuario(res.getString("user"));
                 obj.setPassword(res.getString("clave"));
-                
+                obj.setImagen(res.getBytes("imagen")); 
                 obList.add(obj);
              }
          } catch (SQLException ex) {
@@ -266,6 +273,7 @@ public boolean BuscarUsuario(Usuario obj){
                  obj.setCorreo(res.getString("correo"));
                  obj.setUsuario(res.getString("user"));
                  obj.setPassword(res.getString("clave"));
+                 obj.setImagen(res.getBytes("imagen")); 
                 return true;  
             }
             return false;
@@ -298,6 +306,7 @@ public List ListarBussqueda(String nombre)throws Exception{
                 obj.setCorreo(res.getString("correo"));
                 obj.setUsuario(res.getString("user"));
                 obj.setPassword(res.getString("clave"));
+                obj.setImagen(res.getBytes("imagen")); 
                 listaMaterias.add(obj);
              }
          } catch (SQLException ex) {
@@ -328,6 +337,7 @@ public List ListarBussqueda(String nombre)throws Exception{
                      obj.setCorreo(res.getString("correo"));
                      obj.setUsuario(res.getString("user"));
                      obj.setPassword(res.getString("clave"));
+                     obj.setImagen(res.getBytes("imagen")); 
                     return true;  
                 }
                 return false;

@@ -33,6 +33,8 @@ import Modelo.Usuario;
 import Modelo.clsCuentasPorPagar;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -63,11 +65,18 @@ public class frmMenuInicio extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         execute();
         Cargar();
+//        ImageIcon imagenIcono = new ImageIcon(getClass().getResource("/imagenes/monosp.png"));
+//        userlbl = new JLabel(imagenIcono);
+//        userlbl.setHorizontalAlignment(JLabel.CENTER);
+//
+//        // Agregar el JLabel al panel principal
+//        menus.add(userlbl, BorderLayout.SOUTH);
         
       
     }
     
-    
+    public static JLabel userlbl = new JLabel();
+     public static JPanel panelCentral = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
     public void Cargar(){
         ImageIcon imagenIcono = new ImageIcon(getClass().getResource("/imagenes/monosp.png"));
         lblfondo = new JLabel(imagenIcono);
@@ -712,7 +721,9 @@ public class frmMenuInicio extends javax.swing.JFrame {
             public void mousePressed(MouseEvent  ae) {
                  setBackground(new Color(0,109,230));
                 JOptionPane.showMessageDialog(rootPane, "Gracias por Usar el Sistema", "Informacion", HEIGHT); 
-                System.exit(0);
+                 frmLogin login = new frmLogin();
+                 login.show();
+                 dispose();
                
                
             }
@@ -877,9 +888,9 @@ public class frmMenuInicio extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator16;
     public javax.swing.JLabel lblfondo;
     public javax.swing.JLabel lbluser;
-    private javax.swing.JPanel menus;
+    public javax.swing.JPanel menus;
     public javax.swing.JPanel panelBody;
-    private javax.swing.JPanel panelHeader;
+    public javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
 }

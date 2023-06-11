@@ -13,6 +13,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,6 +43,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -225,6 +231,7 @@ public class ctrl_Login{
         }
         return null;
     }
+    
     public void SSMC(String mensaje){
          // Obtener la imagen desde un archivo
              ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/feli.gif"));
@@ -261,24 +268,45 @@ public class ctrl_Login{
     }
     public boolean Log(String us, String cla){
         String Mensaje;
-        String encryptedValue = encriptar(cla);
+        
         usuario.setUsuario(us);
-        usuario.setPassword(encryptedValue);
-        if (clsconsulta_usuario.Login(usuario)) {
+        
+        if(clsconsulta_usuario.ExisteUsuario(usuario)){
+            String encryptedValue = encriptar(cla);
+            usuario.setPassword(encryptedValue);
+             if (clsconsulta_usuario.Login(usuario)) {
            
-            Mensaje = "Bienvenido " + us;
-            SSMC(Mensaje);
-            frmMenuP menu = new frmMenuP();
-            menu.setVisible(true);
-            menu.userlbl.setText(us);
-            
+                Mensaje = "Bienvenido " + us;
+                SSMC(Mensaje);
+                frmMenuP menu = new frmMenuP();
+                menu.setVisible(true);
+                try {
+                    byte[] imagen = usuario.getImagen();
+                    BufferedImage bufferedImage = null;
+                    InputStream inputStream = new ByteArrayInputStream(imagen);
+                    bufferedImage = ImageIO.read(inputStream);
+                    ImageIcon mIcono = new ImageIcon(bufferedImage.getScaledInstance(menu.imglbl.getWidth(), menu.imglbl.getHeight(), Image.SCALE_SMOOTH));
+                    menu.imglbl.setIcon(mIcono);
+                    menu.userlbl.setText(us);
+                    usuario.setPassword("");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-            return true;
-        } else {
-           Mensaje = "Usuario o Clave Incorrectos";
-           SSMI(Mensaje);
-            return false;
+
+
+                return true;
+            } else {
+               Mensaje = "Usuario o Clave Incorrectos";
+               SSMI(Mensaje);
+                return false;
+            }
+        }else{
+            Mensaje = "El Usuario No Existe. Ingresa Usuario Válido o Crea uno";
+               SSMI(Mensaje);
+                return false;
         }
+       
     }
               
 }
