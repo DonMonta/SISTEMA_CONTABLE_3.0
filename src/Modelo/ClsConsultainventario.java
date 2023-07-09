@@ -19,6 +19,40 @@ import java.util.logging.Logger;
  */
 public class ClsConsultainventario extends Coneccion{
     
+    public boolean ExisteProducto(ClsInventario obj){
+    PreparedStatement ps =null;
+    Connection con= (Connection)getConexion();
+    ResultSet res=null;
+    String sql="SELECT * FROM inventario WHERE nombre_producto=?";
+            
+        try {    
+            ps=con.prepareStatement(sql);
+            ps.setString(1, obj.getNombre_producto());
+            res=ps.executeQuery();
+            //paso el resultado de la consulta al modelo
+           if(res.next())
+            {
+              obj.setId(res.getInt("id"));
+                obj.setNombre_producto(res.getString("nombre_producto"));
+                obj.setDescripcion(res.getString("descripcion"));
+                obj.setPrecio_venta(res.getDouble("precio_venta"));
+                obj.setCosto(res.getDouble("costo"));
+                obj.setCantidad_disponible(res.getInt("cantidad_disponible"));
+                return true;  
+            }
+            return false;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClsConsultainventario.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        finally{
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ClsConsultainventario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+    }
     public boolean Guardar(ClsInventario inventario){
     PreparedStatement ps = null;
     Connection con = (Connection)getConexion();

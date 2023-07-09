@@ -89,7 +89,7 @@ public class frmGastos extends javax.swing.JPanel {
 
         txtbuscar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtbuscar.setForeground(new java.awt.Color(204, 204, 204));
-        txtbuscar.setText("Buscar  tipo de gastos");
+        txtbuscar.setText("Buscar tipo de gastos");
         txtbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtbuscarMousePressed(evt);
@@ -210,7 +210,7 @@ public class frmGastos extends javax.swing.JPanel {
 
     private void txtbuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtbuscarMousePressed
 
-        if(this.txtbuscar.getText().equals("Buscar  tipo de gastos")){
+        if(this.txtbuscar.getText().equals("Buscar tipo de gastos")){
             this.txtbuscar.setText("");
             this.txtbuscar.setForeground(Color.black);
         }
@@ -228,7 +228,7 @@ public class frmGastos extends javax.swing.JPanel {
         }
 
         if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
-            this.txtbuscar.setText("Buscar  tipo de gastos");
+            this.txtbuscar.setText("Buscar tipo de gastos");
             this.txtbuscar.setForeground(new Color(204,204,204));
         }
         

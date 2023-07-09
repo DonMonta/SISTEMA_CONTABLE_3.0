@@ -34,12 +34,16 @@ import Modelo.clsCuentasPorPagar;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -50,6 +54,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -65,14 +70,42 @@ public class frmMenuInicio extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         execute();
         Cargar();
-//        ImageIcon imagenIcono = new ImageIcon(getClass().getResource("/imagenes/monosp.png"));
-//        userlbl = new JLabel(imagenIcono);
-//        userlbl.setHorizontalAlignment(JLabel.CENTER);
-//
-//        // Agregar el JLabel al panel principal
-//        menus.add(userlbl, BorderLayout.SOUTH);
+        Hora();
         
+
       
+    }
+    public void Hora(){
+       
+        lblhora.setFont(new Font("Arial", Font.PLAIN, 12));
+        lblhora.setVerticalAlignment(SwingConstants.TOP);
+        lblhora.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Actualizar la fecha y hora en el JLabel
+        SimpleDateFormat formatoFechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        // Crear un hilo para actualizar continuamente la fecha y hora
+        Thread threadFechaHora = new Thread(() -> {
+            while (true) {
+                // Obtener la fecha y hora actual
+                Date fechaHoraActual = new Date();
+                // Formatear la fecha y hora como una cadena
+                String fechaHoraFormateada = formatoFechaHora.format(fechaHoraActual);
+
+                // Actualizar el texto del JLabel con la fecha y hora actual
+                lblhora.setText("Fecha y hora actual: " + fechaHoraFormateada);
+
+                try {
+                    // Pausar el hilo durante 1 segundo
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Iniciar el hilo para actualizar la fecha y hora
+        threadFechaHora.start();
     }
     
     public static JLabel userlbl = new JLabel();
@@ -169,10 +202,19 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     
                     Ctrl_Clientes ctrl = new Ctrl_Clientes(obj,sqlobj,clientes);
                     ctrl.Iniciar();
+                   
+                    String textoInicial = "Buscar cedula del cliente";
+                    if (clientes.txtbuscar.getText().equals(textoInicial)) {
+                        clientes.txtbuscar.setText("");
+                        
+                        clientes.txtbuscar.setForeground(Color.black);
+                        
+                    }
                     clientes.setVisible(true);
                     panelBody.add(clientes); // Agrega el nuevo formulario al panel
                     panelBody.repaint();
                     panelBody.revalidate();
+                    clientes.txtbuscar.requestFocus();
               
                
             }
@@ -235,11 +277,18 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     
                     ctrl_Gastos ctrl = new ctrl_Gastos(obj,sqlobj,gasto);
                     ctrl.Iniciar();
+                     String textoInicial = "Buscar tipo de gastos";
+                    if (gasto.txtbuscar.getText().equals(textoInicial)) {
+                        gasto.txtbuscar.setText("");
+                        
+                        gasto.txtbuscar.setForeground(Color.black);
+                        
+                    }
                     gasto.setVisible(true);
                     panelBody.add(gasto); // Agrega el nuevo formulario al panel
                     panelBody.repaint();
                     panelBody.revalidate();
-                
+                    gasto.txtbuscar.requestFocus();
               
                
             }
@@ -297,16 +346,21 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     
                     Ctrl_inventario ctrl = new Ctrl_inventario(obj,sqlobj,inventario);
                     ctrl.Iniciar();     
-                
+                    String textoInicial = "Buscar Producto";
+                    if (inventario.txtbuscar.getText().equals(textoInicial)) {
+                        inventario.txtbuscar.setText("");
+                        
+                        inventario.txtbuscar.setForeground(Color.black);
+                        
+                    }
                 
                       lblfondo.setVisible(false);
-                // Agregar nuevo formulario
-                     // Crea una nueva instancia del formulario
+                
                     inventario.setVisible(true);
                     panelBody.add(inventario); // Agrega el nuevo formulario al panel
                     panelBody.repaint();
                     panelBody.revalidate();
-              
+              inventario.txtbuscar.requestFocus();
                
             }
         });
@@ -365,12 +419,18 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     
                     Ctrl_Proveedor ctrl = new Ctrl_Proveedor(obj,sqlobj,proveedores);
                     ctrl.Iniciar();
-              
+                    String textoInicial = "Buscar Proveedores";
+                    if (proveedores.txtBuscar.getText().equals(textoInicial)) {
+                        proveedores.txtBuscar.setText("");
+                        
+                        proveedores.txtBuscar.setForeground(Color.black);
+                        
+                    }
                     proveedores.setVisible(true);
                     panelBody.add(proveedores); // Agrega el nuevo formulario al panel
                     panelBody.repaint();
                     panelBody.revalidate();
-              
+                    proveedores.txtBuscar.requestFocus();
                
             }
         });
@@ -425,18 +485,24 @@ public class frmMenuInicio extends javax.swing.JFrame {
                  
                   lblfondo.setVisible(false);
 
-                // Agregar nuevo formulario
-//                      Crea una nueva instancia del formulario
+                
                      Cuentas_Bancarias obj = new Cuentas_Bancarias();
                     Cls_ConsultaCuentaBancarias sqlobj = new Cls_ConsultaCuentaBancarias();
                     
                     Ctrl_CuentasBancarias ctrl = new Ctrl_CuentasBancarias(obj,sqlobj,bancarias);
                     ctrl.Iniciar();
+                    String textoInicial = "Buscar Numero de Cuenta";
+                    if (bancarias.txtbuscar.getText().equals(textoInicial)) {
+                        bancarias.txtbuscar.setText("");
+                        
+                        bancarias.txtbuscar.setForeground(Color.black);
+                        
+                    }
                     bancarias.setVisible(true);
                     panelBody.add(bancarias); // Agrega el nuevo formulario al panel
                     panelBody.repaint();
                     panelBody.revalidate();
-              
+                    bancarias.txtbuscar.requestFocus();
                
             }
         });
@@ -496,13 +562,18 @@ public class frmMenuInicio extends javax.swing.JFrame {
                    
                     Ctrl_Usuario ctrl = new Ctrl_Usuario(obj,sqlobj,usuario);
                     ctrl.Iniciar();
-
-                // Agregar nuevo formulario
-                     // Crea una nueva instancia del formulario
+                    String textoInicial = "Buscar Por nombre de Usuario";
+                    if (usuario.txtBuscar.getText().equals(textoInicial)) {
+                        usuario.txtBuscar.setText("");
+                        
+                        usuario.txtBuscar.setForeground(Color.black);
+                        
+                    }   
                     usuario.setVisible(true);
                     panelBody.add(usuario); // Agrega el nuevo formulario al panel
                     panelBody.repaint();
                     panelBody.revalidate();
+                    usuario.txtBuscar.requestFocus();
               
               
             }
@@ -567,14 +638,19 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     
                     Ctrl_ReportCuentaCobrar ctrl = new Ctrl_ReportCuentaCobrar(obj,sqlobj,cobrar);
                     ctrl.Iniciar();
-                     // Crea una nueva instancia del formulario
-                    //cuencobraForm = new Prueba();
+                    String textoInicial = "Buscar fechas de Pago";
+                    if (cobrar.txtbuscar.getText().equals(textoInicial)) {
+                        cobrar.txtbuscar.setText("");
+                        
+                        cobrar.txtbuscar.setForeground(Color.black);
+                        
+                    }
                     cobrar.setVisible(true);
                     panelBody.add(cobrar); // Agrega el nuevo formulario al panel
                     
                     panelBody.repaint();
                     panelBody.revalidate();
-                    
+                    cobrar.txtbuscar.requestFocus();
                 
               
                
@@ -633,14 +709,20 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     
                     Ctrl_ReportCuentaPagar ctrl = new Ctrl_ReportCuentaPagar(obj,sqlobj,pagar);
                     ctrl.Iniciar();
+                    String textoInicial = "Buscar fechas de Pago";
+                    if (pagar.txtbuscar.getText().equals(textoInicial)) {
+                        pagar.txtbuscar.setText("");
+                        
+                        pagar.txtbuscar.setForeground(Color.black);
+                        
+                    }
                 
                      lblfondo.setVisible(false);
-                // Agregar nuevo formulario
-                     // Crea una nueva instancia del formulario
                     pagar.setVisible(true);
                     panelBody.add(pagar); // Agrega el nuevo formulario al panel
                     panelBody.repaint();
                     panelBody.revalidate();
+                    pagar.txtbuscar.requestFocus();
             }
         });
         MenuItem subRfactura = new MenuItem(new Color(0,109,230),iconFactura, "Factura", new MouseAdapter() {
@@ -746,6 +828,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jSeparator16 = new javax.swing.JSeparator();
         lbluser = new javax.swing.JLabel();
+        lblhora = new javax.swing.JLabel();
         panelMenu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         menus = new javax.swing.JPanel();
@@ -770,6 +853,10 @@ public class frmMenuInicio extends javax.swing.JFrame {
         lbluser.setForeground(new java.awt.Color(255, 255, 255));
         lbluser.setText("User");
 
+        lblhora.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        lblhora.setForeground(new java.awt.Color(255, 255, 255));
+        lblhora.setText("Fecha y Hora");
+
         javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
         panelHeader.setLayout(panelHeaderLayout);
         panelHeaderLayout.setHorizontalGroup(
@@ -777,14 +864,14 @@ public class frmMenuInicio extends javax.swing.JFrame {
             .addGroup(panelHeaderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelHeaderLayout.createSequentialGroup()
-                        .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(524, Short.MAX_VALUE))
+                    .addComponent(jSeparator16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelHeaderLayout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(lblhora, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbluser, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(85, 85, 85))))
         );
@@ -796,7 +883,8 @@ public class frmMenuInicio extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
-                        .addComponent(lbluser)))
+                        .addComponent(lbluser)
+                        .addComponent(lblhora)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
@@ -887,6 +975,7 @@ public class frmMenuInicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator16;
     public javax.swing.JLabel lblfondo;
+    private javax.swing.JLabel lblhora;
     public javax.swing.JLabel lbluser;
     public javax.swing.JPanel menus;
     public javax.swing.JPanel panelBody;

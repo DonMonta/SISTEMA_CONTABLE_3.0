@@ -9,11 +9,14 @@ import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -27,6 +30,21 @@ public class frmRegistrarse extends javax.swing.JFrame {
     public frmRegistrarse() {
         initComponents();
         this.setLocationRelativeTo(null);
+         txtcorreo.requestFocus();
+          if(this.txtcorreo.getText().equals("Ingrese correo")){
+            this.txtcorreo.setText("");
+            this.txtcorreo.setForeground(Color.black);
+        }
+
+        
+        if(String.valueOf(this.txtUsuario.getText()).isEmpty()){
+            this.txtUsuario.setText("Ingrese usuario");
+            this.txtUsuario.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtContraseña.getText()).isEmpty()){
+            this.txtContraseña.setText("Ingrese contraseña");
+            this.txtContraseña.setForeground(new Color(204,204,204));
+        }
     }
    
 
@@ -88,6 +106,11 @@ public class frmRegistrarse extends javax.swing.JFrame {
                 txtcorreoActionPerformed(evt);
             }
         });
+        txtcorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtcorreoKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 380, 40));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -105,6 +128,11 @@ public class frmRegistrarse extends javax.swing.JFrame {
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
+            }
+        });
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyPressed(evt);
             }
         });
         jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 380, 40));
@@ -127,6 +155,11 @@ public class frmRegistrarse extends javax.swing.JFrame {
         txtContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtContraseñaMousePressed(evt);
+            }
+        });
+        txtContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraseñaKeyPressed(evt);
             }
         });
         jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 380, 40));
@@ -336,6 +369,74 @@ public class frmRegistrarse extends javax.swing.JFrame {
             lblImagen.setIcon(mIcono);
         }
     }//GEN-LAST:event_btnregistrate1MouseClicked
+
+    private void txtcorreoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            // Transferir el foco al siguiente componente
+             if(String.valueOf(this.txtUsuario.getText()).isEmpty()){
+                this.txtUsuario.setText("Ingrese usuario");
+                this.txtUsuario.setForeground(new Color(204,204,204));
+                txtUsuario.requestFocus();
+            }
+            
+        }
+    }//GEN-LAST:event_txtcorreoKeyPressed
+
+    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            // Transferir el foco al siguiente componente
+             if(this.txtContraseña.getText().equals("Ingrese contraseña")){
+                this.txtContraseña.setText("");
+                this.txtContraseña.setForeground(Color.black);
+                txtContraseña.requestFocus();
+            }
+            
+        }
+    }//GEN-LAST:event_txtUsuarioKeyPressed
+
+    private void txtContraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            // Transferir el foco al siguiente componente
+               if("".equals(txtcorreo.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Correo");
+
+                }
+                else if("".equals(txtUsuario.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
+
+                }
+                else if("".equals(txtContraseña.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
+
+                }
+                else if("Ingrese usuario".equals(txtUsuario.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Usuario");
+
+                }
+                else if("Ingrese contraseña".equals(txtContraseña.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Contraseña");
+
+                }
+                else if("Ingrese correo".equals(txtcorreo.getText())){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo Correo");
+
+                }else{
+                    Usuario usuario = new Usuario();
+                    ClsConsultaUsuario consultaUsuario = new ClsConsultaUsuario();
+                    frmuser registrarse = new frmuser();
+                    Ctrl_Usuario ctrl = new Ctrl_Usuario(usuario, consultaUsuario, registrarse);
+                    ctrl.Guardar(txtcorreo.getText(), txtUsuario.getText(), txtContraseña.getText());
+                    txtcorreo.setText("Ingrese correo");txtUsuario.setText("Ingrese usuario"); txtContraseña.setText("Ingrese contraseña");
+                    this.txtcorreo.setForeground(new Color(204,204,204));
+                    this.txtUsuario.setForeground(new Color(204,204,204));
+                    this.txtContraseña.setForeground(new Color(204,204,204));
+                    ImageIcon imagenIcono = new ImageIcon(getClass().getResource("/imagenes/icons8_user_100px.png"));
+                    lblImagen.setIcon(imagenIcono);
+                    lblImagen.setHorizontalAlignment(JLabel.CENTER);
+                }
+            
+        }
+    }//GEN-LAST:event_txtContraseñaKeyPressed
 
     /**
      * @param args the command line arguments

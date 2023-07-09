@@ -37,7 +37,6 @@ public class frmproveedore extends javax.swing.JPanel {
         btnLimpiar = new javax.swing.JButton();
         txtIdentificacion = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
-        txtFormadepago = new javax.swing.JTextField();
         btnUpdate = new javax.swing.JButton();
         btnBusca = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
@@ -52,6 +51,8 @@ public class frmproveedore extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         cmbforma = new javax.swing.JComboBox<>();
+        btnverificar = new javax.swing.JButton();
+        lblverificado = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -132,7 +133,6 @@ public class frmproveedore extends javax.swing.JPanel {
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-eliminar-40.png"))); // NOI18N
         btnEliminar.setBorder(null);
         add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 530, 30, 40));
-        add(txtFormadepago, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 130, 30));
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-editar-40.png"))); // NOI18N
         btnUpdate.setBorder(null);
@@ -204,8 +204,8 @@ public class frmproveedore extends javax.swing.JPanel {
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 110));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel6.setText("Nombre");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 70, 30));
+        jLabel6.setText("Nombres y Apellidos");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 140, 30));
 
         cmbforma.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         cmbforma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
@@ -215,6 +215,15 @@ public class frmproveedore extends javax.swing.JPanel {
             }
         });
         add(cmbforma, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 130, 40));
+
+        btnverificar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnverificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_checkmark_24px.png"))); // NOI18N
+        btnverificar.setText("Haz clic aquí para verificar la Cédula");
+        btnverificar.setBorder(null);
+        add(btnverificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, -1, 30));
+
+        lblverificado.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        add(lblverificado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 470, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -329,6 +338,7 @@ public class frmproveedore extends javax.swing.JPanel {
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnUpdate;
     public javax.swing.JButton btnactualizar;
+    public javax.swing.JButton btnverificar;
     public javax.swing.JComboBox<String> cmbforma;
     private javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;
@@ -339,10 +349,10 @@ public class frmproveedore extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    public javax.swing.JLabel lblverificado;
     public javax.swing.JTable tbMaterias;
     public javax.swing.JTextField txtBuscar;
     public javax.swing.JTextField txtDireccion;
-    public javax.swing.JTextField txtFormadepago;
     public javax.swing.JTextField txtID;
     public javax.swing.JTextField txtIdentificacion;
     public javax.swing.JTextField txtNombre;

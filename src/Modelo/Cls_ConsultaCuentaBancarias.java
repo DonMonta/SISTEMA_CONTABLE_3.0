@@ -14,6 +14,38 @@ import java.util.logging.Logger;
  * @author monta
  */
 public class Cls_ConsultaCuentaBancarias extends Coneccion{
+     public boolean ExisteCuentas_Bancarias(Cuentas_Bancarias cuentas_bancarias){
+    PreparedStatement ps =null;
+    Connection con= (Connection)getConexion();
+    ResultSet res=null;
+    String sql="SELECT * FROM cuentas_bancarias WHERE numero_cuenta=?";
+            
+        try {    
+            ps=con.prepareStatement(sql);
+             ps.setString(1, cuentas_bancarias.getNumero_cuenta());
+            res=ps.executeQuery();
+            //paso el resultado de la consulta al modelo
+           if(res.next())
+            {
+                cuentas_bancarias.setId(res.getInt("id"));
+                cuentas_bancarias.setNombre_banco(res.getString("nombre_banco"));
+                cuentas_bancarias.setNumero_cuenta(res.getString("numero_cuenta"));   
+                cuentas_bancarias.setSaldo_actual(res.getDouble("saldo_actual"));
+                return true;  
+            }
+            return false;
+        } catch (SQLException ex) {
+            Logger.getLogger(Cls_ConsultaCuentaBancarias.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        finally{
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Cls_ConsultaCuentaBancarias.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+    }
      public boolean Guardar(Cuentas_Bancarias cuentas_bancarias){
             PreparedStatement ps =null;
             Connection con= (Connection)getConexion();
@@ -149,11 +181,11 @@ public class Cls_ConsultaCuentaBancarias extends Coneccion{
     PreparedStatement ps =null;
     Connection con= (Connection)getConexion();
     ResultSet res=null;
-    String sql="SELECT * FROM cuentas_bancarias WHERE nombre_banco=?";
+    String sql="SELECT * FROM cuentas_bancarias WHERE numero_cuenta=?";
             
         try {    
             ps=con.prepareStatement(sql);
-             ps.setString(1, cuentas_bancarias.getNombre_banco());
+             ps.setString(1, cuentas_bancarias.getNumero_cuenta());
             res=ps.executeQuery();
             //paso el resultado de la consulta al modelo
            if(res.next())
@@ -182,7 +214,7 @@ public class Cls_ConsultaCuentaBancarias extends Coneccion{
           List listacuentasbancarias = new ArrayList();
          PreparedStatement ps =null;
          Connection con= (Connection)getConexion();
-         String sql="SELECT * FROM cuentas_bancarias WHERE nombre_banco=?";
+         String sql="SELECT * FROM cuentas_bancarias WHERE numero_cuenta=?";
          try {
              
              ps=con.prepareStatement(sql);

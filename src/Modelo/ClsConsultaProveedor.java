@@ -16,6 +16,72 @@ import java.util.logging.Logger;
  * @author juand
  */
 public class ClsConsultaProveedor extends Coneccion {
+    public boolean ExisteProveedor(ClsProveedor obj){
+    PreparedStatement ps =null;
+    Connection con= (Connection)getConexion();
+    ResultSet res=null;
+    String sql="SELECT * FROM proveedores WHERE identificacion_fiscal=?";
+            
+        try {    
+            ps=con.prepareStatement(sql);
+             ps.setString(1, obj.getIdentificacionFiscal());
+            res=ps.executeQuery();
+            //paso el resultado de la consulta al modelo
+           if(res.next())
+            {
+                 obj.setId(res.getInt("id"));
+                obj.setDireccion(res.getString("direccion"));
+                obj.setFormaPagoPreferida(res.getString("forma_pago_preferida"));
+                obj.setIdentificacionFiscal(res.getString("identificacion_fiscal"));
+                return true;  
+            }
+            return false;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClsConsultaProveedor.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        finally{
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ClsConsultaProveedor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+    }
+      public boolean ExisteCliente(String identificacion){
+        PreparedStatement ps =null;
+        Connection con= (Connection)getConexion();
+        ResultSet res=null;
+        String sql="SELECT * FROM clientes WHERE identificacion_fiscal=?";
+
+            try {    
+                ps=con.prepareStatement(sql);
+                 ps.setString(1, identificacion);
+                res=ps.executeQuery();
+                //paso el resultado de la consulta al modelo
+               if(res.next())
+                {
+                    Cliente cliente = new Cliente();
+                    cliente.setId(res.getInt("id"));
+                    cliente.setNombre(res.getString("nombre"));
+                    cliente.setDireccion(res.getString("direccion"));   
+                    cliente.setIdentificacion_fiscal(res.getString("identificacion_fiscal"));
+                    cliente.setForma_pago_preferida(res.getString("forma_pago_preferida"));
+                    return true;  
+                }
+                return false;
+            } catch (SQLException ex) {
+                Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+            finally{
+                    try {
+                        con.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ClsConsultaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+    }
 
     public boolean Guardar(ClsProveedor proveedor){
             PreparedStatement ps =null;
@@ -155,11 +221,11 @@ public class ClsConsultaProveedor extends Coneccion {
     PreparedStatement ps =null;
     Connection con= (Connection)getConexion();
     ResultSet res=null;
-    String sql="SELECT * FROM proveedores WHERE nombre=?";
+    String sql="SELECT * FROM proveedores WHERE identificacion_fiscal=?";
             
         try {    
             ps=con.prepareStatement(sql);
-             ps.setString(1, obj.getNombre());
+             ps.setString(1, obj.getIdentificacionFiscal());
             res=ps.executeQuery();
             //paso el resultado de la consulta al modelo
            if(res.next())
@@ -188,7 +254,7 @@ public class ClsConsultaProveedor extends Coneccion {
          List listaMaterias = new ArrayList();
          PreparedStatement ps =null;
          Connection con= (Connection)getConexion();
-         String sql="SELECT * FROM proveedores WHERE nombre=?";
+         String sql="SELECT * FROM proveedores WHERE identificacion_fiscal=?";
          try {
              
              ps=con.prepareStatement(sql);

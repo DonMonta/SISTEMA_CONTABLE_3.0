@@ -8,6 +8,7 @@ import Controlador.ctrl_Login;
 import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -26,6 +27,18 @@ public class frmLogin extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         txtpassword.setEchoChar((char) 0); 
         txtpassword.setText("Ingrese contraseña");
+        jtxtUsuario.requestFocus();
+        if(this.jtxtUsuario.getText().equals("Ingrese usuario")){
+            this.jtxtUsuario.setText("");
+            this.jtxtUsuario.setForeground(Color.black);
+        }
+
+       
+        if(String.valueOf(this.txtpassword.getText()).isEmpty()){
+           txtpassword.setEchoChar((char) 0); 
+            txtpassword.setText("Ingrese contraseña");
+            this.txtpassword.setForeground(new Color(204,204,204));
+        }
     }
 public static String user,pwd;
     /**
@@ -112,6 +125,11 @@ public static String user,pwd;
                 jtxtUsuarioMousePressed(evt);
             }
         });
+        jtxtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtxtUsuarioKeyPressed(evt);
+            }
+        });
         jPanel2.add(jtxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 240, 35));
 
         jButton1.setBackground(new java.awt.Color(0, 75, 159));
@@ -147,6 +165,11 @@ public static String user,pwd;
         txtpassword.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtpasswordMousePressed(evt);
+            }
+        });
+        txtpassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtpasswordKeyPressed(evt);
             }
         });
         jPanel2.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 240, 40));
@@ -285,6 +308,52 @@ public static String user,pwd;
         re.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnolvidadoMouseClicked
+
+    private void jtxtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtUsuarioKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            // Transferir el foco al siguiente componente
+             if(this.txtpassword.getText().equals("Ingrese contraseña")){
+                 
+                this.txtpassword.setText("");
+                char echoChar = '*';
+               SimpleAttributeSet attrs = new SimpleAttributeSet();
+               StyleConstants.setBold(attrs, true);
+               this.txtpassword.setEchoChar(echoChar);
+               this.txtpassword.setForeground(Color.black);
+               txtpassword.requestFocus();
+           
+            }
+            
+        }
+    }//GEN-LAST:event_jtxtUsuarioKeyPressed
+
+    private void txtpasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            // Transferir el foco al siguiente componente
+            if("Ingrese usuario".equals(jtxtUsuario.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo usuario"); 
+            }
+            else if("Ingrese contraseña".equals(txtpassword.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo clave");
+            }
+            else if("".equals(txtpassword.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo clave");
+            }
+            else if("".equals(jtxtUsuario.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos en el campo usuario");
+            }else{
+                 Usuario usuario = new Usuario();
+                ClsConsultaUsuario consulta_usuario = new ClsConsultaUsuario();
+                user = jtxtUsuario.getText();
+                pwd = txtpassword.getText();
+                ctrl_Login ctrl = new ctrl_Login(usuario,consulta_usuario);
+                if(ctrl.Log(user,pwd)){
+
+                    dispose();
+                }
+            }
+        }
+    }//GEN-LAST:event_txtpasswordKeyPressed
 
     /**
      * @param args the command line arguments

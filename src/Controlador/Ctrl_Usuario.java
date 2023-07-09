@@ -812,49 +812,48 @@ public class Ctrl_Usuario implements ActionListener{
      private void Mostrar()
     {
         frm.tbMaterias.setDefaultRenderer(Object.class, new Render());
+        DefaultTableModel tabla = (DefaultTableModel) frm.tbMaterias.getModel();
+        tabla.setRowCount(0);
         String mensaje;
         String[] columnas ={"ID","Correo","Usuario","Contraseña","Imagen"};
-           Object[] datos = new Object[5];
-           DefaultTableModel tabla = new DefaultTableModel(null,columnas){
-             @Override
-             public boolean isCellEditable(int i, int j)
-             { if(i==5){return true;} else {return false;}}
-           };
+        Object[] datos = new Object[5];
           
            List objList; Usuario cls;
            try {
                 objList= sqlmat.MostrarUsuario();
                 if(!objList.isEmpty())
                 {
-                 for (int i = 0; i < objList.size(); i++) {
-                    cls = (Usuario) objList.get(i);
-                    datos[0] = cls.getIdUsuario();
-                    datos[1] = cls.getCorreo();
-                    datos[2] = cls.getUsuario();
-                    datos[3] = cls.getPassword();
-                     byte[] imagen = cls.getImagen();
-                        BufferedImage bufferedImage = null;
-                        InputStream inputStream = new ByteArrayInputStream(imagen);
-                        bufferedImage = ImageIO.read(inputStream);
-                        ImageIcon mIcono = new ImageIcon(bufferedImage.getScaledInstance(100, 100, 0));
-                        datos[4] = new JLabel(mIcono);
-                    tabla.addRow(datos);
-                  }  
-                 frm.tbMaterias.setModel(tabla);
-                 Limpiar();
-                  frm.txtBuscar.setText("Buscar Por nombre de Usuario");
-                 
-                  DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
-                             Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
-                             if (frm.tbMaterias.getColumnCount() >= 7) {
-                                for(int i=4; i<7;i++)
-                                {  
-                                    frm.tbMaterias.getColumnModel().getColumn(i).setCellRenderer(Alinear);
-                                }
-                            }
+                    for (int i = 0; i < objList.size(); i++) {
+                       cls = (Usuario) objList.get(i);
+                       datos[0] = cls.getIdUsuario();
+                       datos[1] = cls.getCorreo();
+                       datos[2] = cls.getUsuario();
+                       datos[3] = cls.getPassword();
+                        byte[] imagen = cls.getImagen();
+                           BufferedImage bufferedImage = null;
+                           InputStream inputStream = new ByteArrayInputStream(imagen);
+                           bufferedImage = ImageIO.read(inputStream);
+                           ImageIcon mIcono = new ImageIcon(bufferedImage.getScaledInstance(100, 100, 0));
+                           datos[4] = new JLabel(mIcono);
+                       tabla.addRow(datos);
+                     }  
+                    frm.tbMaterias.setModel(tabla);
+                    Limpiar();
+                     frm.txtBuscar.setText("Buscar Por nombre de Usuario");
+
+                     DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
+                                Alinear.setHorizontalAlignment(SwingConstants.RIGHT);
+                                if (frm.tbMaterias.getColumnCount() >= 7) {
+                                   for(int i=4; i<7;i++)
+                                   {  
+                                       frm.tbMaterias.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+                                   }
+                               }
                }
                else
-               {mensaje="No encontro información"; SSMI(mensaje); }
+               {
+                   mensaje="No encontro información"; SSMI(mensaje); 
+               }
            } catch (Exception ex) {
                Logger.getLogger(Ctrl_Usuario.class.getName()).log(Level.SEVERE, null, ex);
            }  

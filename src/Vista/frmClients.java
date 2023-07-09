@@ -17,6 +17,7 @@ public class frmClients extends javax.swing.JPanel {
      */
     public frmClients() {
         initComponents();
+       
     }
 
     /**
@@ -35,7 +36,6 @@ public class frmClients extends javax.swing.JPanel {
         tbcliente = new javax.swing.JTable();
         txtid = new javax.swing.JTextField();
         btnbuscar = new javax.swing.JButton();
-        txtbuscar = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
         txtnombre = new javax.swing.JTextField();
@@ -54,6 +54,7 @@ public class frmClients extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         lblverificado = new javax.swing.JLabel();
         btnverificar = new javax.swing.JButton();
+        txtbuscar = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -116,16 +117,6 @@ public class frmClients extends javax.swing.JPanel {
 
         btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_search_30px.png"))); // NOI18N
         add(btnbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 50, 30));
-
-        txtbuscar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtbuscar.setForeground(new java.awt.Color(204, 204, 204));
-        txtbuscar.setText("Buscar  Nombre y Apellidos del cliente");
-        txtbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtbuscarMousePressed(evt);
-            }
-        });
-        add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 330, 30));
 
         jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -249,27 +240,17 @@ public class frmClients extends javax.swing.JPanel {
         btnverificar.setText("Haz clic aquí para verificar la Cédula");
         btnverificar.setBorder(null);
         add(btnverificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 370, -1, 30));
+
+        txtbuscar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtbuscar.setForeground(new java.awt.Color(204, 204, 204));
+        txtbuscar.setText("Buscar cedula del cliente");
+        txtbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtbuscarMousePressed(evt);
+            }
+        });
+        add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 250, 40));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtbuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtbuscarMousePressed
-
-        if(this.txtbuscar.getText().equals("Buscar  Nombre y Apellidos del cliente")){
-            this.txtbuscar.setText("");
-            this.txtbuscar.setForeground(Color.black);
-        }
-        if(String.valueOf(this.txtnombre.getText()).isEmpty()){
-            this.txtnombre.setText("Ingrese Nombre y Apellidos");
-            this.txtnombre.setForeground(new Color(204,204,204));
-        }
-        if(String.valueOf(this.txtdireccion.getText()).isEmpty()){
-            this.txtdireccion.setText("Ingrese Direccion");
-            this.txtdireccion.setForeground(new Color(204,204,204));
-        }
-        if(String.valueOf(this.txtidentificacion.getText()).isEmpty()){
-            this.txtidentificacion.setText("Ingrese Identificación Social");
-            this.txtidentificacion.setForeground(new Color(204,204,204));
-        }
-    }//GEN-LAST:event_txtbuscarMousePressed
 
     private void txtnombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtnombreMousePressed
         if(this.txtnombre.getText().equals("Ingrese Nombre y Apellidos")){
@@ -278,7 +259,7 @@ public class frmClients extends javax.swing.JPanel {
         }
 
         if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
-            this.txtbuscar.setText("Buscar  Nombre y Apellidos del cliente");
+            this.txtbuscar.setText("Buscar cedula del cliente");
             this.txtbuscar.setForeground(new Color(204,204,204));
         }
         if(String.valueOf(this.txtdireccion.getText()).isEmpty()){
@@ -302,7 +283,7 @@ public class frmClients extends javax.swing.JPanel {
         }
 
         if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
-            this.txtbuscar.setText("Buscar  Nombre y Apellidos del cliente");
+            this.txtbuscar.setText("Buscar cedula del cliente");
             this.txtbuscar.setForeground(new Color(204,204,204));
         }
         if(String.valueOf(this.txtnombre.getText()).isEmpty()){
@@ -326,7 +307,7 @@ public class frmClients extends javax.swing.JPanel {
         }
 
         if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
-            this.txtbuscar.setText("Buscar  Nombre y Apellidos del cliente");
+            this.txtbuscar.setText("Buscar cedula del cliente");
             this.txtbuscar.setForeground(new Color(204,204,204));
         }
         if(String.valueOf(this.txtnombre.getText()).isEmpty()){
@@ -355,6 +336,25 @@ public class frmClients extends javax.swing.JPanel {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void txtbuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtbuscarMousePressed
+          if(this.txtbuscar.getText().equals("Buscar cedula del cliente")){
+            this.txtbuscar.setText("");
+            this.txtbuscar.setForeground(Color.black);
+        }
+        if(String.valueOf(this.txtnombre.getText()).isEmpty()){
+            this.txtnombre.setText("Ingrese Nombre y Apellidos");
+            this.txtnombre.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtdireccion.getText()).isEmpty()){
+            this.txtdireccion.setText("Ingrese Direccion");
+            this.txtdireccion.setForeground(new Color(204,204,204));
+        }
+        if(String.valueOf(this.txtidentificacion.getText()).isEmpty()){
+            this.txtidentificacion.setText("Ingrese Identificación Social");
+            this.txtidentificacion.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtbuscarMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

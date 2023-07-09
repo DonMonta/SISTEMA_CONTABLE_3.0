@@ -52,6 +52,7 @@ public class FrmINVENTARIO extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbltabla = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtnombreproducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -146,7 +147,7 @@ public class FrmINVENTARIO extends javax.swing.JPanel {
         txtbuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtbuscar.setForeground(new java.awt.Color(204, 204, 204));
         txtbuscar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtbuscar.setText("Buscar Por Nombre");
+        txtbuscar.setText("Buscar Producto");
         txtbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtbuscarMousePressed(evt);
@@ -212,11 +213,11 @@ public class FrmINVENTARIO extends javax.swing.JPanel {
         tbltabla.setSelectionBackground(new java.awt.Color(0, 112, 224));
         jScrollPane1.setViewportView(tbltabla);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 750, 360));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 580, 360));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtbuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtbuscarMousePressed
-        if(this.txtbuscar.getText().equals("Buscar Por Nombre")){
+        if(this.txtbuscar.getText().equals("Buscar Producto")){
             this.txtbuscar.setText("");
             this.txtbuscar.setForeground(Color.black);
         }
@@ -250,7 +251,7 @@ public class FrmINVENTARIO extends javax.swing.JPanel {
         }
        
         if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
-            this.txtbuscar.setText("Buscar Por Nombre");
+            this.txtbuscar.setText("Buscar Producto");
             this.txtbuscar.setForeground(new Color(204,204,204));
         }
         if(String.valueOf(this.txtcosto.getText()).isEmpty()){
@@ -278,7 +279,7 @@ public class FrmINVENTARIO extends javax.swing.JPanel {
         }
        
         if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
-            this.txtbuscar.setText("Buscar Por Nombre");
+            this.txtbuscar.setText("Buscar Producto");
             this.txtbuscar.setForeground(new Color(204,204,204));
         }
         if(String.valueOf(this.txtnombreproducto.getText()).isEmpty()){
@@ -306,7 +307,7 @@ public class FrmINVENTARIO extends javax.swing.JPanel {
         }
        
         if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
-            this.txtbuscar.setText("Buscar Por Nombre");
+            this.txtbuscar.setText("Buscar Producto");
             this.txtbuscar.setForeground(new Color(204,204,204));
         }
         if(String.valueOf(this.txtcosto.getText()).isEmpty()){
@@ -334,7 +335,7 @@ public class FrmINVENTARIO extends javax.swing.JPanel {
         }
        
         if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
-            this.txtbuscar.setText("Buscar Por Nombre");
+            this.txtbuscar.setText("Buscar Producto");
             this.txtbuscar.setForeground(new Color(204,204,204));
         }
         if(String.valueOf(this.txtcosto.getText()).isEmpty()){
@@ -377,7 +378,7 @@ public class FrmINVENTARIO extends javax.swing.JPanel {
         }
        
         if(String.valueOf(this.txtbuscar.getText()).isEmpty()){
-            this.txtbuscar.setText("Buscar Por Nombre");
+            this.txtbuscar.setText("Buscar Producto");
             this.txtbuscar.setForeground(new Color(204,204,204));
         }
         if(String.valueOf(this.txtcosto.getText()).isEmpty()){

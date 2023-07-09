@@ -51,6 +51,7 @@ public class frmcuentasporpagar extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbtransacc = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 75, 159));

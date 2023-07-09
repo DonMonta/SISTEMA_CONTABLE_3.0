@@ -8,7 +8,10 @@ import Controlador.Ctrl_Recuperacion;
 import Modelo.ClsConsultaUsuario;
 import Modelo.Usuario;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -22,6 +25,11 @@ public class frmRecuperacion extends javax.swing.JFrame {
     public frmRecuperacion() {
         initComponents();
         this.setLocationRelativeTo(null);
+        txtrecus.requestFocus();
+          if(this.txtrecus.getText().equals("Ingrese usuario para recuperar la clave")){
+            this.txtrecus.setText("");
+            this.txtrecus.setForeground(Color.black);
+        }
     }
 
     /**
@@ -68,6 +76,11 @@ public class frmRecuperacion extends javax.swing.JFrame {
         txtrecus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtrecusMousePressed(evt);
+            }
+        });
+        txtrecus.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtrecusKeyPressed(evt);
             }
         });
         getContentPane().add(txtrecus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 637, 33));
@@ -158,6 +171,27 @@ public class frmRecuperacion extends javax.swing.JFrame {
       this.txtrecus.setText("Ingrese usuario para recuperar la clave");
       this.txtrecus.setForeground(new Color(204,204,204));
     }//GEN-LAST:event_btnactualizarActionPerformed
+
+    private void txtrecusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrecusKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+             if("Ingrese usuario para recuperar la clave".equals(txtrecus.getText())){
+            JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+            }
+            else if("".equals(txtrecus.getText())){
+                JOptionPane.showMessageDialog(null,"Debe ingresar datos");
+            }
+            else{
+                Usuario usuario = new Usuario();
+                ClsConsultaUsuario consulta_usuario = new ClsConsultaUsuario();
+                Ctrl_Recuperacion ctrl = new Ctrl_Recuperacion(usuario,consulta_usuario);
+                ctrl.Iniciar();
+                if(ctrl.Enviar(txtrecus.getText())){
+                    lblresto.setText(ctrl.destinatario);
+                }
+            }
+            
+        }
+    }//GEN-LAST:event_txtrecusKeyPressed
 
     /**
      * @param args the command line arguments
